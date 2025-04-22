@@ -8,14 +8,11 @@ if (!customElements.get('product-form')) {
         this.form = this.querySelector('form');
         this.variantIdInput.disabled = false;
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
-        this.cart =
-          document.querySelector('cart-notification') ||
-          document.querySelector('cart-drawer');
+        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
         this.submitButton = this.querySelector('[type="submit"]');
         this.submitButtonText = this.submitButton.querySelector('span');
 
-        if (document.querySelector('cart-drawer'))
-          this.submitButton.setAttribute('aria-haspopup', 'dialog');
+        if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
         this.hideErrors = this.dataset.hideErrors === 'true';
       }
@@ -38,7 +35,7 @@ if (!customElements.get('product-form')) {
         if (this.cart) {
           formData.append(
             'sections',
-            this.cart.getSectionsToRender().map((section) => section.id),
+            this.cart.getSectionsToRender().map((section) => section.id)
           );
           formData.append('sections_url', window.location.pathname);
           this.cart.setActiveElement(document.activeElement);
@@ -57,8 +54,7 @@ if (!customElements.get('product-form')) {
               });
               this.handleErrorMessage(response.description);
 
-              const soldOutMessage =
-                this.submitButton.querySelector('.sold-out-message');
+              const soldOutMessage = this.submitButton.querySelector('.sold-out-message');
               if (!soldOutMessage) return;
               this.submitButton.setAttribute('aria-disabled', true);
               this.submitButtonText.classList.add('hidden');
@@ -70,11 +66,14 @@ if (!customElements.get('product-form')) {
               return;
             }
 
+            const startMarker = CartPerformance.createStartingMarker('add:wait-for-subscribers');
             if (!this.error)
               publish(PUB_SUB_EVENTS.cartUpdate, {
                 source: 'product-form',
                 productVariantId: formData.get('id'),
                 cartData: response,
+              }).then(() => {
+                CartPerformance.measureFromMarker('add:wait-for-subscribers', startMarker);
               });
             this.error = false;
             const quickAddModal = this.closest('quick-add-modal');
@@ -83,14 +82,18 @@ if (!customElements.get('product-form')) {
                 'modalClosed',
                 () => {
                   setTimeout(() => {
-                    this.cart.renderContents(response);
+                    CartPerformance.measure("add:paint-updated-sections", () => {
+                      this.cart.renderContents(response);
+                    });
                   });
                 },
-                { once: true },
+                { once: true }
               );
               quickAddModal.hide(true);
             } else {
-              this.cart.renderContents(response);
+              CartPerformance.measure("add:paint-updated-sections", () => {
+                this.cart.renderContents(response);
+              });
             }
           })
           .catch((e) => {
@@ -98,23 +101,21 @@ if (!customElements.get('product-form')) {
           })
           .finally(() => {
             this.submitButton.classList.remove('loading');
-            if (this.cart && this.cart.classList.contains('is-empty'))
-              this.cart.classList.remove('is-empty');
+            if (this.cart && this.cart.classList.contains('is-empty')) this.cart.classList.remove('is-empty');
             if (!this.error) this.submitButton.removeAttribute('aria-disabled');
             this.querySelector('.loading__spinner').classList.add('hidden');
+
+            CartPerformance.measureFromEvent("add:user-action", evt);
           });
       }
 
       handleErrorMessage(errorMessage = false) {
+        if (this.hideErrors) return;
+
         this.errorMessageWrapper =
-          this.errorMessageWrapper ||
-          this.querySelector('.product-form__error-message-wrapper');
+          this.errorMessageWrapper || this.querySelector('.product-form__error-message-wrapper');
         if (!this.errorMessageWrapper) return;
-        this.errorMessage =
-          this.errorMessage ||
-          this.errorMessageWrapper.querySelector(
-            '.product-form__error-message',
-          );
+        this.errorMessage = this.errorMessage || this.errorMessageWrapper.querySelector('.product-form__error-message');
 
         this.errorMessageWrapper.toggleAttribute('hidden', !errorMessage);
 
@@ -136,6 +137,6 @@ if (!customElements.get('product-form')) {
       get variantIdInput() {
         return this.form.querySelector('[name=id]');
       }
-    },
+    }
   );
 }

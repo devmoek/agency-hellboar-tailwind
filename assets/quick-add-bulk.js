@@ -8,10 +8,7 @@ if (!customElements.get('quick-add-bulk')) {
 
         const debouncedOnChange = debounce((event) => {
           if (parseInt(event.target.value) === 0) {
-            this.startQueue(
-              event.target.dataset.index,
-              parseInt(event.target.value),
-            );
+            this.startQueue(event.target.dataset.index, parseInt(event.target.value));
           } else {
             this.validateQuantity(event);
           }
@@ -21,32 +18,23 @@ if (!customElements.get('quick-add-bulk')) {
         this.listenForActiveInput();
         this.listenForKeydown();
         this.lastActiveInputId = null;
-        const pageParams = new URLSearchParams(window.location.search);
-        window.pageNumber = decodeURIComponent(pageParams.get('page') || '');
       }
 
       connectedCallback() {
-        this.cartUpdateUnsubscriber = subscribe(
-          PUB_SUB_EVENTS.cartUpdate,
-          (event) => {
-            if (
-              event.source === 'quick-add' ||
-              (event.cartData.items &&
-                !event.cartData.items.some(
-                  (item) => item.id === parseInt(this.dataset.index),
-                )) ||
-              (event.cartData.variant_id &&
-                !(event.cartData.variant_id === parseInt(this.dataset.index)))
-            ) {
-              return;
-            }
-            // If its another section that made the update
-            this.onCartUpdate().then(() => {
-              this.listenForActiveInput();
-              this.listenForKeydown();
-            });
-          },
-        );
+        this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+          if (
+            event.source === 'quick-add' ||
+            (event.cartData.items && !event.cartData.items.some((item) => item.id === parseInt(this.dataset.index))) ||
+            (event.cartData.variant_id && !(event.cartData.variant_id === parseInt(this.dataset.index)))
+          ) {
+            return;
+          }
+          // If its another section that made the update
+          this.onCartUpdate().then(() => {
+            this.listenForActiveInput();
+            this.listenForKeydown();
+          });
+        });
       }
 
       disconnectedCallback() {
@@ -55,7 +43,7 @@ if (!customElements.get('quick-add-bulk')) {
         }
       }
 
-      getInput() {
+      get input() {
         return this.querySelector('quantity-input input');
       }
 
@@ -65,17 +53,15 @@ if (!customElements.get('quick-add-bulk')) {
 
       listenForActiveInput() {
         if (!this.classList.contains('hidden')) {
-          this.getInput().addEventListener('focusin', (event) =>
-            event.target.select(),
-          );
+          this.input?.addEventListener('focusin', (event) => event.target.select());
         }
         this.isEnterPressed = false;
       }
 
       listenForKeydown() {
-        this.getInput().addEventListener('keydown', (event) => {
+        this.input?.addEventListener('keydown', (event) => {
           if (event.key === 'Enter') {
-            this.getInput().blur();
+            this.input?.blur();
             this.isEnterPressed = true;
           }
         });
@@ -87,28 +73,25 @@ if (!customElements.get('quick-add-bulk')) {
           () => {
             event.target.setCustomValidity('');
           },
-          { once: true },
+          { once: true }
         );
+      }
+
+      get sectionId() {
+        if (!this._sectionId) {
+          this._sectionId = this.closest('.collection-quick-add-bulk').dataset.id;
+        }
+
+        return this._sectionId;
       }
 
       onCartUpdate() {
         return new Promise((resolve, reject) => {
-          fetch(
-            `${this.getSectionsUrl()}?section_id=${
-              this.closest('.collection').dataset.id
-            }`,
-          )
+          fetch(`${this.getSectionsUrl()}?section_id=${this.sectionId}`)
             .then((response) => response.text())
             .then((responseText) => {
-              const html = new DOMParser().parseFromString(
-                responseText,
-                'text/html',
-              );
-              const sourceQty = html.querySelector(
-                `#quick-add-bulk-${this.dataset.id}-${
-                  this.closest('.collection').dataset.id
-                }`,
-              );
+              const html = new DOMParser().parseFromString(responseText, 'text/html');
+              const sourceQty = html.querySelector(`#quick-add-bulk-${this.dataset.index}-${this.sectionId}`);
               if (sourceQty) {
                 this.innerHTML = sourceQty.innerHTML;
               }
@@ -121,15 +104,20 @@ if (!customElements.get('quick-add-bulk')) {
         });
       }
 
+      getSectionsUrl() {
+        const pageParams = new URLSearchParams(window.location.search);
+        const pageNumber = decodeURIComponent(pageParams.get('page') || '');
+
+        return `${window.location.pathname}${pageNumber ? `?page=${pageNumber}` : ''}`;
+      }
+
       updateMultipleQty(items) {
         this.selectProgressBar().classList.remove('hidden');
 
         const ids = Object.keys(items);
         const body = JSON.stringify({
           updates: items,
-          sections: this.getSectionsToRender().map(
-            (section) => section.section,
-          ),
+          sections: this.getSectionsToRender().map((section) => section.section),
           sections_url: this.getSectionsUrl(),
         });
 
@@ -140,10 +128,7 @@ if (!customElements.get('quick-add-bulk')) {
           .then((state) => {
             const parsedState = JSON.parse(state);
             this.renderSections(parsedState, ids);
-            publish(PUB_SUB_EVENTS.cartUpdate, {
-              source: 'quick-add',
-              cartData: parsedState,
-            });
+            publish(PUB_SUB_EVENTS.cartUpdate, { source: 'quick-add', cartData: parsedState });
           })
           .catch(() => {
             // Commented out for now and will be fixed when BE issue is done https://github.com/Shopify/shopify/issues/440605
@@ -156,20 +141,16 @@ if (!customElements.get('quick-add-bulk')) {
           })
           .finally(() => {
             this.selectProgressBar().classList.add('hidden');
-            this.requestStarted = false;
+            this.setRequestStarted(false);
           });
       }
 
       getSectionsToRender() {
         return [
           {
-            id: `quick-add-bulk-${this.dataset.id}-${
-              this.closest('.collection-quick-add-bulk').dataset.id
-            }`,
-            section: this.closest('.collection-quick-add-bulk').dataset.id,
-            selector: `#quick-add-bulk-${this.dataset.id}-${
-              this.closest('.collection-quick-add-bulk').dataset.id
-            }`,
+            id: `quick-add-bulk-${this.dataset.index}-${this.sectionId}`,
+            section: this.sectionId,
+            selector: `#quick-add-bulk-${this.dataset.index}-${this.sectionId}`,
           },
           {
             id: 'cart-icon-bubble',
@@ -178,33 +159,19 @@ if (!customElements.get('quick-add-bulk')) {
           },
           {
             id: 'CartDrawer',
-            selector: '#CartDrawer',
+            selector: '.drawer__inner',
             section: 'cart-drawer',
           },
         ];
       }
 
       renderSections(parsedState, ids) {
-        const intersection = this.queue.filter((element) =>
-          ids.includes(element.id),
-        );
+        const intersection = this.queue.filter((element) => ids.includes(element.id));
         if (intersection.length !== 0) return;
         this.getSectionsToRender().forEach((section) => {
           const sectionElement = document.getElementById(section.id);
-          if (
-            sectionElement &&
-            sectionElement.parentElement &&
-            sectionElement.parentElement.classList.contains('drawer')
-          ) {
-            parsedState.items.length > 0
-              ? sectionElement.parentElement.classList.remove('is-empty')
-              : sectionElement.parentElement.classList.add('is-empty');
-
-            setTimeout(() => {
-              document
-                .querySelector('#CartDrawer-Overlay')
-                .addEventListener('click', this.cart.close.bind(this.cart));
-            });
+          if (section.section === 'cart-drawer') {
+            sectionElement.closest('cart-drawer')?.classList.toggle('is-empty', parsedState.items.length.length === 0);
           }
           const elementToReplace =
             sectionElement && sectionElement.querySelector(section.selector)
@@ -213,7 +180,7 @@ if (!customElements.get('quick-add-bulk')) {
           if (elementToReplace) {
             elementToReplace.innerHTML = this.getSectionInnerHTML(
               parsedState.sections[section.section],
-              section.selector,
+              section.selector
             );
           }
         });
@@ -225,6 +192,6 @@ if (!customElements.get('quick-add-bulk')) {
         this.listenForActiveInput();
         this.listenForKeydown();
       }
-    },
+    }
   );
 }
