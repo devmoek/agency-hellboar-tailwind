@@ -3606,20 +3606,7 @@ details-disclosure > details {
         --white: #ffffff;
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
-      }
-
-      body {
-        background-color: var(--black);
-        color: var(--white);
-        line-height: 1.6;
-      }
-
-      header {
+      /* header {
         background-color: var(--black);
         padding: 20px 0;
         position: sticky;
@@ -3627,12 +3614,12 @@ details-disclosure > details {
         z-index: 100;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       }
-
-      .container {
+ */
+      /* .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px;
-      }
+      } */
 
       .navbar {
         display: flex;
