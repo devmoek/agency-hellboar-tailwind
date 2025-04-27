@@ -3945,6 +3945,7 @@ details-disclosure > details {
         font-style: italic;
         margin-bottom: 20px;
         line-height: 1.8;
+        color: #fff;
       }
 
       .testimonial-author {
