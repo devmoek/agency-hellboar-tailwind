@@ -15,8 +15,8 @@
       "settings": {
         "custom_liquid": "<section class=\"hero\">\n      <div class=\"container\">\n        <div class=\"hero-content\">\n          <div class=\"timer-box\">Limited Time Offer - Ending Soon!</div>\n          <h1 class=\"hero-title\">\n            Win Your <span>Dream Luxury Car</span> Today!\n          </h1>\n          <p class=\"hero-subtitle\">\n            Purchase any item from our store and automatically get entered to\n            win this incredible luxury vehicle. Plus, receive BONUS entries with\n            every $50 spent!\n          </p>\n\n          <div class=\"countdown\">\n            <div class=\"countdown-item\">\n              <span class=\"countdown-number\" id=\"days\">29</span>\n              <span class=\"countdown-label\">Days</span>\n            </div>\n            <div class=\"countdown-item\">\n              <span class=\"countdown-number\" id=\"hours\">23</span>\n              <span class=\"countdown-label\">Hours</span>\n            </div>\n            <div class=\"countdown-item\">\n              <span class=\"countdown-number\" id=\"minutes\">59</span>\n              <span class=\"countdown-label\">Minutes</span>\n            </div>\n            <div class=\"countdown-item\">\n              <span class=\"countdown-number\" id=\"seconds\">59</span>\n              <span class=\"countdown-label\">Seconds</span>\n            </div>\n          </div>\n\n          <a href=\"#entry\" class=\"cta-button\">ENTER NOW</a>\n        </div>\n      </div>\n    </section>",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "custom_liquid_Khi3wB": {
@@ -25,8 +25,8 @@
       "settings": {
         "custom_liquid": "<section class=\"features\">\n      <div class=\"container\">\n        <h2 class=\"section-title\">Why Participate?</h2>\n        <div class=\"features-grid\">\n          <div class=\"feature-card\">\n            <img\n              src=\"/api/placeholder/400/300\"\n              alt=\"Easy Entry\"\n              class=\"feature-img\"\n            />\n            <div class=\"feature-content\">\n              <h3 class=\"feature-title\">Easy Entry</h3>\n              <p class=\"feature-desc\">\n                Simply make any purchase on our store and you're automatically\n                entered to win. Plus, get bonus entries with every $50 spent!\n              </p>\n            </div>\n          </div>\n\n          <div class=\"feature-card\">\n            <img\n              src=\"/api/placeholder/400/300\"\n              alt=\"Guaranteed Winner\"\n              class=\"feature-img\"\n            />\n            <div class=\"feature-content\">\n              <h3 class=\"feature-title\">Guaranteed Winner</h3>\n              <p class=\"feature-desc\">\n                Unlike other giveaways, we GUARANTEE a winner will be selected.\n                Someone WILL drive away in this dream car!\n              </p>\n            </div>\n          </div>\n\n          <div class=\"feature-card\">\n            <img\n              src=\"/api/placeholder/400/300\"\n              alt=\"Transparent Process\"\n              class=\"feature-img\"\n            />\n            <div class=\"feature-content\">\n              <h3 class=\"feature-title\">Transparent Process</h3>\n              <p class=\"feature-desc\">\n                Our winner selection is conducted live and publicly. Fair and\n                transparent with a trusted third-party verification.\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "custom_liquid_9HEPqC": {
@@ -35,8 +35,8 @@
       "settings": {
         "custom_liquid": "<section class=\"prize-showcase\" id=\"prize\">\n      <div class=\"container\">\n        <h2 class=\"section-title\">Your Dream Car Awaits</h2>\n        <div class=\"prize-content\">\n          <img\n            src=\"https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990\"\n            alt=\"Luxury Car Prize\"\n            class=\"car-image\"\n          />\n          <div class=\"car-details\">\n            <p>\n              This stunning luxury vehicle comes fully loaded with premium\n              leather interior, state-of-the-art entertainment system, advanced\n              driver assistance features, and performance that will take your\n              breath away. Valued at over\n              <span class=\"highlight\">$85,000</span>, this could be yours just\n              by shopping with us!\n            </p>\n            <a href=\"#entry\" class=\"cta-button\">Win This Car</a>\n          </div>\n        </div>\n      </div>\n    </section>",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "custom_liquid_4C48h3": {
@@ -45,8 +45,8 @@
       "settings": {
         "custom_liquid": "<section class=\"how-it-works\" id=\"how-it-works\">\n      <div class=\"container\">\n        <h2 class=\"section-title\">How To Enter</h2>\n        <div class=\"steps\">\n          <div class=\"step\">\n            <div class=\"step-number\">1</div>\n            <h3 class=\"step-title\">Shop Our Store</h3>\n            <p>\n              Browse our collection and make any purchase. Every order qualifies\n              you for entry!\n            </p>\n          </div>\n\n          <div class=\"step\">\n            <div class=\"step-number\">2</div>\n            <h3 class=\"step-title\">Earn Entries</h3>\n            <p>\n              Get 1 entry for any purchase, plus 1 BONUS entry for every $50\n              spent on eligible products.\n            </p>\n          </div>\n\n          <div class=\"step\">\n            <div class=\"step-number\">3</div>\n            <h3 class=\"step-title\">Win Big</h3>\n            <p>\n              When the countdown ends, we'll randomly select and announce a\n              winner who takes home the car!\n            </p>\n          </div>\n        </div>\n      </div>\n    </section>",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "custom_liquid_aDnbbL": {
@@ -55,8 +55,8 @@
       "settings": {
         "custom_liquid": "<section class=\"testimonials\" id=\"testimonials\">\n      <div class=\"container\">\n        <h2 class=\"section-title\">Past Winners</h2>\n        <div class=\"testimonial-slider\">\n          <div class=\"testimonial-slide active\">\n            <p class=\"testimonial-text\">\n              \"I never thought I'd actually win! When I got the call that I won\n              last year's sports car, I couldn't believe it. The process was so\n              smooth and the team was incredible throughout. Now I'm driving my\n              dream car every day!\"\n            </p>\n            <p class=\"testimonial-author\">- Michael T., Last Year's Winner</p>\n          </div>\n\n          <div class=\"testimonial-slide\">\n            <p class=\"testimonial-text\">\n              \"I only made a small purchase to support the brand, and next thing\n              I know I'm picking up the keys to a brand new luxury vehicle! This\n              giveaway changed my life completely. Forever grateful!\"\n            </p>\n            <p class=\"testimonial-author\">- Sarah J., Previous Winner</p>\n          </div>\n\n          <div class=\"testimonial-slide\">\n            <p class=\"testimonial-text\">\n              \"The moment they announced my name during the live drawing was\n              surreal. I've entered many giveaways before but this was the first\n              legitimate one where they actually delivered exactly as promised.\n              Truly amazing experience!\"\n            </p>\n            <p class=\"testimonial-author\">- Robert K., Grand Prize Winner</p>\n          </div>\n\n          <div class=\"slider-dots\">\n            <span class=\"dot active\" data-slide=\"0\"></span>\n            <span class=\"dot\" data-slide=\"1\"></span>\n            <span class=\"dot\" data-slide=\"2\"></span>\n          </div>\n        </div>\n      </div>\n    </section>",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "custom_liquid_R7jcCJ": {
@@ -65,8 +65,8 @@
       "settings": {
         "custom_liquid": "<section class=\"faq\" id=\"faq\">\n      <div class=\"container\">\n        <h2 class=\"section-title\">Frequently Asked Questions</h2>\n        <div class=\"faq-list\">\n          <div class=\"faq-item\">\n            <div class=\"faq-question\">How do I enter the giveaway?</div>\n            <div class=\"faq-answer\">\n              <p>\n                To enter the giveaway, simply make any purchase on our website.\n                Every order automatically qualifies you for entry, and you'll\n                receive additional entries for every $50 spent on eligible\n                products.\n              </p>\n            </div>\n          </div>\n\n          <div class=\"faq-item\">\n            <div class=\"faq-question\">When will the winner be announced?</div>\n            <div class=\"faq-answer\">\n              <p>\n                The winner will be selected and announced when the countdown\n                timer reaches zero. We conduct our drawing live on our social\n                media channels to ensure complete transparency.\n              </p>\n            </div>\n          </div>\n\n          <div class=\"faq-item\">\n            <div class=\"faq-question\">What are the odds of winning?</div>\n            <div class=\"faq-answer\">\n              <p>\n                Your odds of winning depend on the total number of entries\n                received during the promotional period. The more you shop, the\n                more entries you'll earn, which increases your chances of\n                winning!\n              </p>\n            </div>\n          </div>\n\n          <div class=\"faq-item\">\n            <div class=\"faq-question\">Do I have to pay taxes if I win?</div>\n            <div class=\"faq-answer\">\n              <p>\n                Winners are responsible for all taxes and fees associated with\n                prize acceptance and use. We recommend consulting with a tax\n                professional regarding your specific situation if you win.\n              </p>\n            </div>\n          </div>\n\n          <div class=\"faq-item\">\n            <div class=\"faq-question\">Can I win if I'm outside the US?</div>\n            <div class=\"faq-answer\">\n              <p>\n                Yes! Our giveaway is open internationally. However,\n                international winners may be responsible for additional\n                shipping, import duties, taxes, and compliance with local\n                regulations. We'll work with international winners to ensure a\n                smooth delivery process.\n              </p>\n            </div>\n          </div>\n\n          <div class=\"faq-item\">\n            <div class=\"faq-question\">What if I don't want the car?</div>\n            <div class=\"faq-answer\">\n              <p>\n                Winners have the option to choose a cash alternative of 75% of\n                the vehicle's retail value. This gives you flexibility if you'd\n                prefer the monetary prize instead of the vehicle itself.\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "featured_collection_WhFDjN": {
@@ -85,7 +85,7 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "color_scheme": "",
+        "color_scheme": "accent-2",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -104,8 +104,8 @@
       "settings": {
         "custom_liquid": "",
         "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     }
   },
