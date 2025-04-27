@@ -3901,6 +3901,10 @@ details-disclosure > details {
         color: var(--white);
       }
 
+      .step p {
+        color: #fff;
+      }
+
       .testimonials {
         padding: 80px 0;
         background-color: var(--black);
