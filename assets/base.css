@@ -4365,6 +4365,7 @@ details-disclosure > details {
       }
 
       .timer-box {
+        color: #fff;
         background-color: rgba(0, 0, 0, 0.7);
         border: 2px solid var(--primary-red);
         padding: 10px 20px;
