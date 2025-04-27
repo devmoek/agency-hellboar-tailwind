@@ -3657,7 +3657,7 @@ details-disclosure > details {
       .hero {
         height: 80vh;
         background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-          url('/api/placeholder/1200/800') center/cover no-repeat;
+          url('https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990') center/cover no-repeat;
         display: flex;
         align-items: center;
         position: relative;
