@@ -4032,14 +4032,14 @@ details-disclosure > details {
         margin: -30px auto 50px;
       }
 
-      .product-grid {
+      /* .product-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 30px;
         margin-bottom: 40px;
-      }
+      } */
 
-      .product-card {
+      /* .product-card {
         background-color: rgba(255, 255, 255, 0.05);
         border-radius: 10px;
         overflow: hidden;
@@ -4049,13 +4049,13 @@ details-disclosure > details {
         display: flex;
         flex-direction: column;
         border: 1px solid rgba(255, 255, 255, 0.1);
-      }
+      } */
 
-      .product-card:hover {
+      /* .product-card:hover {
         transform: translateY(-10px);
         box-shadow: 0 10px 30px rgba(229, 23, 44, 0.2);
         border-color: rgba(229, 23, 44, 0.3);
-      }
+      } */
 
       .product-badge {
         position: absolute;
