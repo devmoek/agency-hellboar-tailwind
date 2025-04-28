@@ -18,14 +18,14 @@
           "type": "link_list",
           "settings": {
             "heading": "Account",
-            "menu": "account"
+            "menu": "main-menu"
           }
         },
         "footer-1": {
           "type": "link_list",
           "settings": {
             "heading": "Info",
-            "menu": "info"
+            "menu": "main-menu"
           }
         },
         "link_list_afKjiw": {
