@@ -1,0 +1,1069 @@
+<style>
+      :root {
+        --primary-red: #e5172c;
+        --dark-red: #b5121e;
+        --black: #121212;
+        --light-gray: #f2f2f2;
+        --white: #ffffff;
+      }
+
+      .page-header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url('https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990') center/cover no-repeat;
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .page-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, var(--black), transparent);
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .page-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        color: var(--white);
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+      }
+
+      .page-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: var(--primary-red);
+      }
+
+      .highlight {
+        color: var(--primary-red);
+      }
+
+      .section-alt {
+        background-color: #0a0a0a;
+        padding: 40px 0;
+        margin: 60px 0;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 60px;
+        text-transform: uppercase;
+        color: var(--white);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background-color: var(--primary-red);
+      }
+
+      .current-prize {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .prize-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 3px solid var(--primary-red);
+      }
+
+      .prize-content {
+        padding: 20px;
+      }
+
+      .prize-title {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        color: var(--white);
+      }
+
+      .prize-subtitle {
+        font-size: 12px;
+        color: var(--primary-red);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .prize-text {
+        color: #fff;
+        margin-bottom: 30px;
+        font-size: 14px;
+        text-align: left;
+      }
+
+      .prize-features {
+        margin-bottom: 30px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .feature-icon {
+        color: var(--primary-red);
+        font-size: 1.4rem;
+        margin-right: 10px;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--primary-red);
+        color: var(--white);
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(229, 23, 44, 0.4);
+      }
+
+      .cta-button:hover {
+        background-color: var(--dark-red);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(229, 23, 44, 0.6);
+      }
+
+      .countdown-container {
+        background-color: rgba(229, 23, 44, 0.05);
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        border-left: 4px solid var(--primary-red);
+        margin: 50px 0;
+      }
+
+      .countdown-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: var(--white);
+      }
+
+      .countdown-timer {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .countdown-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .countdown-number {
+        background-color: var(--primary-red);
+        color: var(--white);
+        font-size: 2.5rem;
+        font-weight: 700;
+        padding: 10px;
+        min-width: 80px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      .countdown-label {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .previous-winners {
+        margin-top: 50px;
+      }
+
+      .winners-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .winner-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        border-bottom: 3px solid var(--primary-red);
+      }
+
+      .winner-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      .winner-content {
+        padding: 20px;
+      }
+
+      .winner-name {
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: var(--white);
+      }
+
+      .winner-prize {
+        font-size: 18px;
+        color: var(--primary-red);
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .winner-text {
+        font-size: 14px;
+        color: var(--light-gray);
+        font-style: italic;
+      }
+
+      .prize-specs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .spec-item {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .spec-label {
+        font-weight: 500;
+        color: var(--primary-red);
+        margin-bottom: 5px;
+      }
+
+      .spec-value {
+        font-size: 1.1rem;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .car-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        position: relative;
+        height: fit-content;
+      }
+
+      .gallery-item h2 {
+        margin: 0;
+        padding: 0;
+      }
+
+      .gallery-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover .gallery-img {
+        transform: scale(1.1);
+      }
+
+      .how-to-win {
+        margin-top: 50px;
+      }
+
+      .steps-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .step-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        border-top: 3px solid var(--primary-red);
+      }
+
+      .step-number {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--primary-red);
+        color: var(--white);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .step-title {
+        font-size: 1.3rem;
+        margin: 15px 0;
+        color: var(--white);
+      }
+
+      .step-text {
+        color: var(--light-gray);
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        padding: 20px;
+        cursor: pointer;
+        position: relative;
+        font-size: 1.2rem;
+        color: var(--white);
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      .faq-question::after {
+        content: '+';
+        position: absolute;
+        right: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .faq-question.active::after {
+        content: '-';
+      }
+
+      .faq-answer {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        color: var(--light-gray);
+      }
+
+      .faq-answer.show {
+        padding: 0 20px 20px;
+        max-height: 300px;
+      }
+
+      .review-sliders {
+        display: flex;
+      }
+
+      .review-slider {
+        position: relative;
+      }
+
+      .review-slide {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 10px;
+        margin: 0 15px;
+        text-align: center;
+        border-left: 3px solid var(--primary-red);
+      }
+
+      .review-quote {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-style: italic;
+        color: var(--light-gray);
+      }
+
+      .review-author {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--primary-red);
+      }
+
+      .footer {
+        background-color: var(--black);
+        padding: 40px 0;
+        color: var(--light-gray);
+      }
+
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .footer-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: var(--white);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: var(--light-gray);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-red);
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+        color: var(--white);
+        text-decoration: none;
+      }
+
+      .social-icon:hover {
+        background-color: var(--primary-red);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 40px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .floating-cta {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 100;
+      }
+
+    .entry-bonus {
+        background-color: rgba(229, 23, 44, 0.1);
+        color: var(--primary-red);
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-block;
+        margin-bottom: 15px;
+        border: 1px dashed var(--primary-red);
+        animation: pulse 2s infinite;
+        width: 80%;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+      }
+
+      @media (max-width: 992px) {
+        .current-prize,
+        .winners-grid,
+        .steps-container {
+          grid-template-columns: 1fr 1fr;
+        }
+        
+        .prize-specs {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .current-prize,
+        .winners-grid,
+        .steps-container {
+          grid-template-columns: 1fr;
+        }
+        
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .nav-list {
+          position: absolute;
+          top: 80px;
+          left: 0;
+          width: 100%;
+          background-color: var(--black);
+          flex-direction: column;
+          align-items: center;
+          padding: 20px 0;
+          gap: 20px;
+          transform: translateY(-150%);
+          transition: transform 0.3s ease;
+          z-index: 99;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-list.active {
+          transform: translateY(0);
+        }
+
+        .nav-list li {
+          margin: 0;
+        }
+        
+        .page-title {
+          font-size: 2.2rem;
+        }
+
+        .countdown-timer {
+          flex-wrap: wrap;
+        }
+
+        .countdown-number {
+          font-size: 1.8rem;
+          min-width: 60px;
+        }
+
+        .review-sliders {
+            flex-direction: column;
+            gap: 20px;
+        }
+      }
+    </style>
+
+    <main style="background: #000;display:flex;flex-direction: column;gap: 60px;">
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <div class="header-content">
+          <h1 class="page-title">The <span class="highlight">Prize</span></h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Prize Section -->
+    <section class="section" id="current-prize">
+      <div class="container">
+        <h2 class="section-title">Current Giveaway</h2>
+        <div class="current-prize">
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="2025 Ferrari 488 GTB" class="prize-image">
+          </div>
+          <div class="prize-content">
+            <h3 class="prize-title">Chevrolet Corvette C8</h3>
+            <p class="prize-subtitle">Valued at $80,000</p>
+            <p class="prize-text">Experience the pinnacle of automotive engineering with our biggest giveaway yet. The 2025 Ferrari 488 GTB combines breathtaking Italian design with unmatched performance, creating the ultimate driving experience that could be yours with just a single purchase.</p>
+            
+            <div class="prize-features">
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>3.9L Twin-Turbocharged V8 Engine</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>670 Horsepower & 560 lb-ft of Torque</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>0-60 MPH in Just 2.9 Seconds</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Custom HellBoar Edition Interior Package</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>All Taxes and Delivery Covered</span>
+              </div>
+            </div>
+            
+            <a href="#entry" class="cta-button">Shop Now To Enter</a>
+          </div>
+        </div>
+        
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+          <h3 class="countdown-title">Giveaway Ends In:</h3>
+          <div class="countdown-timer">
+            <div class="countdown-item">
+              <div class="countdown-number" id="days">27</div>
+              <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-number" id="hours">14</div>
+              <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-number" id="minutes">33</div>
+              <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-number" id="seconds">59</div>
+              <div class="countdown-label">Seconds</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Detailed Specifications -->
+        <h3 class="section-title">Car Specifications</h3>
+        <div class="prize-specs">
+            <div class="spec-item">
+                <div class="spec-label">Engine</div>
+                <div class="spec-value">6.2L Naturally Aspirated V8</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Power</div>
+                <div class="spec-value">495 hp @ 6,450 rpm</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Torque</div>
+                <div class="spec-value">470 lb-ft @ 5,150 rpm</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Transmission</div>
+                <div class="spec-value">8-Speed Dual-Clutch Automatic</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Top Speed</div>
+                <div class="spec-value">194 mph</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">0-60 MPH</div>
+                <div class="spec-value">2.9 seconds</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Exterior Color</div>
+                <div class="spec-value">Torch Red</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Interior</div>
+                <div class="spec-value">Red Leather</div>
+            </div>
+        </div>
+
+        
+        <!-- Car Gallery -->
+        <h3 class="section-title">Gallery</h3>
+        <div class="car-gallery">
+          <div class="gallery-item">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Ferrari 488 Front" class="gallery-img">
+          </div>
+          <div class="gallery-item">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Ferrari 488 Side" class="gallery-img">
+          </div>
+          <div class="gallery-item">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Ferrari 488 Rear" class="gallery-img">
+          </div>
+          <div class="gallery-item">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Ferrari 488 Interior" class="gallery-img">
+          </div>
+          <div class="gallery-item">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Ferrari 488 Engine" class="gallery-img">
+          </div>
+          <div class="gallery-item">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Ferrari 488 Wheels" class="gallery-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Win Section -->
+    <section class="section section-alt" id="how-it-works">
+      <div class="container">
+        <h2 class="section-title">How To Win</h2>
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Shop Our Collection</h3>
+            <p class="step-text">Browse our premium streetwear collection and find your style. Every item you purchase equals one entry into our giveaway.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Complete Your Purchase</h3>
+            <p class="step-text">Check out and create an account. Your entry is automatically registered with your purchase confirmation.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Wait For The Draw</h3>
+            <p class="step-text">The winner is selected at random and announced live on our social media. We contact the winner directly after the announcement.</p>
+          </div>
+        </div>
+        
+        <!-- Additional Entry Methods -->
+        <div class="countdown-container">
+          <h3 class="countdown-title">Maximize Your Chances</h3>
+          <p class="prize-text">While every purchase gives you one entry, there are ways to increase your odds:</p>
+          
+          <div class="prize-features" style="margin-top: 20px;">
+            <div class="feature-item">
+              <span class="feature-icon">+</span>
+              <span>Join our VIP membership for 2x entries on every purchase</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">+</span>
+              <span>Share your purchase on social media for an additional entry, don't forget to tag us @hellboarapparel</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">+</span>
+              <span>Refer a friend who makes a purchase for 5 bonus entries</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">+</span>
+              <span>Digital products offer 3x entry multiplier</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Previous Winners Section -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <h2 class="section-title">Previous Winners</h2>
+        <div class="winners-grid">
+          <div class="winner-card">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Michael Rodriguez" class="winner-img">
+            <div class="winner-content">
+              <h3 class="winner-name">Michael Rodriguez</h3>
+              <p class="winner-prize">2024 Lamborghini Huracán</p>
+              <p class="winner-text">"I never thought buying a hoodie would change my life. The moment I got the call from HellBoar, I couldn't believe it was real. Now I drive my dream car every day!"</p>
+            </div>
+          </div>
+          <div class="winner-card">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Sarah Johnson" class="winner-img">
+            <div class="winner-content">
+              <h3 class="winner-name">Sarah Johnson</h3>
+              <p class="winner-prize">2023 Porsche 911 GT3</p>
+              <p class="winner-text">"HellBoar's giveaways are 100% legitimate. I was skeptical until they delivered a brand new Porsche to my driveway with all taxes paid. Best day ever!"</p>
+            </div>
+          </div>
+          <div class="winner-card">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="David Chen" class="winner-img">
+            <div class="winner-content">
+              <h3 class="winner-name">David Chen</h3>
+              <p class="winner-prize">2022 Tesla Model S Plaid</p>
+              <p class="winner-text">"From ordering a t-shirt to driving a Tesla in just one month. The HellBoar team was amazing throughout the entire process. They even flew me out for the handover ceremony!"</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review Slider -->
+        {% comment %} <div class="review-slider">
+          <div class="review-slide">
+            <p class="review-quote">"The whole experience was surreal. From the moment I got the call to receiving the keys to my McLaren, HellBoar treated me like family. Their giveaways are the real deal."</p>
+            <p class="review-author">- James Wilson, 2023 Winner</p>
+          </div>
+        </div> {% endcomment %}
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-alt" id="faq">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">Is this giveaway legal?</div>
+            <div class="faq-answer">Yes, all our giveaways comply with international laws and regulations. We work with legal experts to ensure transparency and fairness in every draw. Full terms and conditions are available on our website.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">How are winners selected?</div>
+            <div class="faq-answer">Winners are selected using a certified random number generator, with each entry assigned a unique number. The drawing is overseen by an independent auditor and streamed live on our social media platforms for full transparency.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">What about taxes and delivery?</div>
+            <div class="faq-answer">HellBoar covers all taxes, registration fees, and delivery costs associated with the prize. We believe in giving you a truly free prize with no hidden costs or financial surprises.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">How many entries can I have?</div>
+            <div class="faq-answer">There's no limit to the number of entries you can have. Each purchase equals one entry, with bonus entries available through our referral program, VIP membership, and social media shares.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Can I win if I live outside the USA?</div>
+            <div class="faq-answer">Absolutely! Our giveaways are open worldwide to entrants in eligible countries. International winners receive the same benefits, including covered shipping and import duties where legally possible.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Can I choose cash instead of the car?</div>
+            <div class="faq-answer">Yes, winners have the option to choose a cash alternative valued at 80% of the vehicle's MSRP. This gives you the flexibility to decide what works best for your situation.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">When is the next drawing?</div>
+            <div class="faq-answer">The current Ferrari 488 GTB giveaway drawing will take place on May 25, 2025, at 8:00 PM EST. The event will be streamed live across all our social media platforms.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">How will I be notified if I win?</div>
+            <div class="faq-answer">Winners are announced live during our drawing stream, and we'll contact you directly via email and phone. We'll make multiple attempts to reach you over a 7-day period before selecting an alternate winner.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Entry Section -->
+    <section class="section" id="entry">
+      <div class="container">
+        <h2 class="section-title">Enter The Giveaway</h2>
+        <div class="current-prize">
+          <div class="prize-content">
+            <h3 class="prize-title">Shop Now To Enter</h3>
+            <p class="prize-text">Every HellBoar product you purchase gives you one entry into our current Ferrari 488 GTB giveaway. Our premium streetwear isn't just about looking good—it's your ticket to potentially owning your dream car.</p>
+            <p class="prize-text">Browse our collection of exclusive designs, limited-edition collaborations, and signature HellBoar apparel. From graphic tees to premium hoodies, every purchase brings you one step closer to the ultimate prize.</p>
+            <p class="prize-subtitle">No Purchase Necessary</p>
+            <p class="prize-text">You can also enter without purchase by mailing a handwritten entry form. See our terms and conditions for full details.</p>
+            <a href="#shop-collection" class="cta-button">Shop Collection</a>
+          </div>
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="HellBoar Collection" class="prize-image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collection Preview -->
+    <section class="section section-alt" id="shop-collection">
+      <div class="container">
+        <h2 class="section-title">ENTER NOW</h2>
+        <div class="car-gallery">
+          <div class="gallery-item">
+            <img src="https://hellboar.com/cdn/shop/files/hellboartiersver1-01_ccee0300-8231-4a6c-8f9c-c3cc90aece18.png?v=1736100984" alt="Limited Edition Hoodie" class="gallery-img">
+            <p class="entry-bonus">100 ENTRIES</p>
+          </div>
+          <div class="gallery-item">
+            <img src="https://hellboar.com/cdn/shop/files/hellboartiersver1-02.png?v=1736100899" alt="Signature T-Shirt" class="gallery-img">
+            <p class="entry-bonus">300 ENTRIES</p>
+          </div>
+          <div class="gallery-item">
+            <img src="https://hellboar.com/cdn/shop/files/hellboartiersver1-03_18d55102-6347-4f32-a44d-2a9684272eb1.png?v=1736101061" alt="Premium Jacket" class="gallery-img">
+            <p class="entry-bonus">500 ENTRIES</p>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="/collections/all" class="cta-button">View all</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Previous Prizes -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Previous Prizes</h2>
+        <div class="winners-grid">
+          <div class="winner-card">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Lamborghini Huracán" class="winner-img">
+            <div class="winner-content">
+              <h3 class="winner-name">2024 Lamborghini Huracán</h3>
+              <p class="winner-prize">Valued at $275,000</p>
+              <p class="winner-text">Our previous headline prize featuring a custom HellBoar edition interior and exclusive Arancio Borealis paint.</p>
+            </div>
+          </div>
+          <div class="winner-card">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Porsche 911 GT3" class="winner-img">
+            <div class="winner-content">
+              <h3 class="winner-name">2023 Porsche 911 GT3</h3>
+              <p class="winner-prize">Valued at $220,000</p>
+              <p class="winner-text">A track-ready beast with HellBoar's signature styling touches and upgraded performance package.</p>
+            </div>
+          </div>
+          <div class="winner-card">
+            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Tesla Model S Plaid" class="winner-img">
+            <div class="winner-content">
+              <h3 class="winner-name">2022 Tesla Model S Plaid</h3>
+              <p class="winner-prize">Valued at $135,000</p>
+              <p class="winner-text">The world's fastest production electric vehicle, featuring custom HellBoar badging and interior accents.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Customer Reviews</h2>
+        <div class="review-sliders">
+            <div class="review-slider">
+            <div class="review-slide">
+                <p class="review-quote">"Not only is the clothing amazing quality, but knowing each purchase could win me a supercar makes shopping at HellBoar even more exciting. The anticipation of each draw is addictive!"</p>
+                <p class="review-author">- Emma Parker</p>
+            </div>
+            </div>
+            <div class="review-slider">
+            <div class="review-slide">
+                <p class="review-quote">"I've been wearing HellBoar for two years now. The designs are unique and the quality is unmatched. The possibility of winning a Ferrari is just the cherry on top of an already excellent product."</p>
+                <p class="review-author">- Thomas Wright</p>
+            </div>
+            </div>
+            <div class="review-slider">
+            <div class="review-slide">
+                <p class="review-quote">"After seeing my friend win last year's Porsche, I know these giveaways are 100% real. I've made it a point to order from every new collection drop since then. My time is coming!"</p>
+                <p class="review-author">- Ryan Martinez</p>
+            </div>
+            </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Legal Information -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Legal Information</h2>
+        <div class="countdown-container">
+          <h3 class="countdown-title">Giveaway Terms & Conditions</h3>
+          <p class="prize-text">Our giveaways are conducted with complete transparency and in compliance with all applicable laws. Full terms and conditions are available on our website, but here are some key points:</p>
+          
+          <div class="prize-features" style="margin-top: 20px;">
+            <div class="feature-item">
+              <span class="feature-icon">•</span>
+              <span>You must be 18 years or older to participate</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">•</span>
+              <span>No purchase necessary entry option available</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">•</span>
+              <span>All entries have an equal chance of winning</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">•</span>
+              <span>Drawing conducted by independent third party</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">•</span>
+              <span>Prize is as described, including tax and delivery coverage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+      // Scroll to sections smoothly
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute('href');
+          
+          // If it's an internal link on the same page
+          if (targetId.startsWith('#')) {
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth',
+              });
+
+              // Close mobile menu if open
+              navList.classList.remove('active');
+            }
+          } else {
+            // It's a link to another page
+            window.location.href = targetId;
+          }
+        });
+      });
+
+      // FAQ Toggle
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          question.classList.toggle('active');
+          answer.classList.toggle('show');
+        });
+      });
+
+    </script>
+    </main>
+
+
+{% schema %}
+  {
+  "name": "Giveaway Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Giveaway Page"
+    }
+  ]
+}  
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
