@@ -17,41 +17,52 @@
         "footer-0": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
+            "heading": "Account",
+            "menu": "account"
           }
         },
         "footer-1": {
           "type": "link_list",
           "settings": {
             "heading": "Info",
+            "menu": "info"
+          }
+        },
+        "link_list_afKjiw": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Company",
             "menu": "footer"
           }
         },
         "footer-2": {
           "type": "text",
           "settings": {
-            "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
+            "heading": "HELLBOAR® Car Giveaway",
+            "subtext": "<p>NO PURCHASE NECESSARY TO ENTER OR WIN. A PURCHASE WILL NOT INCREASE YOUR CHANCES OF WINNING. Open to legal residents of the 50 United States, the District of Columbia, and Canada. Void in Puerto Rico, Quebec, U.S. territories, and where prohibited by law. Must be the age of majority in state/province of residence and a licensed driver as of 01/07/2025 EST. The Beast Car Giveaway (the “Sweepstakes”), sponsored by Oversizeonly Inc. (the “Sponsor”), begins at 12:00:00 AM EST on January 7, 2025, and ends at 11:59:59 PM EST on May 7, 2025 (“Entry Period”). Skill-testing question required if a Canadian resident is selected as the potential winner. Maximum value of the Grand Prize is $130,000 USD. Odds of winning depend upon the number of eligible purchase and non-purchase entries received. See Official Rules for details, including how to enter without making a purchase.</p>"
           }
         }
       },
       "block_order": [
         "footer-0",
         "footer-1",
+        "link_list_afKjiw",
         "footer-2"
+      ],
+      "custom_css": [
+        ".rte > *:last-child {font-size: 12px;}"
       ],
       "settings": {
         "color_scheme": "accent-2",
         "newsletter_enable": false,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": false,
-        "show_social": true,
+        "show_social": false,
         "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": false,
         "show_policy": false,
-        "margin_top": 48,
+        "margin_top": 0,
         "padding_top": 36,
         "padding_bottom": 36
       }
