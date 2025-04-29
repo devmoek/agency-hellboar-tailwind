@@ -4493,3 +4493,11 @@ details-disclosure > details {
           margin: 0;
         }
       }
+
+#shopify-section-template--16385085079646__main {
+  background: #000;
+}
+
+#shopify-section-template--16385085079646__main .page-title {
+  color: #fff;
+}
