@@ -50,7 +50,7 @@
         "footer-2"
       ],
       "custom_css": [
-        ".rte > *:last-child {font-size: 12px;}"
+        ".rte > *:last-child {font-size: 11px;}"
       ],
       "settings": {
         "color_scheme": "accent-2",
