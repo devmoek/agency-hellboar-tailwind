@@ -17,14 +17,14 @@
         "padding_bottom": 28
       }
     },
-    "winners_page_cEfiye": {
-      "type": "winners-page",
-      "name": "Winners Page",
+    "faq_page_MmPXA7": {
+      "type": "faq-page",
+      "name": "FAQ Page",
       "settings": {}
     }
   },
   "order": [
     "main",
-    "winners_page_cEfiye"
+    "faq_page_MmPXA7"
   ]
 }

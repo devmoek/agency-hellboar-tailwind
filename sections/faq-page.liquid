@@ -1,0 +1,1152 @@
+<style>
+  :root {
+    --primary-red: #e5172c;
+    --dark-red: #b5121e;
+    --black: #121212;
+    --light-gray: #f2f2f2;
+    --white: #ffffff;
+  }
+
+  .page-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))
+    , url('/api/placeholder/1200/600') center/cover no-repeat;
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, var(--black), transparent);
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: var(--white);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+  }
+
+  .page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-red);
+  }
+
+  .highlight {
+    color: var(--primary-red);
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .section-alt {
+    background-color: #0a0a0a;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    color: var(--white);
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background-color: var(--primary-red);
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: var(--primary-red);
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(229, 23, 44, 0.4);
+  }
+
+  .cta-button:hover {
+    background-color: var(--dark-red);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(229, 23, 44, 0.6);
+  }
+
+  /* FAQ Page Specific Styles */
+  .faq-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+  }
+
+  .faq-intro p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  .faq-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+  }
+
+  .tab-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+  }
+
+  .tab-btn:hover,
+  .tab-btn.active {
+    border-color: var(--primary-red);
+    background-color: rgba(229, 23, 44, 0.1);
+  }
+
+  .tab-btn.active {
+    color: var(--primary-red);
+  }
+
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-category {
+    display: none;
+  }
+
+  .faq-category.active {
+    display: block;
+  }
+
+  .faq-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-left: 3px solid var(--primary-red);
+    transition: all 0.3s ease;
+  }
+
+  .faq-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(229, 23, 44, 0.2);
+  }
+
+  .faq-question {
+    padding: 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--primary-red);
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item.active .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 25px;
+    line-height: 1.6;
+    color: var(--light-gray);
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-bottom: 25px;
+  }
+
+  .search-section {
+    background-color: rgba(229, 23, 44, 0.05);
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 80px;
+    border-radius: 15px;
+  }
+
+  .search-section h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--white);
+  }
+
+  .search-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: 1.1rem;
+    padding-right: 50px;
+    border: 2px solid rgba(229, 23, 44, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--primary-red);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .search-button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary-red);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .contact-section {
+    padding: 80px 0;
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))
+    , url('/api/placeholder/1200/600') center/cover no-repeat;
+    border-radius: 15px;
+    margin-top: 80px;
+  }
+
+  .contact-section h3 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  .contact-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .contact-card {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    min-width: 250px;
+    text-align: center;
+    border-bottom: 3px solid var(--primary-red);
+    transition: transform 0.3s ease;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .contact-icon {
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+  }
+
+  .contact-title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .contact-info {
+    color: var(--light-gray);
+    margin-bottom: 20px;
+  }
+
+  .quick-links {
+    margin-top: 80px;
+  }
+
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .quick-link-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border-bottom: 3px solid var(--primary-red);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+  }
+
+  .quick-link-card:hover {
+    transform: translateY(-10px);
+    background-color: rgba(229, 23, 44, 0.1);
+  }
+
+  .quick-link-icon {
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+  }
+
+  .quick-link-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--white);
+  }
+
+  .quick-link-text {
+    color: var(--light-gray);
+  }
+
+  footer {
+    background-color: var(--black);
+    padding: 40px 0;
+    color: var(--light-gray);
+    margin-top: 80px;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .footer-title {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary-red);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .social-icon:hover {
+    background-color: var(--primary-red);
+  }
+
+  .copyright {
+    text-align: center;
+    padding-top: 40px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 992px) {
+    .quick-links-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2.2rem;
+    }
+
+    .quick-links-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-question {
+      font-size: 1.1rem;
+      padding: 20px;
+    }
+  }
+</style>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <div class="header-content">
+      <h1 class="page-title">Frequently <span class="highlight">Asked</span> Questions</h1>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Intro Section -->
+<section class="section">
+  <div class="container">
+    <div class="faq-intro">
+      <h2 class="section-title">Get Answers Fast</h2>
+      <p>Everything you need to know about HellBoar's products, shipping, returns, and our legendary giveaways. Can't find what you're looking for? Contact our support team 24/7.</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+      <div class="container">
+        <h3>Find Your Answer Quickly</h3>
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Type your question here...">
+          <button class="search-button">&#128269;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Tabs -->
+    <div class="faq-tabs">
+      <button class="tab-btn active" data-category="order-status">Order Status</button>
+      <button class="tab-btn" data-category="returns-shipping">Returns & Shipping</button>
+      <button class="tab-btn" data-category="giveaway">Giveaway Questions</button>
+    </div>
+
+    <!-- FAQ Content -->
+    <div class="faq-container">
+      <!-- Order Status FAQs -->
+      <div class="faq-category active" id="order-status">
+        <div class="faq-item">
+          <div class="faq-question">How do I track my order?</div>
+          <div class="faq-answer">
+            <p>Once your order ships, you'll receive a tracking number via email. You can also track your order by:</p>
+            <ul>
+              <li>Logging into your HellBoar account and viewing your order history</li>
+              <li>Using our Order Tracking page with your order number and email</li>
+              <li>Contacting customer support with your order number</li>
+            </ul>
+            <p>Most tracking numbers become active within 24 hours after shipping.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How long will it take to process my order?</div>
+          <div class="faq-answer">
+            <p>Orders are typically processed within 1-2 business days. During high-volume sales and giveaway periods, processing may take 2-3 business days. Premium members receive priority processing.</p>
+            <p>After processing, shipping times depend on your selected shipping method and location. You'll receive a confirmation email once your order ships.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Can I modify or cancel my order?</div>
+          <div class="faq-answer">
+            <p>You can modify or cancel your order within 2 hours of placing it. After that window, our system begins processing and we cannot guarantee changes.</p>
+            <p>To request modifications within the 2-hour window:</p>
+            <ul>
+              <li>Log into your account and select "Order History"</li>
+              <li>Find your recent order and select "Modify Order"</li>
+              <li>For urgent assistance, contact our 24/7 customer support team</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Why is my order status "On Hold"?</div>
+          <div class="faq-answer">
+            <p>An "On Hold" status typically indicates one of the following:</p>
+            <ul>
+              <li>Payment verification issue (most common with international orders)</li>
+              <li>Address verification needed</li>
+              <li>Item temporarily out of stock</li>
+              <li>Order flagged for manual review</li>
+            </ul>
+            <p>Our team will contact you via email with details and next steps. Most holds are resolved within 24 hours.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How do I view my order history?</div>
+          <div class="faq-answer">
+            <p>You can view your complete order history by logging into your HellBoar account:</p>
+            <ol>
+              <li>Click on "My Account" in the top navigation</li>
+              <li>Select "Order History" from the dropdown menu</li>
+              <li>All past orders will be displayed with status and tracking information</li>
+            </ol>
+            <p>Your order history includes detailed information including order date, status, items purchased, and giveaway entries earned.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Returns & Shipping FAQs -->
+      <div class="faq-category" id="returns-shipping">
+        <div class="faq-item">
+          <div class="faq-question">What is your return policy?</div>
+          <div class="faq-answer">
+            <p>We offer a 30-day satisfaction guarantee on all products. If you're not completely satisfied, you can return any unworn, unwashed items with the original tags attached for a full refund.</p>
+            <p>To initiate a return:</p>
+            <ol>
+              <li>Log into your account and go to "Order History"</li>
+              <li>Select the order and click "Start Return"</li>
+              <li>Follow the prompts to generate a return shipping label</li>
+            </ol>
+            <p>Return shipping is free for exchanges. For refunds, a $7.99 return shipping fee will be deducted from your refund amount unless the return is due to a product defect.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How much does shipping cost?</div>
+          <div class="faq-answer">
+            <p>Shipping costs are calculated based on your location and selected shipping method:</p>
+            <ul>
+              <li><strong>US Standard Shipping (5-7 business days):</strong> $7.99 or FREE on orders over $75</li>
+              <li><strong>US Express Shipping (2-3 business days):</strong> $15.99</li>
+              <li><strong>US Next Day Shipping:</strong> $24.99</li>
+              <li><strong>International Standard (10-14 business days):</strong> $19.99 - $29.99</li>
+              <li><strong>International Express (5-7 business days):</strong> $39.99 - $49.99</li>
+            </ul>
+            <p>HellBoar Premium members receive free standard shipping on all orders and 50% off expedited shipping options.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Do you ship internationally?</div>
+          <div class="faq-answer">
+            <p>Yes! We ship to over 150 countries worldwide. International shipping typically takes 10-14 business days for standard shipping and 5-7 business days for express shipping.</p>
+            <p>Please note:</p>
+            <ul>
+              <li>International customers are responsible for all duties, taxes, and customs fees</li>
+              <li>Some countries may have restrictions on certain products</li>
+              <li>Tracking may be limited in some regions</li>
+            </ul>
+            <p>To check shipping availability to your country, enter your shipping address during checkout.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How do I exchange an item for a different size?</div>
+          <div class="faq-answer">
+            <p>We make exchanges easy and FREE! To exchange for a different size:</p>
+            <ol>
+              <li>Log into your account and select "Order History"</li>
+              <li>Find your order and click "Start Exchange"</li>
+              <li>Select the item and specify the new size needed</li>
+              <li>Print the prepaid return label and return instructions</li>
+            </ol>
+            <p>Once we receive your return, we'll ship out the new size immediately. Exchange shipping is always free both ways within the US. For international customers, return shipping fees may still apply.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">My package is damaged or missing items. What should I do?</div>
+          <div class="faq-answer">
+            <p>We're sorry to hear about this issue! Please follow these steps:</p>
+            <ol>
+              <li>Take photos of any damaged packaging and products</li>
+              <li>Contact our support team within 48 hours of delivery</li>
+              <li>Include your order number and detailed description of the issue</li>
+              <li>Our team will provide immediate assistance</li>
+            </ol>
+            <p>For damaged items, we'll send a replacement at no cost. For missing items, we'll either ship the missing product immediately or provide a refund.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Giveaway Questions FAQs -->
+      <div class="faq-category" id="giveaway">
+        <div class="faq-item">
+          <div class="faq-question">How do HellBoar giveaways work?</div>
+          <div class="faq-answer">
+            <p>HellBoar hosts monthly giveaways with incredible prizes including luxury cars, cash, and exclusive experiences. Here's how they work:</p>
+            <ul>
+              <li>Every $1 spent = 1 entry into the current giveaway</li>
+              <li>Limited edition drops earn 2x or 3x bonus entries</li>
+              <li>Purchases are automatically entered - no additional steps required</li>
+              <li>Winners are selected randomly and announced live on our social media</li>
+              <li>All winners are verified before announcement</li>
+            </ul>
+            <p>Each giveaway runs for approximately one month, with the next giveaway starting immediately after the winner announcement.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Are the giveaways legitimate? How do I know they're real?</div>
+          <div class="faq-answer">
+            <p>Absolutely! Our giveaways are 100% legitimate and we pride ourselves on our transparency:</p>
+            <ul>
+              <li>All winner selections are conducted using a certified random selection process</li>
+              <li>Winner announcements are broadcast live on our social media channels</li>
+              <li>We publish videos of winner reactions and prize deliveries</li>
+              <li>All giveaways comply with state and federal laws regarding sweepstakes</li>
+              <li>Full giveaway terms and conditions are available on our website</li>
+            </ul>
+            <p>You can view our previous winners and their testimonials on our <a href="#winners" style="color: var(--primary-red);">Winners Page</a>.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How do I check my current giveaway entries?</div>
+          <div class="faq-answer">
+            <p>You can view your current giveaway entries by:</p>
+            <ol>
+              <li>Logging into your HellBoar account</li>
+              <li>Clicking on "My Giveaway Entries" in your dashboard</li>
+              <li>Viewing your total entries for the current giveaway</li>
+            </ol>
+            <p>The dashboard shows a detailed breakdown of your entries, including which purchases contributed to your total and any bonus entries you've earned through promotions or referrals.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">If I win a car, can I choose cash instead?</div>
+          <div class="faq-answer">
+            <p>Yes! We understand that a luxury vehicle isn't practical for everyone. Winners have three options:</p>
+            <ul>
+              <li>Accept the featured vehicle prize</li>
+              <li>Choose a cash alternative (typically 75% of the vehicle's MSRP)</li>
+              <li>Select store credit for 100% of the cash alternative value</li>
+            </ul>
+            <p>Winners have 7 days after notification to make their decision. If choosing the vehicle, winners are responsible for applicable taxes, registration, and insurance.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Are there any ways to get bonus entries?</div>
+          <div class="faq-answer">
+            <p>Yes! There are several ways to earn bonus entries:</p>
+            <ul>
+              <li><strong>Limited Edition Drops:</strong> Purchases from our limited collections earn 2x or 3x entries</li>
+              <li><strong>Referral Program:</strong> Earn 100 bonus entries for each friend who makes their first purchase</li>
+              <li><strong>Social Media Challenges:</strong> Participate in our monthly social media challenges for 250 bonus entries</li>
+              <li><strong>HellBoar Premium:</strong> Members earn 2x entries on all purchases year-round</li>
+              <li><strong>Anniversary Bonus:</strong> Earn 5x entries during your HellBoar account anniversary month</li>
+            </ul>
+            <p>Check our social media and email newsletters for special promotions offering additional bonus entry opportunities!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+      <h3>Still Have Questions?</h3>
+      <p>Our dedicated support team is ready to help you with any questions or concerns you might have about your order, returns, or our giveaways.</p>
+
+      <div class="contact-options">
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h4 class="contact-title">Email Support</h4>
+          <p class="contact-info">support@hellboar.com</p>
+          <p>Response within 24 hours</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <h4 class="contact-title">Live Chat</h4>
+          <p class="contact-info">Available 24/7</p>
+          <a href="#chat" class="cta-button">Chat Now</a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">📞</div>
+          <h4 class="contact-title">Phone Support</h4>
+          <p class="contact-info">1-800-HELLBOAR</p>
+          <p>Mon-Fri: 9am - 8pm EST</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+      <h2 class="section-title">Quick Links</h2>
+
+      <div class="quick-links-grid">
+        <a href="#shipping" class="quick-link-card">
+          <div class="quick-link-icon">🚚</div>
+          <h3 class="quick-link-title">Shipping Policy</h3>
+          <p class="quick-link-text">Detailed information about our shipping methods, timeframes, and costs.</p>
+        </a>
+
+        <a href="#returns" class="quick-link-card">
+          <div class="quick-link-icon">↩️</div>
+          <h3 class="quick-link-title">Returns & Exchanges</h3>
+          <p class="quick-link-text">Everything you need to know about our hassle-free return process.</p>
+        </a>
+
+        <a href="#winners" class="quick-link-card">
+          <div class="quick-link-icon">🏆</div>
+          <h3 class="quick-link-title">Winners Gallery</h3>
+          <p class="quick-link-text">Meet our previous giveaway winners and their incredible prizes.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Continuing the script section -->
+<script>
+  // Tab functionality
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const faqCategories = document.querySelectorAll('.faq-category');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons and categories
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      faqCategories.forEach(category => category.classList.remove('active'));
+      
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      // Show corresponding category
+      const categoryId = button.getAttribute('data-category');
+      document.getElementById(categoryId).classList.add('active');
+      
+      // Remove search results if present
+      const searchResults = document.getElementById('search-results');
+      if (searchResults) {
+        searchResults.remove();
+      }
+      
+      // Clear search input
+      const searchInput = document.querySelector('.search-input');
+      if (searchInput) {
+        searchInput.value = '';
+      }
+    });
+  });
+  
+  // FAQ accordion functionality
+  const faqItems = document.querySelectorAll('.faq-item');
+  
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    
+    question.addEventListener('click', () => {
+      // Check if this item is already active
+      const isActive = item.classList.contains('active');
+      
+      // Close all faq items
+      faqItems.forEach(faqItem => {
+        faqItem.classList.remove('active');
+      });
+      
+      // If the clicked item wasn't active, make it active
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // Search functionality
+  const searchInput = document.querySelector('.search-input');
+  const searchButton = document.querySelector('.search-button');
+  const allFaqItems = document.querySelectorAll('.faq-item');
+  const noResultsMessage = document.createElement('div');
+  
+  noResultsMessage.classList.add('no-results');
+  noResultsMessage.innerHTML = `
+    <div style="text-align: center; padding: 50px 20px; color: var(--light-gray);">
+      <div style="font-size: 3rem; margin-bottom: 20px;">🔍</div>
+      <h3 style="color: var(--white); margin-bottom: 15px;">No Results Found</h3>
+      <p>We couldn't find any FAQ matching your search. Try different keywords or contact our support team for help.</p>
+      <button class="cta-button reset-search" style="margin-top: 20px;">Reset Search</button>
+    </div>
+  `;
+  
+  function performSearch() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    
+    if (!searchTerm) {
+      resetSearch();
+      return;
+    }
+    
+    // Create a search results container
+    const searchResultsContainer = document.createElement('div');
+    searchResultsContainer.classList.add('search-results-category', 'active');
+    searchResultsContainer.id = 'search-results';
+    
+    // Hide all tab buttons
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Hide all categories
+    faqCategories.forEach(category => {
+      category.classList.remove('active');
+    });
+    
+    // Keep track of matches
+    let matchFound = false;
+    const matchedItems = [];
+    
+    // Search through all FAQ items across all categories
+    allFaqItems.forEach(item => {
+      const question = item.querySelector('.faq-question').textContent.toLowerCase();
+      const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+      
+      if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+        // Clone the item for our search results
+        const clonedItem = item.cloneNode(true);
+        clonedItem.classList.add('active'); // Expand matching items
+        clonedItem.classList.add('search-highlight');
+        
+        // Highlight the matching text
+        const questionElem = clonedItem.querySelector('.faq-question');
+        const answerElem = clonedItem.querySelector('.faq-answer');
+        
+        // Add event listener to the cloned question element
+        questionElem.addEventListener('click', () => {
+          const isActive = clonedItem.classList.contains('active');
+          if (isActive) {
+            clonedItem.classList.remove('active');
+          } else {
+            clonedItem.classList.add('active');
+          }
+        });
+        
+        // Add to our matched items
+        matchedItems.push(clonedItem);
+        matchFound = true;
+      }
+    });
+    
+    // Get the FAQ container and clear existing search results
+    const faqContainer = document.querySelector('.faq-container');
+    const existingSearchResults = document.getElementById('search-results');
+    if (existingSearchResults) {
+      existingSearchResults.remove();
+    }
+    
+    // Show search results or no results message
+    if (!matchFound) {
+      // Show no results message
+      if (!document.querySelector('.no-results')) {
+        searchResultsContainer.appendChild(noResultsMessage);
+        faqContainer.appendChild(searchResultsContainer);
+      }
+    } else {
+      // Add all matched items to the search results container
+      matchedItems.forEach(item => {
+        searchResultsContainer.appendChild(item);
+      });
+      
+      // Remove any existing no results message
+      const existingNoResults = document.querySelector('.no-results');
+      if (existingNoResults) {
+        existingNoResults.remove();
+      }
+      
+      // Add the search results container to the FAQ container
+      faqContainer.appendChild(searchResultsContainer);
+    }
+    
+    // Add search indicator
+    const searchIndicator = document.createElement('div');
+    searchIndicator.classList.add('search-indicator');
+    searchIndicator.innerHTML = `
+      <div style="background-color: rgba(229, 23, 44, 0.1); padding: 10px 20px; border-radius: 50px; display: inline-flex; align-items: center; margin-bottom: 30px;">
+        <span style="margin-right: 10px;">Search results for: "${searchTerm}"</span>
+        <button class="reset-search" style="background: none; border: none; color: var(--primary-red); cursor: pointer; font-weight: 600;">Clear</button>
+      </div>
+    `;
+    
+    const existingIndicator = document.querySelector('.search-indicator');
+    if (existingIndicator) {
+      existingIndicator.remove();
+    }
+    
+    if (matchFound) {
+      searchResultsContainer.insertBefore(searchIndicator, searchResultsContainer.firstChild);
+    }
+    
+    // Add event listener to reset button
+    document.querySelectorAll('.reset-search').forEach(button => {
+      button.addEventListener('click', resetSearch);
+    });
+  }
+  
+  function resetSearch() {
+    // Clear search input
+    searchInput.value = '';
+    
+    // Remove search results container
+    const searchResults = document.getElementById('search-results');
+    if (searchResults) {
+      searchResults.remove();
+    }
+    
+    // Remove search indicator and no results message
+    const searchIndicator = document.querySelector('.search-indicator');
+    if (searchIndicator) {
+      searchIndicator.remove();
+    }
+    
+    const noResults = document.querySelector('.no-results');
+    if (noResults) {
+      noResults.remove();
+    }
+    
+    // Reset to original state - make all FAQ items visible again
+    allFaqItems.forEach(item => {
+      item.style.display = '';
+      item.classList.remove('search-highlight');
+    });
+    
+    // Reset tab navigation and show first category
+    tabButtons[0].classList.add('active');
+    document.getElementById('order-status').classList.add('active');
+  }
+  
+  // Add event listeners for search
+  searchButton.addEventListener('click', performSearch);
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
+  });
+
+  // Newsletter subscription form validation
+  const newsletterForm = document.getElementById('newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailInput = newsletterForm.querySelector('input[type="email"]');
+      if (emailInput && emailInput.value) {
+        // Show success message
+        const formContainer = newsletterForm.parentElement;
+        formContainer.innerHTML = `
+          <div class="success-message" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 20px;">✅</div>
+            <h3 style="color: var(--white); margin-bottom: 15px;">Successfully Subscribed!</h3>
+            <p>You've been added to our newsletter. Watch your inbox for exclusive deals and bonus entry opportunities!</p>
+          </div>
+        `;
+      }
+    });
+  }
+
+  // Add smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Add hover animation for FAQ items
+  allFaqItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      item.style.borderLeftWidth = '6px';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      item.style.borderLeftWidth = '3px';
+    });
+  });
+
+  // Add scroll to top button
+  const scrollButton = document.createElement('button');
+  scrollButton.classList.add('scroll-top-button');
+  scrollButton.innerHTML = '&uarr;';
+  scrollButton.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-red);
+    color: var(--white);
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    display: none;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  `;
+  
+  document.body.appendChild(scrollButton);
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 500) {
+      scrollButton.style.display = 'block';
+    } else {
+      scrollButton.style.display = 'none';
+    }
+  });
+  
+  scrollButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
+
+<!-- Add Newsletter Section -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Stay <span class="highlight">Updated</span></h2>
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+      <p style="margin-bottom: 30px; color: var(--light-gray); font-size: 1.1rem;">
+        Subscribe to our newsletter to get the latest updates on upcoming drops, exclusive deals, and bonus giveaway entries.
+      </p>
+      <form id="newsletter-form" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+        <input type="email" placeholder="Your email address" required style="
+          flex: 1;
+          min-width: 250px;
+          padding: 15px 25px;
+          border-radius: 50px;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.1);
+          color: var(--white);
+          font-size: 1.1rem;
+          border: 2px solid rgba(229, 23, 44, 0.3);
+        ">
+        <button type="submit" class="cta-button">Subscribe</button>
+      </form>
+      <p style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
+        By subscribing, you agree to receive marketing emails from HellBoar. You can unsubscribe at any time.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Add More FAQ Categories -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">More <span class="highlight">Topics</span></h2>
+    
+    <div class="quick-links-grid" style="margin-bottom: 80px;">
+      <a href="#payment" class="quick-link-card">
+        <div class="quick-link-icon">💳</div>
+        <h3 class="quick-link-title">Payment Options</h3>
+        <p class="quick-link-text">Learn about our secure payment methods and installment plans.</p>
+      </a>
+
+      <a href="#premium" class="quick-link-card">
+        <div class="quick-link-icon">✨</div>
+        <h3 class="quick-link-title">Premium Membership</h3>
+        <p class="quick-link-text">Discover the exclusive benefits of HellBoar Premium.</p>
+      </a>
+
+      <a href="#sizes" class="quick-link-card">
+        <div class="quick-link-icon">📏</div>
+        <h3 class="quick-link-title">Size Guide</h3>
+        <p class="quick-link-text">Find your perfect fit with our detailed measurement charts.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+  "name": "FAQ Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "FAQ Page"
+    }
+  ]
+}  
+{% endschema %}
