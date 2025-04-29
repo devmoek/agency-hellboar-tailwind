@@ -3856,6 +3856,10 @@ details-disclosure > details {
         color: #fff;
       }
 
+      .car-details p {
+        font-size: 14px;
+      }
+
       .how-it-works {
         padding: 80px 0;
         background-color: #0a0a0a;
@@ -3940,7 +3944,7 @@ details-disclosure > details {
       }
 
       .testimonial-text {
-        font-size: 1.2rem;
+        font-size: 14px;
         font-style: italic;
         margin-bottom: 20px;
         line-height: 1.8;
