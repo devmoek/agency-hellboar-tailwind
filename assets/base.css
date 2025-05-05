@@ -3811,18 +3811,18 @@ details-disclosure > details {
         padding: 25px;
       }
 
-        .feature-title {
-          font-size: 18px;
-          margin-bottom: 15px;
-          color: var(--primary-red);
-          text-transform: uppercase;
-          text-shadow:
-            0 0 2px var(--primary-red),
-            0 0 4px var(--primary-red),
-            0 0 6px var(--primary-red),
-            0 0 10px rgba(255, 0, 0, 0.6),
-            0 0 15px rgba(255, 0, 0, 0.4);
-        }
+      .feature-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #FFD700;
+        text-transform: uppercase;
+        text-shadow:
+          0 0 2px #FFD700,
+          0 0 4px #FFD700,
+          0 0 6px #FFD700,
+          0 0 10px rgba(255, 215, 0, 0.6),
+          0 0 15px rgba(255, 215, 0, 0.4);
+      }
 
       .feature-desc {
         color: var(--light-gray);
