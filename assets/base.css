@@ -3817,9 +3817,9 @@ details-disclosure > details {
         color: var(--primary-red);
         text-transform: uppercase;
           text-shadow:
-            0 0 7px var(--primary-red),
-            0 0 10px var(--primary-red),
-            0 0 21px var(--primary-red),
+            0 0 7px #000,
+            0 0 10px #000,
+            0 0 21px #000,
             0 0 42px var(--primary-red),
             0 0 82px var(--primary-red),
             0 0 92px var(--primary-red),
