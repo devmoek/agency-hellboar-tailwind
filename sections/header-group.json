@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "BCG #02 STARTED",
+            "text": "BCG #01 ENDED. THE RESULTS",
             "link": ""
           }
         }
@@ -39,7 +39,7 @@
       "type": "header",
       "custom_css": [],
       "settings": {
-        "logo_position": "top-left",
+        "logo_position": "middle-left",
         "menu": "main-menu",
         "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
