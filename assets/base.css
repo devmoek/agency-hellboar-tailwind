@@ -3827,7 +3827,7 @@ details-disclosure > details {
       .feature-title {
         font-size: 18px;
         margin-bottom: 15px;
-        color: #FFD700;
+        color: #000;
         text-transform: uppercase;
         text-shadow:
           0 0 2px #FFD700,
