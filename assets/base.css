@@ -4592,5 +4592,9 @@ details-disclosure > details {
   .prize-content {
     width: 100%;
   }
+
+  .prize-showcase .container {
+    flex-direction: column;
+  }
 }
 
