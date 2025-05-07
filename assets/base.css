@@ -4158,6 +4158,7 @@ details-disclosure > details {
         margin-bottom: 15px;
         border: 1px dashed var(--primary-red);
         animation: pulse 2s infinite;
+        width: 100%;
       }
 
       .product-button {
@@ -4562,23 +4563,6 @@ details-disclosure > details {
   .gallery-item:hover .gallery-img {
     transform: scale(1.1);
   }
-
-    .entry-bonus {
-        background-color: rgba(229, 23, 44, 0.1);
-        color: var(--primary-red);
-        padding: 5px 10px;
-        border-radius: 3px;
-        font-size: 14px;
-        font-weight: 700;
-        display: inline-block;
-        margin-bottom: 15px;
-        border: 1px dashed var(--primary-red);
-        animation: pulse 2s infinite;
-        width: 80%;
-        display: flex;
-        margin: 0 auto;
-        justify-content: center;
-      }
 
 @media screen and (max-width: 430px) {
   .car-details p {
