@@ -150,6 +150,8 @@
   </div>
 </div>
 
+<script>vs_email = '{% if checkout.email %}{{checkout.email}}{% endif %}'; if (vs_email=='') { vs_email = '{% if customer.email %}{{customer.email}}{% endif %}'; }</script> <script>if (vs_email=='') { vs_email =  '{% if checkout.customer.phone %}{{checkout.customer.phone}}{% elsif customer.phone %}{{customer.phone}}{% endif %}@viralsweep.com'; }</script><script>vs_order_id = '{% if checkout.order_id %}{{checkout.order_id}}{% endif %}';</script><script>vs_auto_submit = true;</script> <div id="vsscript_198482_756627"></div><script async type="text/javascript" src="https://app.viralsweep.com/vsa-widget-5f5d39-198482.js?sid=198482_756627"></script>
+
 {% schema %}
 {
   "name": "t:sections.main-account.name",
