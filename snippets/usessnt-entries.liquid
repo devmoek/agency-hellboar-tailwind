@@ -1,4 +1,4 @@
-<div class="product-ticket-entries" style="float:unset;">
+<div class="product-ticket-entries entry-bonus" style="float:unset;">
     {% assign multiplier = 5 %}
 
     {% if product.metafields.product.entries_multiplier != blank %}
@@ -8,7 +8,7 @@
     {% assign entries = product.price | divided_by: 100 | times: multiplier %}
 
     <span class="entries">
-        <span class="product-item-icon" style="">🎟</span>
+        <!-- <span class="product-item-icon" style="">🎟</span> -->
         <span class="entries_cl">{{ entries }} Entries</span>
     </span>
 </div>
