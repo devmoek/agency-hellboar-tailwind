@@ -205,19 +205,7 @@
             {%- endif -%}
 
             {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
-            {% assign multiplier = 5 %}
-{% if card_product.metafields.entries_multiplier.value != blank %}
-  {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
-{% endif %}
-
-{% assign entries = variant_price | times: multiplier | round %}
-
-<div class="product-ticket-entries entry-bonus" style="float:unset;">
-  <span class="entries">
-    <span class="product-item-icon">🎟</span>
-    <span class="entries_cl">{{ entries }} Entries</span>
-  </span>
-</div>
+            {% render 'usessnt-entries-card-product' %}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants.size == 1 and quick_add == 'bulk' %}
                 {% liquid
