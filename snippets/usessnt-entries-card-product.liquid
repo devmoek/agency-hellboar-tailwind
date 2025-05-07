@@ -2,6 +2,7 @@
   assign variant = card_product.selected_or_first_available_variant
   assign variant_price = variant.price | divided_by: 100.0
 -%}
+
 {% assign multiplier = 5 %}
 {% if card_product.metafields.entries_multiplier.value != blank %}
   {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
