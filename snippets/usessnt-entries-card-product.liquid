@@ -1,20 +1,13 @@
-{% assign multiplier = 5 %}
-{% if card_product.metafields.entries_multiplier.value != blank %}
-  {% assign raw_multiplier = card_product.metafields.entries_multiplier.value %}
-  {% assign multiplier = raw_multiplier | plus: 0 %}
-{% endif %}
+<div class="product-ticket-entries entry-bonus" style="float:unset;">
+  {% assign multiplier = 5 %}
 
-{% assign product_price_cents = card_product.price %}
-{% assign product_price_dollars = product_price_cents | divided_by: 100 %}
-{% assign entries = product_price_dollars | times: multiplier | round %}
+  {% if card_product.metafields.entries_multiplier.value != blank %}
+    {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
+  {% endif %}
 
-<!-- Debug -->
-Price in cents: {{ product_price_cents }} <br>
-Price in dollars: {{ product_price_dollars }} <br>
-Multiplier: {{ multiplier }} <br>
-Entries: {{ entries }}
+  {% assign product_price_dollars = card_product.selected_or_first_available_variant.price | divided_by: 100 %}
+  {% assign entries = product_price_dollars | times: multiplier | round %}
 
-<div class="product-ticket-entries entry-bonus">
   <span class="entries">
     <span class="product-item-icon">🎟</span>
     <span class="entries_cl">{{ entries }} Entries</span>
