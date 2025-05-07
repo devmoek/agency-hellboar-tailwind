@@ -176,10 +176,10 @@
                         
                               {% assign entries = item.line_price | divided_by: 100 | times: multiplier %}
                               {% assign total_entries = total_entries | plus: entries %}
-                        <!-- 
+                        
                               <li class="product-entry-item">
                                   <span class="product-entries">{{ entries }} Entries</span>
-                              </li> -->
+                              </li>
                           {% endfor %}
                         </ul>
 
