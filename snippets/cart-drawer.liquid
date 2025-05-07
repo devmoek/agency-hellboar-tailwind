@@ -520,7 +520,9 @@
             <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
           
             <div class="totals__total-value">
+                    {% for item in cart.items %}
               🎟 {{ total_entries }} Total Entries
+              {% endfor %}
             </div>
             
           </div>
