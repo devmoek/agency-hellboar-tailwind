@@ -508,7 +508,19 @@
           <div class="totals" role="status">
             <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
             <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
-            <p class="totals__total-value">{{ total_entries }} Entries</p>
+            {% assign total_entries = 0 %}
+            {% for item in cart.items %}
+              {% assign multiplier = 5 %}
+              {% if item.product.metafields.product.entries_multiplier.value %}
+                {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+              {% endif %}
+              {% assign entries = item.quantity | times: multiplier %}
+              {% assign total_entries = total_entries | plus: entries %}
+            {% endfor %}
+            
+            <div class="totals__total-value">
+              🎟 {{ total_entries }} Total Entries
+            </div>
             
           </div>
 
