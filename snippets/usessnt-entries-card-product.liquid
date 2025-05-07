@@ -1,13 +1,20 @@
-<div class="product-ticket-entries entry-bonus" style="float:unset;">
-  {% assign multiplier = 5 %}
+{% assign multiplier = 5 %}
+{% if card_product.metafields.entries_multiplier.value != blank %}
+  {% assign raw_multiplier = card_product.metafields.entries_multiplier.value %}
+  {% assign multiplier = raw_multiplier | plus: 0 %}
+{% endif %}
 
-  {% if card_product.metafields.entries_multiplier.value != blank %}
-    {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
-  {% endif %}
+{% assign product_price_cents = card_product.price %}
+{% assign product_price_dollars = product_price_cents | divided_by: 100 %}
+{% assign entries = product_price_dollars | times: multiplier | round %}
 
-  {% assign product_price_dollars = card_product.price | divided_by: 100 %}
-  {% assign entries = product_price_dollars | times: multiplier | round %}
+<!-- Debug -->
+Price in cents: {{ product_price_cents }} <br>
+Price in dollars: {{ product_price_dollars }} <br>
+Multiplier: {{ multiplier }} <br>
+Entries: {{ entries }}
 
+<div class="product-ticket-entries entry-bonus">
   <span class="entries">
     <span class="product-item-icon">🎟</span>
     <span class="entries_cl">{{ entries }} Entries</span>
