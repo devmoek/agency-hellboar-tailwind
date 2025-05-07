@@ -5,7 +5,7 @@
         {% assign multiplier = card_product.metafields.product.entries_multiplier %}
     {% endif %}
 
-    {% assign entries = card_product.price | divided_by: 100 | times: multiplier %}
+    {% assign entries = card_product.selected_or_first_available_variant.price | divided_by: 100 | times: multiplier %}
 
     <span class="entries entry-bonus">
         <span class="product-item-icon" style="">🎟</span>
