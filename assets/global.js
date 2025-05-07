@@ -1343,47 +1343,46 @@ class CartPerformance {
 }
 
       // Countdown Timer
-      // Countdown Timer
-      function updateCountdown() {
-        // Set a fixed end date - 30 days from when the page loads
-        // We'll store this in localStorage so it persists across page refreshes
-        if (!localStorage.getItem('countdownEndDate')) {
-          const endDate = new Date();
-          endDate.setDate(endDate.getDate() + 30);
-          localStorage.setItem('countdownEndDate', endDate.getTime());
-        }
+      // function updateCountdown() {
+      //   // Set a fixed end date - 30 days from when the page loads
+      //   // We'll store this in localStorage so it persists across page refreshes
+      //   if (!localStorage.getItem('countdownEndDate')) {
+      //     const endDate = new Date();
+      //     endDate.setDate(endDate.getDate() + 30);
+      //     localStorage.setItem('countdownEndDate', endDate.getTime());
+      //   }
 
-        const endTime = parseInt(localStorage.getItem('countdownEndDate'));
-        const now = new Date().getTime();
-        const distance = endTime - now;
+      //   const endTime = parseInt(localStorage.getItem('countdownEndDate'));
+      //   const now = new Date().getTime();
+      //   const distance = endTime - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      //   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      //   const hours = Math.floor(
+      //     (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      //   );
+      //   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      //   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById('days').innerHTML = days;
-        document.getElementById('hours').innerHTML =
-          hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').innerHTML =
-          minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').innerHTML =
-          seconds < 10 ? '0' + seconds : seconds;
+      //   document.getElementById('days').innerHTML = days;
+      //   document.getElementById('hours').innerHTML =
+      //     hours < 10 ? '0' + hours : hours;
+      //   document.getElementById('minutes').innerHTML =
+      //     minutes < 10 ? '0' + minutes : minutes;
+      //   document.getElementById('seconds').innerHTML =
+      //     seconds < 10 ? '0' + seconds : seconds;
 
-        if (distance < 0) {
-          clearInterval(countdownInterval);
-          document.getElementById('days').innerHTML = '0';
-          document.getElementById('hours').innerHTML = '00';
-          document.getElementById('minutes').innerHTML = '00';
-          document.getElementById('seconds').innerHTML = '00';
-        }
-      }
+      //   if (distance < 0) {
+      //     clearInterval(countdownInterval);
+      //     document.getElementById('days').innerHTML = '0';
+      //     document.getElementById('hours').innerHTML = '00';
+      //     document.getElementById('minutes').innerHTML = '00';
+      //     document.getElementById('seconds').innerHTML = '00';
+      //   }
+      // }
 
       // Initialize countdown
-      updateCountdown();
-      const countdownInterval = setInterval(updateCountdown, 1000);
+      // updateCountdown();
+      // const countdownInterval = setInterval(updateCountdown, 1000);
 
       // FAQ Accordion
       const faqItems = document.querySelectorAll('.faq-item');
