@@ -1,16 +1,38 @@
+{% assign variant_price_cents = card_product.selected_or_first_available_variant.price %}
+{% assign variant_price = variant_price_cents | divided_by: 100.0 %}
+
+{% assign multiplier = 5 %}
+{% if card_product.metafields.entries_multiplier.value != blank %}
+  {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
+{% endif %}
+
+{% assign entries = variant_price | times: multiplier | round %}
+
 <div class="product-ticket-entries entry-bonus" style="float:unset;">
-  {% assign variant_price_cents = card_product.selected_or_first_available_variant.price %}
-  {% assign variant_price = variant_price_cents | divided_by: 100.0 %}
-
-  {% assign multiplier = 5 %}
-  {% if card_product.metafields.entries_multiplier.value != blank %}
-    {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
-  {% endif %}
-
-  {% assign entries = variant_price | times: multiplier | round %}
-
   <span class="entries">
     <span class="product-item-icon">🎟</span>
     <span class="entries_cl">{{ entries }} Entries</span>
   </span>
 </div>
+
+<style>
+  .product-ticket-entries {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-base-text);
+  }
+  
+  .entries {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .product-item-icon {
+    font-size: 1rem;
+  }
+  
+  .entries_cl {
+    font-weight: 500;
+  }
+</style>
