@@ -1,24 +1,23 @@
 {%- liquid
-  assign variant = card_product.selected_or_first_available_variant
-  assign variant_price = card_product.price | divided_by: 100.0
+  assign price = product.price | default: card_product.price
+  assign price_in_dollars = price | divided_by: 100.0
 -%}
 
 <!-- Debug output -->
-<div style="display: none;">
+<div>
   Debug:
-  Product price in cents: {{ card_product.price }}
-  Variant price in cents: {{ variant.price }}
-  Product price in dollars: {{ variant_price }}
-  Multiplier: {{ multiplier }}
-  Final entries: {{ entries }}
+  Raw price: {{ price }}
+  Price in dollars: {{ price_in_dollars }}
+  Product object: {{ product | json }}
+  Card product object: {{ card_product | json }}
 </div>
 
 {% assign multiplier = 5 %}
-{% if card_product.metafields.entries_multiplier.value != blank %}
-  {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
+{% if product.metafields.entries_multiplier.value != blank %}
+  {% assign multiplier = product.metafields.entries_multiplier.value | plus: 0 %}
 {% endif %}
 
-{% assign entries = variant_price | times: multiplier | round %}
+{% assign entries = price_in_dollars | times: multiplier | round %}
 
 <div class="product-ticket-entries entry-bonus" style="float:unset;">
   <span class="entries">
