@@ -1,26 +1,14 @@
-{%- liquid
-  assign price = product.price
-  assign price_in_dollars = price | divided_by: 100.0
--%}
+<div class="product-ticket-entries" style="float:unset;">
+    {% assign multiplier = 5 %}
 
-<!-- Debug output -->
-<div>
-  Debug:
-  Raw price: {{ price }}
-  Price in dollars: {{ price_in_dollars }}
-  Product object: {{ product | json }}
-</div>
+    {% if ard_product.metafields.product.entries_multiplier != blank %}
+        {% assign multiplier = card_product.metafields.product.entries_multiplier %}
+    {% endif %}
 
-{% assign multiplier = 5 %}
-{% if product.metafields.entries_multiplier.value != blank %}
-  {% assign multiplier = product.metafields.entries_multiplier.value | plus: 0 %}
-{% endif %}
+    {% assign entries = card_product.price | divided_by: 100 | times: multiplier %}
 
-{% assign entries = price_in_dollars | times: multiplier | round %}
-
-<div class="product-ticket-entries entry-bonus" style="float:unset;">
-  <span class="entries">
-    <span class="product-item-icon">🎟</span>
-    <span class="entries_cl">{{ entries }} Entries</span>
-  </span>
+    <span class="entries">
+        <span class="product-item-icon" style="">🎟</span>
+        <span class="entries_cl">{{ entries }} Entries</span>
+    </span>
 </div>
