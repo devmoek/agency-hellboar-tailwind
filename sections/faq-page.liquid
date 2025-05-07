@@ -1092,7 +1092,7 @@
       <p style="margin-bottom: 30px; color: var(--light-gray); font-size: 1.1rem;">
         Subscribe to our newsletter to get the latest updates on upcoming drops, exclusive deals, and bonus giveaway entries.
       </p>
-      {% form 'customer' id: newsletter-form %}
+      {% form 'customer', id: newsletter-form %}
           {{ form.errors | default_errors }}
           <input type="email" name="contact[email]" placeholder="Your email address" required style="
             flex: 1;
