@@ -3858,6 +3858,11 @@ details-disclosure > details {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        background: rgb(10, 10, 10);
+        padding: 30px;
+        border-radius: 15px;
+        border-right: 5px solid var(--primary-red);
+        width: 60%;
       }
 
       .car-image {
