@@ -1,5 +1,5 @@
 {%- liquid
-  assign price = product.price | default: card_product.price
+  assign price = product.price
   assign price_in_dollars = price | divided_by: 100.0
 -%}
 
@@ -9,7 +9,6 @@
   Raw price: {{ price }}
   Price in dollars: {{ price_in_dollars }}
   Product object: {{ product | json }}
-  Card product object: {{ card_product | json }}
 </div>
 
 {% assign multiplier = 5 %}
