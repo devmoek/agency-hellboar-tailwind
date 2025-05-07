@@ -4573,3 +4573,9 @@ details-disclosure > details {
         justify-content: center;
       }
 
+@media screen and (max-width: 430px) {
+  .car-details p {
+    text-align: left;
+  }
+}
+
