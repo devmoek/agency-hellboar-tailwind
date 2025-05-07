@@ -18,21 +18,21 @@
           "type": "link_list",
           "settings": {
             "heading": "Account",
-            "menu": "main-menu"
+            "menu": "account"
           }
         },
         "footer-1": {
           "type": "link_list",
           "settings": {
             "heading": "Info",
-            "menu": "main-menu"
+            "menu": "info"
           }
         },
         "link_list_afKjiw": {
           "type": "link_list",
           "settings": {
-            "heading": "Company",
-            "menu": "footer"
+            "heading": "Shop",
+            "menu": "shop-now"
           }
         },
         "footer-2": {
