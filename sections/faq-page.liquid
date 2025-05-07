@@ -1092,20 +1092,22 @@
       <p style="margin-bottom: 30px; color: var(--light-gray); font-size: 1.1rem;">
         Subscribe to our newsletter to get the latest updates on upcoming drops, exclusive deals, and bonus giveaway entries.
       </p>
-      <form id="newsletter-form" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-        <input type="email" placeholder="Your email address" required style="
-          flex: 1;
-          min-width: 250px;
-          padding: 15px 25px;
-          border-radius: 50px;
-          border: none;
-          background-color: rgba(255, 255, 255, 0.1);
-          color: var(--white);
-          font-size: 14px;
-          border: 2px solid rgba(229, 23, 44, 0.3);
-        ">
-        <button type="submit" class="cta-button">Subscribe</button>
-      </form>
+      {% form 'customer' %}
+        <form id="newsletter-form" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+          <input type="email" name="contact[email]" placeholder="Your email address" required style="
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 14px;
+            border: 2px solid rgba(229, 23, 44, 0.3);
+          ">
+          <button type="submit" class="cta-button">Subscribe</button>
+        </form>
+      {% endform %}
       <p style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
         By subscribing, you agree to receive marketing emails from HellBoar. You can unsubscribe at any time.
       </p>
