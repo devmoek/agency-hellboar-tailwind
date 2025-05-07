@@ -1,4 +1,4 @@
-{% comment %} <div class="product-ticket-entries" style="float:unset;">
+<div class="product-ticket-entries" style="float:unset;">
     {% assign multiplier = 5 %}
 
     {% if card_product.metafields.product.entries_multiplier.value != blank %}
@@ -7,23 +7,8 @@
 
     {% assign entries = card_product.price | divided_by: 100 | times: multiplier %}
 
-  {{ product.price | money }}
-
     <span class="entries entry-bonus">
         <span class="product-item-icon" style="">🎟</span>
         <span class="entries_cl">{{ entries }} Entries</span>
     </span>
-</div> {% endcomment %}
-
-{%- liquid
-  assign price = product.price | divided_by: 100.0
-  assign multiplier = product.metafields.custom.entries_multiplier | default: 5
-  assign entries = price | times: multiplier | round
--%}
-
-<div class="product-entries">
-  <span class="entries">
-    <span class="entries-icon">🎟</span>
-    <span class="entries-count">{{ entries }} Entries</span>
-  </span>
 </div>
