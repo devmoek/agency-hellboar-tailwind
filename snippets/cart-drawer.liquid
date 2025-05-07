@@ -167,7 +167,6 @@
                         {% assign total_entries = 0 %}
                         
                         <ul class="product-entries-list">
-                
                               {% assign multiplier = 5 %}  <!-- Default multiplier is 5 -->
                         
                               {% if item.product.metafields.product.entries_multiplier %}
@@ -180,7 +179,6 @@
                               <li class="product-entry-item">
                                   <span class="product-entries">{{ entries }} Entries</span>
                               </li>
-                
                         </ul>
 
                           {%- if item.product.has_only_default_variant == false
