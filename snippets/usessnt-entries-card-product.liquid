@@ -5,7 +5,7 @@
     {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
   {% endif %}
 
-  {% assign product_price_dollars = card_product.selected_or_first_available_variant.price | divided_by: 100 %}
+  {% assign product_price_dollars = card_product.selected_or_first_available_variant.price %}
   {% assign entries = product_price_dollars | times: multiplier | round %}
 
   <span class="entries">
