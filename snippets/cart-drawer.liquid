@@ -165,7 +165,8 @@
                           {%- endif -%}
 
                         {% assign total_entries = 0 %}
-                        
+                                                                {% for item in cart.items %}
+
                         <ul class="product-entries-list" style="margin:0;padding:0;">
                               {% assign multiplier = 5 %}  <!-- Default multiplier is 5 -->
                         
@@ -180,6 +181,7 @@
                                   <span class="product-entries "><b>{{ entries }} Entries</b></span>
                               </li>
                         </ul>
+                                        {% endfor %}
 
                           {%- if item.product.has_only_default_variant == false
                             or item.properties.size != 0
