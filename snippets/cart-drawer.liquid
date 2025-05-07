@@ -169,8 +169,8 @@
                         <ul class="product-entries-list" style="margin:0;padding:0;">
                               {% assign multiplier = 5 %}  <!-- Default multiplier is 5 -->
                         
-                              {% if item.product.metafields.product.entries_multiplier %}
-                                  {% assign multiplier = item.product.metafields.product.entries_multiplier %}
+                              {% if item.product.metafields.product.entries_multiplier.value %}
+                                  {% assign multiplier = item.product.metafields.product.entries_multiplier | plus: 0 %}
                               {% endif %}
                         
                               {% assign entries = item.line_price | divided_by: 100 | times: multiplier %}
