@@ -3653,7 +3653,7 @@ details-disclosure > details {
       .nav-list a:hover {
         color: var(--primary-red);
       }
-        
+      
       .hero {
         height: 80vh;
         position: relative;
@@ -3675,8 +3675,10 @@ details-disclosure > details {
       }
       
       .hero-content {
-        position: relative;
-        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        z-index: 10;
       }
       
       .hero::before {
