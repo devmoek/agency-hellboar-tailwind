@@ -166,7 +166,7 @@
 
                {% assign total_entries = 0 %}
   
-            {% for item in cart.items %}
+      
               {% assign multiplier = 5 %}
             
               {% if item.product.metafields.product.entries_multiplier.value %}
@@ -182,11 +182,8 @@
               </div>
             
               {% assign total_entries = total_entries | plus: entries %}
-            {% endfor %}
-            
-            <div class="totals__total-value">
-              🎟 {{ total_entries }} Total Entries
-            </div>
+
+          
 
 
                           {%- if item.product.has_only_default_variant == false
