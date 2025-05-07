@@ -4584,5 +4584,13 @@ details-disclosure > details {
   .car-details p {
     text-align: left;
   }
+
+  .car-image {
+    height: fit-content;
+  }
+
+  .prize-content {
+    width: 100%;
+  }
 }
 
