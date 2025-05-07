@@ -4159,7 +4159,6 @@ details-disclosure > details {
         border: 1px dashed var(--primary-red);
         animation: pulse 2s infinite;
         width: 100%;
-        text-align: center;
       }
 
       .product-button {
