@@ -997,24 +997,24 @@
   });
 
   // Newsletter subscription form validation
-  const newsletterForm = document.getElementById('newsletter-form');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = newsletterForm.querySelector('input[type="email"]');
-      if (emailInput && emailInput.value) {
-        // Show success message
-        const formContainer = newsletterForm.parentElement;
-        formContainer.innerHTML = `
-          <div class="success-message" style="text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 20px;">✅</div>
-            <h3 style="color: var(--white); margin-bottom: 15px;">Successfully Subscribed!</h3>
-            <p>You've been added to our newsletter. Watch your inbox for exclusive deals and bonus entry opportunities!</p>
-          </div>
-        `;
-      }
-    });
-  }
+  // const newsletterForm = document.getElementById('newsletter-form');
+  // if (newsletterForm) {
+  //   newsletterForm.addEventListener('submit', (e) => {
+  //     e.preventDefault();
+  //     const emailInput = newsletterForm.querySelector('input[type="email"]');
+  //     if (emailInput && emailInput.value) {
+  //       // Show success message
+  //       const formContainer = newsletterForm.parentElement;
+  //       formContainer.innerHTML = `
+  //         <div class="success-message" style="text-align: center;">
+  //           <div style="font-size: 3rem; margin-bottom: 20px;">✅</div>
+  //           <h3 style="color: var(--white); margin-bottom: 15px;">Successfully Subscribed!</h3>
+  //           <p>You've been added to our newsletter. Watch your inbox for exclusive deals and bonus entry opportunities!</p>
+  //         </div>
+  //       `;
+  //     }
+  //   });
+  // }
 
   // Add smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
