@@ -1,5 +1,5 @@
 <div class="product-ticket-entries entry-bonus" style="float:unset;">
-    {% assign multiplier = 5 %}
+    {% assign multiplier = 15 %}
 
     {% if card_product.metafields.entries_multiplier.value != blank %}
         {% assign multiplier = card_product.metafields.entries_multiplier.value | plus: 0 %}
