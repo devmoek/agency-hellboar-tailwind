@@ -1,8 +1,8 @@
 <div class="product-ticket-entries" style="float:unset;">
     {% assign multiplier = 5 %}
 
-    {% if ard_product.metafields.product.entries_multiplier != blank %}
-        {% assign multiplier = card_product.metafields.product.entries_multiplier %}
+    {% if card_product.metafields.product.entries_multiplier.value != blank %}
+        {% assign multiplier = card_product.metafields.entries_multiplier.value %}
     {% endif %}
 
     {% assign entries = card_product.price | divided_by: 100 | times: multiplier %}
