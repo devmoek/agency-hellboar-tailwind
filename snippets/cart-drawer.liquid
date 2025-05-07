@@ -164,24 +164,17 @@
                             </div>
                           {%- endif -%}
 
-                        {% assign total_entries = 0 %}
-                                                                {% for item in cart.items %}
+                        {% assign multiplier = 5 %}
+                        {% if item.product.metafields.product.entries_multiplier.value %}
+                          {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+                        {% endif %}
+                        
+                        {% assign entries = item.quantity | times: multiplier %}
+                        
+                        <div class="product-entry-info">
+                          <span class="product-entries">{{ entries }} Entries</span>
+                        </div>
 
-                        <ul class="product-entries-list" style="margin:0;padding:0;">
-                              {% assign multiplier = 5 %}  <!-- Default multiplier is 5 -->
-                        
-                              {% if item.product.metafields.product.entries_multiplier.value %}
-                                  {% assign multiplier = item.product.metafields.product.entries_multiplier | plus: 0 %}
-                              {% endif %}
-                        
-                              {% assign entries = item.line_price | divided_by: 100 | times: multiplier %}
-                              {% assign total_entries = total_entries | plus: entries %}
-                        
-                              <li class="product-entry-item" style="list-style:none;">
-                                  <span class="product-entries "><b>{{ entries }} Entries</b></span>
-                              </li>
-                        </ul>
-                                        {% endfor %}
 
                           {%- if item.product.has_only_default_variant == false
                             or item.properties.size != 0
