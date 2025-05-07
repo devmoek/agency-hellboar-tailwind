@@ -523,6 +523,10 @@
   letter-spacing: 0.07rem;
 }
 
+.card-information .price {
+  display: none;
+}
+
 .card-article-info {
   margin-top: 1rem;
 }
