@@ -3878,6 +3878,7 @@ details-disclosure > details {
 
       .car-details p {
         font-size: 14px;
+        margin: 0;
       }
 
       .how-it-works {
