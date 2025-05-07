@@ -3711,7 +3711,7 @@ details-disclosure > details {
       }
 
       .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 16px;
         margin-bottom: 30px;
         color: var(--light-gray);
       }
