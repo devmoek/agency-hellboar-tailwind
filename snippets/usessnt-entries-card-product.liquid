@@ -1,7 +1,17 @@
 {%- liquid
   assign variant = card_product.selected_or_first_available_variant
-  assign variant_price = variant.price | divided_by: 100.0
+  assign variant_price = card_product.price | divided_by: 100.0
 -%}
+
+<!-- Debug output -->
+<div style="display: none;">
+  Debug:
+  Product price in cents: {{ card_product.price }}
+  Variant price in cents: {{ variant.price }}
+  Product price in dollars: {{ variant_price }}
+  Multiplier: {{ multiplier }}
+  Final entries: {{ entries }}
+</div>
 
 {% assign multiplier = 5 %}
 {% if card_product.metafields.entries_multiplier.value != blank %}
