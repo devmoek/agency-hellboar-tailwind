@@ -4589,5 +4589,9 @@ details-disclosure > details {
   .values-grid {
     padding: 0 20px;
   }
+
+  .mission-container {
+    margin: 0 20px;
+  }
 }
 
