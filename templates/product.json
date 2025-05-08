@@ -37,6 +37,13 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
+        },
+        "popup_PtVzRK": {
+          "type": "popup",
+          "settings": {
+            "text": "Size chart",
+            "page": "size-chart"
+          }
         }
       },
       "block_order": [
@@ -44,7 +51,8 @@
         "price",
         "variant_picker",
         "quantity_selector",
-        "buy_buttons"
+        "buy_buttons",
+        "popup_PtVzRK"
       ],
       "settings": {
         "enable_sticky_info": true,
