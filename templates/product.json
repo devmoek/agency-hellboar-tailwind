@@ -37,15 +37,6 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "collapsible-row-1": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "icon": "none",
-            "content": "{{ product.description }}",
-            "page": ""
-          }
         }
       },
       "block_order": [
@@ -53,8 +44,7 @@
         "price",
         "variant_picker",
         "quantity_selector",
-        "buy_buttons",
-        "collapsible-row-1"
+        "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": true,
