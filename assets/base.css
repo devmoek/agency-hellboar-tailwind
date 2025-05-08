@@ -4585,7 +4585,8 @@ details-disclosure > details {
 @media screen and (max-width: 768px) {
   .gallery,
   .stats-grid,
-  .team-grid{
+  .team-grid, 
+  .values-grid {
     padding: 0 20px;
   }
 }
