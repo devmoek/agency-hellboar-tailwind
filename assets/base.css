@@ -4431,6 +4431,7 @@ details-disclosure > details {
         border-radius: 5px;
         margin-bottom: 20px;
         display: inline-block;
+        animation: pulse-v2 2s infinite;
       }
 
       .modal {
