@@ -27,6 +27,13 @@
             "swatch_shape": "square"
           }
         },
+        "popup_PtVzRK": {
+          "type": "popup",
+          "settings": {
+            "text": "Size chart",
+            "page": "size-chart"
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -37,22 +44,15 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "popup_PtVzRK": {
-          "type": "popup",
-          "settings": {
-            "text": "Size chart",
-            "page": "size-chart"
-          }
         }
       },
       "block_order": [
         "title",
         "price",
         "variant_picker",
+        "popup_PtVzRK",
         "quantity_selector",
-        "buy_buttons",
-        "popup_PtVzRK"
+        "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": true,
