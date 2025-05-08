@@ -164,27 +164,24 @@
                             </div>
                           {%- endif -%}
 
-               {% assign total_entries = 0 %}
-  
-      
-              {% assign multiplier = 5 %}
+                         {% assign total_entries = 0 %}
             
-              {% if item.product.metafields.product.entries_multiplier.value %}
-                {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
-              {% endif %}
-            
-              {% assign price = item.product.selected_or_first_available_variant.price | divided_by: 100.0 %}  <!-- Get the price of the product in dollars -->
-            
-              {% assign entries = price | times: multiplier | times: item.quantity | round %}  <!-- Multiply price, multiplier, and quantity -->
-            
-              <div class="product-entry-info">
-                <span class="product-entries">{{ entries }} Entries</span>
-              </div>
-            
-              {% assign total_entries = total_entries | plus: entries %}
-
-          
-
+                
+                        {% assign multiplier = 5 %}
+                      
+                        {% if item.product.metafields.product.entries_multiplier.value %}
+                          {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+                        {% endif %}
+                      
+                        {% assign price = item.product.selected_or_first_available_variant.price | divided_by: 100.0 %}  <!-- Get the price of the product in dollars -->
+                      
+                        {% assign entries = price | times: multiplier | times: item.quantity | round %}  <!-- Multiply price, multiplier, and quantity -->
+                      
+                        <div class="product-entry-info">
+                          <span class="product-entries">{{ entries }} Entries</span>
+                        </div>
+                      
+                        {% assign total_entries = total_entries | plus: entries %}
 
                           {%- if item.product.has_only_default_variant == false
                             or item.properties.size != 0
