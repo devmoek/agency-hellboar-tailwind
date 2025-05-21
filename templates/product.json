@@ -42,6 +42,19 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "complementary_PcUxgF": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Available in other colors",
+            "make_collapsible_row": false,
+            "icon": "price_tag",
+            "product_list_limit": 5,
+            "products_per_page": 3,
+            "pagination_style": "counter",
+            "image_ratio": "square",
+            "enable_quick_add": true
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -57,6 +70,7 @@
         "variant_picker",
         "popup_PtVzRK",
         "quantity_selector",
+        "complementary_PcUxgF",
         "buy_buttons"
       ],
       "settings": {
@@ -108,6 +122,23 @@
         "padding_bottom": 36
       }
     },
+    "17478114088ed95153": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_HfM9mN": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_HfM9mN"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -124,23 +155,6 @@
         "show_rating": false,
         "padding_top": 36,
         "padding_bottom": 28
-      }
-    },
-    "17478114088ed95153": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_featured_carousel_HfM9mN": {
-          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "maxwidth": 1080
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_featured_carousel_HfM9mN"
-      ],
-      "settings": {
-        "include_margins": true
       }
     }
   },
