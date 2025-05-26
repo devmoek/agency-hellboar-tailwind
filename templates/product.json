@@ -46,7 +46,7 @@
         "complementary_PcUxgF": {
           "type": "complementary",
           "settings": {
-            "block_heading": "Available in other colors",
+            "block_heading": "Other options",
             "make_collapsible_row": false,
             "icon": "price_tag",
             "product_list_limit": 5,
