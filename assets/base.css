@@ -3614,15 +3614,6 @@ details-disclosure>details {
   --white: #ffffff;
 }
 
-/* header {
-        background-color: var(--black);
-        padding: 20px 0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      }
- */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -3781,7 +3772,7 @@ details-disclosure>details {
 
 .features {
   padding: 80px 0;
-  background-color: var(--black);
+  background-color: #0a0a0a;
 }
 
 .section-title {
@@ -4625,5 +4616,66 @@ footer {
 
   .mission-container {
     margin: 0 20px;
+  }
+}
+
+
+.video-text-section {
+  padding: 4rem 0;
+  background-color: var(--black);
+}
+
+.winner-announcement .two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.winner-announcement .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.winner-announcement .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.winner-announcement .section-title {
+  margin-bottom: 4.5rem;
+  font-size: 2.5rem;
+  color: var(--white);
+}
+
+.winner-announcement .section-text {
+  margin-bottom: 1rem;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+@media screen and (max-width: 768px) {
+  .winner-announcement .two-column-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .winner-announcement .video-column {
+    order: -1;
+  }
+
+  .winner-announcement .section-title {
+    font-size: 2rem;
+  }
+
+  .winner-announcement .section-text {
+    font-size: 15px;
   }
 }
