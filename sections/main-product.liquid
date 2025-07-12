@@ -442,7 +442,7 @@
                   {%- endif -%}
                 </div>
               {%- when 'popup' -%}
-              {% if product.tag != 'entry' %}
+              {% unless product.tag == 'entry' %}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
                   data-modal="#PopupModal-{{ block.id }}"
@@ -457,7 +457,7 @@
                     {{ block.settings.text | default: block.settings.page.title | escape }}
                   </button>
                 </modal-opener>
-                {% endif %}
+              {% endunless %}
               {%- when 'share' -%}
                 {% liquid
                   assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
