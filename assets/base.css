@@ -4049,7 +4049,7 @@ details-disclosure>details {
 }
 
 .faq-answer {
-  padding: 0 20px;
+  padding: 10px 20px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
