@@ -442,7 +442,7 @@
                   {%- endif -%}
                 </div>
               {%- when 'popup' -%}
-              {% unless product.tag == 'entry' %}
+              {% unless product.tags contains 'entry' %}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
                   data-modal="#PopupModal-{{ block.id }}"
