@@ -4058,7 +4058,7 @@ details-disclosure>details {
 
 .faq-item.active .faq-answer {
   max-height: 300px;
-  padding: 0 20px;
+  padding: 10px 20px;
 }
 
 .section-subtitle {
