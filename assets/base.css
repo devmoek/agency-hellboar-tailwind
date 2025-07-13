@@ -4605,21 +4605,6 @@ footer {
   }
 }
 
-@media screen and (max-width: 768px) {
-
-  .gallery,
-  .stats-grid,
-  .team-grid,
-  .values-grid {
-    padding: 0 20px;
-  }
-
-  .mission-container {
-    margin: 0 20px;
-  }
-}
-
-
 .video-text-section {
   padding: 4rem 0;
   background-color: var(--black);
@@ -4662,6 +4647,11 @@ footer {
   color: var(--white);
 }
 
+.merchandise-section,
+.gallery-section {
+  margin: 100px 0;
+}
+
 @media screen and (max-width: 768px) {
   .winner-announcement .two-column-grid {
     grid-template-columns: 1fr;
@@ -4677,5 +4667,21 @@ footer {
 
   .winner-announcement .section-text {
     font-size: 15px;
+  }
+
+  .merchandise-section,
+  .gallery-section {
+    margin: 50px 0;
+  }
+
+  .gallery,
+  .stats-grid,
+  .team-grid,
+  .values-grid {
+    padding: 0;
+  }
+
+  .mission-container {
+    margin: 0 20px;
   }
 }

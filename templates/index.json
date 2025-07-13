@@ -12,7 +12,15 @@
     "index_page_dpNa3W": {
       "type": "index-page",
       "name": "Index Page",
-      "settings": {}
+      "settings": {
+        "merchandise_title": "Our Merchandise Shop",
+        "merchandise_subtitle": "More chances to win if you are in",
+        "collection": "frontpage",
+        "products_limit": 9,
+        "button_text": "Shop Now",
+        "show_cta_button": true,
+        "cta_button_text": "View all products"
+      }
     }
   },
   "order": [
