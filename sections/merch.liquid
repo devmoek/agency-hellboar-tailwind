@@ -1,6 +1,305 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<style>
+  :root {
+    --primary-red: #e5172c;
+    --dark-red: #b5121e;
+    --black: #121212;
+    --light-gray: #f2f2f2;
+    --white: #ffffff;
   }
+
+  /* Merchandise Shop Styles */
+  .section-subtitle {
+    text-align: center;
+    color: #f2f2f2;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    font-weight: 300;
+  }
+
+  .merchandise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .merchandise-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(229, 23, 44, 0.1);
+  }
+
+  .merchandise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(229, 23, 44, 0.2);
+    border-color: rgba(229, 23, 44, 0.3);
+  }
+
+  .merchandise-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .merchandise-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .merchandise-card:hover .merchandise-img {
+    transform: scale(1.05);
+  }
+
+  .merchandise-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(229, 23, 44, 0.9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .merchandise-content {
+    padding: 25px;
+  }
+
+  .merchandise-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .merchandise-description {
+    color: #f2f2f2;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .merchandise-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #e5172c;
+    margin-bottom: 20px;
+  }
+
+  .merchandise-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #e5172c, #b5121e);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .merchandise-button:hover {
+    background: linear-gradient(45deg, #b5121e, #e5172c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(229, 23, 44, 0.4);
+  }
+
+  .merchandise-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: var(--primary-red);
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(229, 23, 44, 0.4);
+  }
+
+  .cta-button:hover {
+    background-color: var(--dark-red);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(229, 23, 44, 0.6);
+  }
+
+  /* Responsive Design for Merchandise */
+  @media (max-width: 768px) {
+    .merchandise-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .merchandise-image {
+      height: 200px;
+    }
+
+    .merchandise-content {
+      padding: 20px;
+    }
+
+    .merchandise-title {
+      font-size: 1.1rem;
+    }
+
+    .merchandise-price {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .merchandise-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<main style="background: #000;display:flex;flex-direction: column;gap: 60px;">
+
+  <!-- Our Merchandise Shop Section -->
+  <section class="section" id="merchandise">
+    <div class="container">
+      <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
+      <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'Discover our exclusive collection of premium merchandise' }}</p>
+      
+      {% if section.settings.collection != blank %}
+        {% assign collection = collections[section.settings.collection] %}
+        {% assign products_limit = section.settings.products_limit | default: 9 %}
+        
+        <div class="merchandise-grid">
+          {% for product in collection.products limit: products_limit %}
+            <div class="merchandise-card">
+              <div class="merchandise-image">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 300, height: 250 }}" 
+                       alt="{{ product.title | escape }}" 
+                       class="merchandise-img" 
+                       width="300" 
+                       height="250"
+                       loading="lazy">
+                {% else %}
+                  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802" 
+                       alt="Product placeholder" 
+                       class="merchandise-img" 
+                       width="300" 
+                       height="250"
+                       loading="lazy">
+                {% endif %}
+                <div class="merchandise-overlay">
+                  <span class="merchandise-category">{{ product.type | default: 'Product' }}</span>
+                </div>
+              </div>
+              <div class="merchandise-content">
+                <h3 class="merchandise-title">{{ product.title }}</h3>
+                <p class="merchandise-description">{{ product.description | strip_html | truncate: 100 }}</p>
+                <div class="merchandise-price">
+                  {% if product.compare_at_price > product.price %}
+                    <span style="text-decoration: line-through; color: #999; margin-right: 10px;">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  {{ product.price | money }}
+                </div>
+                <a href="{{ product.url }}" class="merchandise-button">{{ section.settings.button_text | default: 'Shop Now' }}</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        
+        {% if section.settings.show_cta_button %}
+          <div class="merchandise-cta">
+            <a href="{{ collection.url }}" class="cta-button">
+              {{ section.settings.cta_button_text | default: 'View All Merchandise' }}
+            </a>
+          </div>
+        {% endif %}
+      {% else %}
+        <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
+          <p>Please select a collection in the theme editor to display products.</p>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+</main>
+
+{% schema %}
+{
+  "name": "Merch",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Merchandise Section"
+    },
+    {
+      "type": "text",
+      "id": "merchandise_title",
+      "label": "Merchandise Section Title",
+      "default": "Our Merchandise Shop"
+    },
+    {
+      "type": "text",
+      "id": "merchandise_subtitle",
+      "label": "Merchandise Section Subtitle",
+      "default": "Discover our exclusive collection of premium merchandise"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Select a collection to display products"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Number of products to show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 9
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Product Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta_button",
+      "label": "Show CTA Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "View All Merchandise"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Merch"
+    }
+  ]
+}
 {% endschema %}
