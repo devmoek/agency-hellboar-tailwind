@@ -492,6 +492,10 @@
   width: 100%;
 }
 
+.complementary-products__container .card-information {
+  margin-top: 10px;
+}
+
 .card-information > * {
   line-height: calc(1 + 0.4 / var(--font-body-scale));
   color: rgb(var(--color-foreground));
