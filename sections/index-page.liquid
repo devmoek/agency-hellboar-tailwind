@@ -10,10 +10,10 @@
         Your browser does not support the video tag.
       </video>
       <div class="hero-content">
-        <div class="timer-box">Limited Time Offer - Ending Soon!</div>
         <h2 class="hero-title" style="font-size:30px;">
           BCG #02
         </h2>
+        <div class="timer-box">Limited Time Offer</div>
 
         <h1 class="hero-title">
           Win Your
@@ -21,30 +21,87 @@
           Today!
         </h1>
         <p class="hero-subtitle">
-          Purchase any item from our store and automatically get entered to  
- 
-            win this
-          <b>Chevrolet Corvette C8 HellBoar Edition</b>
-          + $20k cash.
+          Purchase any item from our store and automatically get entered to win
         </p>
 
-        <!-- <div class="countdown">  <div class="countdown-item">    <span class="countdown-number" id="days">29</span>
-            <span class="countdown-label">Days</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="hours">23</span>
-            <span class="countdown-label">Hours</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="minutes">59</span>
-            <span class="countdown-label">Minutes</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="seconds">59</span>
-            <span class="countdown-label">Seconds</span>
-          </div>
-        </div> -->
-        <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
+        <div class="prize">
+          <p>Chevrolet Corvette C8 HellBoar Edition</p>
+          <p>+ $20k cash</p>
+        </div>
+
+        {% comment %} <div class="cta-button-container">
+          <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
+        </div> {% endcomment %}
+      </div>
+    </div>
+  </section>
+
+  <section class="countdown">
+    <div class="countdown-title">
+      <h3>Giveaway ends in:</h3>
+    </div>
+    <div class="countdown-timer">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days">29</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours">23</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes">59</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds">59</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collection Preview -->
+  <section class="section section-alt" id="shop-collection">
+    <div class="container">
+      <h2 class="section-title">ENTER NOW</h2>
+      <p class="section-subtitle">More chances to win if you are in</p>
+      <div class="car-gallery">
+        <div class="gallery-item">
+          <a href="{{ shop.url }}/products/challenger-entry" style="text-decoration:none;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770"
+              alt="challenger boost entries"
+              class="gallery-img"
+              width="373"
+              height="373">
+            <p class="entry-bonus">1500 ENTRIES</p>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="{{ shop.url }}/products/trailblazer-entry" style="text-decoration:none;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667"
+              alt="trailblazer boost entries"
+              class="gallery-img"
+              width="373"
+              height="373">
+            <p class="entry-bonus">500 ENTRIES</p>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="{{ shop.url }}/products/beast-entry" style="text-decoration:none;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802"
+              alt="beast mode boost entries"
+              class="gallery-img"
+              width="373"
+              height="373">
+            <p class="entry-bonus">6000 ENTRIES</p>
+          </a>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="{{ routes.all_products_collection_url }}" class="cta-button">View all products</a>
       </div>
     </div>
   </section>
@@ -109,7 +166,7 @@
     </div>
   </section>
 
-
+  <!-- Winner Section -->
   <section class="winner-announcement video-text-section">
     <div class="container">
       <div class="two-column-grid">
@@ -141,221 +198,69 @@
     </div>
   </section>
 
-  <style>
-    :root {
-      --primary-red: #e5172c;
-      --dark-red: #b5121e;
-      --black: #121212;
-      --light-gray: #f2f2f2;
-      --white: #ffffff;
-    }
+  <!-- Our Merchandise Section -->
+  <section style="background: #000;display:flex;flex-direction: column;gap: 60px;">
+    <div class="section merchandise-section" id="merchandise">
+      <div class="container">
+        <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
+        <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'More chances to win if you are in' }}</p>
 
-    /* Merchandise Shop Styles */
-    .section-subtitle {
-      text-align: center;
-      color: #f2f2f2;
-      font-size: 14px;
-      margin-bottom: 50px;
-      font-weight: 300;
-    }
+        {% if section.settings.collection != blank %}
+          {% assign collection = collections[section.settings.collection] %}
+          {% assign products_limit = section.settings.products_limit | default: 9 %}
 
-    .merchandise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-bottom: 25px;
-    }
-
-    .merchandise-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(229, 23, 44, 0.1);
-    }
-
-    .merchandise-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(229, 23, 44, 0.2);
-      border-color: rgba(229, 23, 44, 0.3);
-    }
-
-    .merchandise-image {
-      position: relative;
-      height: 250px;
-      overflow: hidden;
-    }
-
-    .merchandise-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .merchandise-card:hover .merchandise-img {
-      transform: scale(1.05);
-    }
-
-    .merchandise-content {
-      padding: 15px;
-    }
-
-    .merchandise-title {
-      font-size: 16px;
-      color: #fff;
-      margin-bottom: 10px;
-      line-height: 1.3;
-      text-align: left;
-    }
-
-    .merchandise-cta {
-      text-align: center;
-      margin-top: 25px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: var(--primary-red);
-      color: var(--white);
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 15px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(229, 23, 44, 0.4);
-    }
-
-    .cta-button:hover {
-      background-color: var(--dark-red);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(229, 23, 44, 0.6);
-    }
-
-    .entry-bonus {
-      background-color: rgba(229, 23, 44, 0.1);
-      color: var(--primary-red);
-      padding: 5px 10px;
-      border-radius: 3px;
-      font-size: 14px;
-      font-weight: 700;
-      display: inline-block;
-      margin-bottom: 15px;
-      border: 1px dashed var(--primary-red);
-      animation: pulse 2s infinite;
-      width: 94%;
-      display: flex;
-      margin: 0 auto;
-      justify-content: center;
-      margin-top: 15px;
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(229, 23, 44, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(229, 23, 44, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(229, 23, 44, 0);
-      }
-    }
-
-    /* Responsive Design for Merchandise */
-    @media (max-width: 768px) {
-      .merchandise-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 15px;
-      }
-
-      .merchandise-image {
-        height: 200px;
-      }
-
-      .merchandise-content {
-        padding: 15px;
-      }
-
-      .merchandise-title {
-        font-size: 14px;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .merchandise-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-</style>
-
-<section style="background: #000;display:flex;flex-direction: column;gap: 60px;">
-
-  <!-- Our Merchandise Shop Section -->
-  <div class="section merchandise-section" id="merchandise">
-    <div class="container">
-      <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
-      <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'More chances to win if you are in' }}</p>
-      
-      {% if section.settings.collection != blank %}
-        {% assign collection = collections[section.settings.collection] %}
-        {% assign products_limit = section.settings.products_limit | default: 9 %}
-        
-        <div class="merchandise-grid">
-          {% for product in collection.products limit: products_limit %}
-            <a href="{{ product.url }}" style="text-decoration: none;">
-            <div class="merchandise-card">
-              <div class="merchandise-image">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | image_url: width: 365, height: 250 }}" 
-                       alt="{{ product.title | escape }}" 
-                       class="merchandise-img" 
-                       width="300" 
-                       height="250"
-                       loading="lazy">
-                {% else %}
-                  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802" 
-                       alt="Product placeholder" 
-                       class="merchandise-img" 
-                       width="300" 
-                       height="250"
-                       loading="lazy">
-                {% endif %}
-                <p class="entry-bonus">{{ product.metafields.product.entries_multiplier }} ENTRIES</p>
-              </div>
-              <div class="merchandise-content">
-                <h3 class="merchandise-title">{{ product.title }}</h3>
-                <div class="merchandise-price">
-                  {% render 'usessnt-entries-product', product: product %}
+          <div class="merchandise-grid">
+            {% for product in collection.products limit: products_limit %}
+              <a href="{{ product.url }}" style="text-decoration: none;">
+                <div class="merchandise-card">
+                  <div class="merchandise-image">
+                    {% if product.featured_image %}
+                      <img
+                        src="{{ product.featured_image | image_url: width: 365, height: 250 }}"
+                        alt="{{ product.title | escape }}"
+                        class="merchandise-img"
+                        width="300"
+                        height="250"
+                        loading="lazy">
+                    {% else %}
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802"
+                        alt="Product placeholder"
+                        class="merchandise-img"
+                        width="300"
+                        height="250"
+                        loading="lazy">
+                    {% endif %}
+                    <p class="entry-bonus">{{ product.metafields.product.entries_multiplier }} ENTRIES</p>
+                  </div>
+                  <div class="merchandise-content">
+                    <h3 class="merchandise-title">{{ product.title }}</h3>
+                    <div class="merchandise-price">
+                      {% render 'usessnt-entries-product'
+                        , product: product %}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          {% endfor %}
-        </div>
-        
-        {% if section.settings.show_cta_button %}
-          <div class="merchandise-cta">
-            <a href="{{ routes.all_products_collection_url }}" class="cta-button">
-              {{ section.settings.cta_button_text | default: 'Shop all' }}
-            </a>
+              </a>
+            {% endfor %}
+          </div>
+
+          {% if section.settings.show_cta_button %}
+            <div class="merchandise-cta">
+              <a href="{{ routes.all_products_collection_url }}" class="cta-button">
+                {{ section.settings.cta_button_text | default: 'Shop all' }}
+              </a>
+            </div>
+          {% endif %}
+        {% else %}
+          <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
+            <p>Please select a collection in the theme editor to display products.</p>
           </div>
         {% endif %}
-      {% else %}
-        <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
-          <p>Please select a collection in the theme editor to display products.</p>
-        </div>
-      {% endif %}
+      </div>
     </div>
-  </div>
 
-</section>
+  </section>
 
 
   <section class="features">
@@ -375,7 +280,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Easy Entry</h3>
             <p class="feature-desc">
-              Simply make any purchase on our store and you're automatically  
+              Simply make any purchase on our store and you're automatically             
  
                 entered to win. Plus, get bonus entries with every $50 spent!
             </p>
@@ -395,7 +300,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Guaranteed Winner</h3>
             <p class="feature-desc">
-              Unlike other giveaways, we GUARANTEE a winner will be selected.  
+              Unlike other giveaways, we GUARANTEE a winner will be selected.             
  
                 Someone WILL drive away in this dream car!
             </p>
@@ -416,7 +321,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Transparent Process</h3>
             <p class="feature-desc">
-              Our winner selection is conducted live and publicly. Fair and  
+              Our winner selection is conducted live and publicly. Fair and             
  
                 transparent with a trusted third-party verification.
             </p>
@@ -428,7 +333,7 @@
 
   <section class="prize-showcase" id="prize">
     <h2 class="section-title">Your Dream Car Awaits</h2>
-    <div class="container" style="display:flex;justify-content:space-between;align-items: center;">
+    <div class="container" style="display:flex;justify-content:space-between;align-items: center;gap:20px;">
       <div>
         <video
           playsinline
@@ -449,14 +354,7 @@
           <p>
             We believe the C8 Corvette represents the unstoppable energy of modern America. It’s a car that looks like the future and drives like a dream. From the roar of its engine to the refined details of its premium leather interior, everything about this machine screams excellence. It’s fully loaded with the latest driver assistance technologies, a state-of-the-art entertainment system, and performance features that make every ride unforgettable.
           </p>
-          <!-- <p>  This stunning <span class="highlight">Chevrolet Corvette C8 HellBoar Edition </span> comes fully loaded with premium
-              leather interior, state-of-the-art entertainment system, advanced
-              driver assistance features, and performance that will take your
-              breath away. Valued at over
-            <span class="highlight">$85,000</span>, this could be yours just
-          
-              by shopping with us!
-          </p> -->
+          <!-- <p>  This stunning <span class="highlight">Chevrolet Corvette C8 HellBoar Edition </span> comes fully loaded with premium    leather interior, state-of-the-art entertainment system, advanced    driver assistance features, and performance that will take your    breath away. Valued at over  <span class="highlight">$85,000</span>, this could be yours just    by shopping with us!</p> -->
           <a
             href="{{ shop.url }}/pages/giveaway"
             class="cta-button"
@@ -474,7 +372,7 @@
           <div class="step-number">1</div>
           <h3 class="step-title">Choose your product</h3>
           <p>
-            Browse our collection and make any purchase. Every order qualifies  
+            Browse our collection and make any purchase. Every order qualifies             
  
               you for entry!
           </p>
@@ -484,7 +382,7 @@
           <div class="step-number">2</div>
           <h3 class="step-title">Complete your purchase</h3>
           <p>
-            Get 1 entry for any purchase, plus 1 BONUS entry for every $50  
+            Get 1 entry for any purchase, plus 1 BONUS entry for every $50             
  
               spent on eligible products.
           </p>
@@ -494,7 +392,7 @@
           <div class="step-number">3</div>
           <h3 class="step-title">Receive your entry & wait for the draw</h3>
           <p>
-            When the countdown ends, we'll randomly select and announce a  
+            When the countdown ends, we'll randomly select and announce a             
  
               winner who takes home the car!
           </p>
@@ -515,25 +413,10 @@
           <p class="testimonial-author">- Dawid Blazej, Tesla CyberBeast Winner</p>
         </div>
 
-      <!-- <div class="testimonial-slide">  <p class="testimonial-text">    "I only made a small purchase to support the brand, and next thing
-      
-            I know I'm picking up the keys to a brand new luxury vehicle! This
-            giveaway changed my life completely. Forever grateful!"
-        </p>
-        <p class="testimonial-author">- Sarah J., Previous Winner</p>
-      </div> -->
-      <!-- <div class="testimonial-slide">  <p class="testimonial-text">    "The moment they announced my name during the live drawing was
-      
-            surreal. I've entered many giveaways before but this was the first
-            legitimate one where they actually delivered exactly as promised.
-            Truly amazing experience!"
-        </p>
-        <p class="testimonial-author">- Robert K., Grand Prize Winner</p>
-      </div> -->
+      <!-- <div class="testimonial-slide">  <p class="testimonial-text">    "I only made a small purchase to support the brand, and next thing      I know I'm picking up the keys to a brand new luxury vehicle! This      giveaway changed my life completely. Forever grateful!"  </p>  <p class="testimonial-author">- Sarah J., Previous Winner</p></div> -->
+      <!-- <div class="testimonial-slide">  <p class="testimonial-text">    "The moment they announced my name during the live drawing was      surreal. I've entered many giveaways before but this was the first      legitimate one where they actually delivered exactly as promised.      Truly amazing experience!"  </p>  <p class="testimonial-author">- Robert K., Grand Prize Winner</p></div> -->
       <!--
-        <div class="slider-dots">          <span class="dot active" data-slide="0"></span>          <span class="dot" data-slide="1"></span>
-                <span class="dot" data-slide="2"></span>
-              </div> -->
+        <div class="slider-dots">          <span class="dot active" data-slide="0"></span>          <span class="dot" data-slide="1"></span>          <span class="dot" data-slide="2"></span>        </div> -->
       </div>
     </div>
   </section>
@@ -595,56 +478,56 @@
   {
     "name": "Index Page",
     "settings": [
-    {
-      "type": "header",
-      "content": "Merchandise Section"
-    },
-    {
-      "type": "text",
-      "id": "merchandise_title",
-      "label": "Merchandise Section Title",
-      "default": "Our Merchandise Shop"
-    },
-    {
-      "type": "text",
-      "id": "merchandise_subtitle",
-      "label": "Merchandise Section Subtitle",
-      "default": "More chances to win if you are in"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection",
-      "info": "Select a collection to display products"
-    },
-    {
-      "type": "range",
-      "id": "products_limit",
-      "label": "Number of products to show",
-      "min": 3,
-      "max": 12,
-      "step": 3,
-      "default": 9
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Product Button Text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_cta_button",
-      "label": "Show CTA Button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "cta_button_text",
-      "label": "CTA Button Text",
-      "default": "View All Merchandise"
-    }
-  ],
+      {
+        "type": "header",
+        "content": "Merchandise Section"
+      },
+      {
+        "type": "text",
+        "id": "merchandise_title",
+        "label": "Merchandise Section Title",
+        "default": "Our Merchandise Shop"
+      },
+      {
+        "type": "text",
+        "id": "merchandise_subtitle",
+        "label": "Merchandise Section Subtitle",
+        "default": "More chances to win if you are in"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection",
+        "info": "Select a collection to display products"
+      },
+      {
+        "type": "range",
+        "id": "products_limit",
+        "label": "Number of products to show",
+        "min": 3,
+        "max": 12,
+        "step": 3,
+        "default": 9
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Product Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cta_button",
+        "label": "Show CTA Button",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cta_button_text",
+        "label": "CTA Button Text",
+        "default": "View All Merchandise"
+      }
+    ],
     "presets": [
       {
         "name": "Index Page"

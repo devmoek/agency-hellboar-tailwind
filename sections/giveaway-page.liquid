@@ -1,975 +1,282 @@
-<style>
-      :root {
-        --primary-red: #e5172c;
-        --dark-red: #b5121e;
-        --black: #121212;
-        --light-gray: #f2f2f2;
-        --white: #ffffff;
-      }
+<main style="background: #000;display:flex;flex-direction: column;">
 
-      .page-header {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-          url('https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990') center/cover no-repeat;
-        padding: 100px 0;
-        text-align: center;
-        position: relative;
-      }
-
-      .page-header::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        background: linear-gradient(to top, var(--black), transparent);
-      }
-
-      .header-content {
-        position: relative;
-        z-index: 2;
-      }
-
-      .page-title {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        color: var(--white);
-        position: relative;
-        display: inline-block;
-        padding-bottom: 15px;
-      }
-
-      .page-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 4px;
-        background-color: var(--primary-red);
-      }
-
-      .highlight {
-        color: var(--primary-red);
-      }
-
-      .section-alt {
-        background-color: #0a0a0a;
-        padding: 40px 0;
-        margin: 60px 0;
-      }
-
-      .current-prize {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: center;
-      }
-
-      .prize-image {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        border: 3px solid var(--primary-red);
-      }
-
-      .prize-content {
-        padding: 20px;
-        width: 100%;
-      }
-
-      .prize-title {
-        font-size: 2.2rem;
-        margin-bottom: 20px;
-        color: var(--white);
-      }
-
-      .prize-subtitle {
-        font-size: 12px;
-        color: var(--primary-red);
-        margin-bottom: 20px;
-        font-weight: 500;
-      }
-
-      .prize-text {
-        color: #fff;
-        margin-bottom: 30px;
-        font-size: 14px;
-        text-align: left;
-      }
-
-      .prize-features {
-        margin-bottom: 30px;
-        width: 100%;
-      }
-
-      .feature-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        color: #fff;
-      }
-
-      .feature-icon {
-        color: var(--primary-red);
-        font-size: 1.4rem;
-        margin-right: 10px;
-      }
-
-      .cta-button {
-        display: inline-block;
-        background-color: var(--primary-red);
-        color: var(--white);
-        font-size: 1.2rem;
-        font-weight: 600;
-        padding: 15px 40px;
-        border-radius: 50px;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(229, 23, 44, 0.4);
-      }
-
-      .cta-button:hover {
-        background-color: var(--dark-red);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(229, 23, 44, 0.6);
-      }
-
-      .countdown-container {
-        background-color: rgba(229, 23, 44, 0.05);
-        border-radius: 10px;
-        padding: 40px;
-        text-align: center;
-        border-left: 4px solid var(--primary-red);
-        margin: 50px 0;
-      }
-
-      .countdown-title {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        color: var(--white);
-      }
-
-      .countdown-timer {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
-      }
-
-      .countdown-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .countdown-number {
-        background-color: var(--primary-red);
-        color: var(--white);
-        font-size: 2.5rem;
-        font-weight: 700;
-        padding: 10px;
-        min-width: 80px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-      }
-
-      .countdown-label {
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .previous-winners {
-        margin-top: 50px;
-      }
-
-      .winners-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-      }
-
-      .winner-card {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        overflow: hidden;
-        text-align: center;
-        border-bottom: 3px solid var(--primary-red);
-      }
-
-      .winner-img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-      }
-
-      .winner-content {
-        padding: 20px;
-      }
-
-      .winner-name {
-        font-size: 16px;
-        margin-bottom: 5px;
-        color: var(--white);
-      }
-
-      .winner-prize {
-        font-size: 18px;
-        color: var(--primary-red);
-        font-weight: 500;
-        margin-bottom: 15px;
-      }
-
-      .winner-text {
-        font-size: 14px;
-        color: var(--light-gray);
-        font-style: italic;
-      }
-
-      .prize-specs {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin: 30px 0;
-      }
-
-      .spec-item {
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 15px;
-        border-radius: 8px;
-      }
-
-      .spec-label {
-        font-weight: 500;
-        color: var(--primary-red);
-        margin-bottom: 5px;
-      }
-
-      .spec-value {
-        font-size: 1.1rem;
-        color: #fff;
-        font-size: 14px;
-      }
-
-      .car-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-      }
-
-      .gallery-item {
-        position: relative;
-        height: fit-content;
-      }
-
-      .gallery-item h2 {
-        margin: 0;
-        padding: 0;
-      }
-
-      .gallery-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-        border-radius: 10px;
-      }
-
-      .gallery-item:hover .gallery-img {
-        transform: scale(1.1);
-      }
-
-      .how-to-win {
-        margin-top: 50px;
-      }
-
-      .steps-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-      }
-
-      .step-card {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        padding: 30px;
-        text-align: center;
-        position: relative;
-        border-top: 3px solid var(--primary-red);
-      }
-
-      .step-number {
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: var(--primary-red);
-        color: var(--white);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        font-weight: 700;
-      }
-
-      .step-text {
-        color: var(--light-gray);
-      }
-
-      .faq-container {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .faq-item {
-        margin-bottom: 20px;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        overflow: hidden;
-      }
-
-      .faq-question {
-        padding: 20px;
-        cursor: pointer;
-        position: relative;
-        font-size: 1.2rem;
-        color: var(--white);
-        font-weight: 500;
-        font-size: 16px;
-      }
-
-      .faq-question::after {
-        content: '+';
-        position: absolute;
-        right: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      .faq-question.active::after {
-        content: '-';
-      }
-
-      .faq-answer {
-        padding: 0 20px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        color: var(--light-gray);
-      }
-
-      .faq-answer.show {
-        padding: 0 20px 20px;
-        max-height: 300px;
-      }
-
-      .review-sliders {
-        display: flex;
-      }
-
-      .review-slider {
-        position: relative;
-      }
-
-      .review-slide {
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 30px;
-        border-radius: 10px;
-        margin: 0 15px;
-        text-align: center;
-        border-left: 3px solid var(--primary-red);
-      }
-
-      .review-quote {
-        font-size: 16px;
-        margin-bottom: 20px;
-        font-style: italic;
-        color: var(--light-gray);
-      }
-
-      .review-author {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--primary-red);
-      }
-
-      .footer {
-        background-color: var(--black);
-        padding: 40px 0;
-        color: var(--light-gray);
-      }
-
-      .footer-content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 40px;
-      }
-
-      .footer-column {
-        flex: 1;
-        min-width: 250px;
-      }
-
-      .footer-title {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-        color: var(--white);
-      }
-
-      .footer-links {
-        list-style: none;
-      }
-
-      .footer-links li {
-        margin-bottom: 10px;
-      }
-
-      .footer-links a {
-        color: var(--light-gray);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .footer-links a:hover {
-        color: var(--primary-red);
-      }
-
-      .social-icons {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
-      }
-
-      .social-icon {
-        width: 40px;
-        height: 40px;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.3s ease;
-        color: var(--white);
-        text-decoration: none;
-      }
-
-      .social-icon:hover {
-        background-color: var(--primary-red);
-      }
-
-      .copyright {
-        text-align: center;
-        padding-top: 40px;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.9rem;
-      }
-
-      .mobile-menu-btn {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--white);
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-
-      .floating-cta {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: 100;
-      }
-
-    .entry-bonus {
-        background-color: rgba(229, 23, 44, 0.1);
-        color: var(--primary-red);
-        padding: 5px 10px;
-        border-radius: 3px;
-        font-size: 14px;
-        font-weight: 700;
-        display: inline-block;
-        margin-bottom: 15px;
-        border: 1px dashed var(--primary-red);
-        animation: pulse 2s infinite;
-        width: 94%;
-        display: flex;
-        margin: 0 auto;
-        justify-content: center;
-        margin-top: 15px;
-      }
-
-      @media (max-width: 992px) {
-        .current-prize,
-        .winners-grid,
-        .steps-container {
-          grid-template-columns: 1fr 1fr;
-        }
-        
-        .prize-specs {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .current-prize,
-        .winners-grid,
-        .steps-container {
-          grid-template-columns: 1fr;
-        }
-        
-        .mobile-menu-btn {
-          display: block;
-        }
-
-        .nav-list {
-          position: absolute;
-          top: 80px;
-          left: 0;
-          width: 100%;
-          background-color: var(--black);
-          flex-direction: column;
-          align-items: center;
-          padding: 20px 0;
-          gap: 20px;
-          transform: translateY(-150%);
-          transition: transform 0.3s ease;
-          z-index: 99;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-list.active {
-          transform: translateY(0);
-        }
-
-        .nav-list li {
-          margin: 0;
-        }
-        
-        .page-title {
-          font-size: 2.2rem;
-        }
-
-        .countdown-timer {
-          flex-wrap: wrap;
-        }
-
-        .countdown-number {
-          font-size: 1.8rem;
-          min-width: 60px;
-        }
-
-        .review-sliders {
-            flex-direction: column;
-            gap: 20px;
-        }
-      }
-    </style>
-
-    <main style="background: #000;display:flex;flex-direction: column;gap: 60px;">
-
-    <!-- Page Header -->
-    <section class="page-header">
-      <div class="container">
-        <div class="header-content">
-          <h1 class="page-title">The <span class="highlight">Prize</span></h1>
-        </div>
-      </div>
-    </section>
-
-    <!-- Current Prize Section -->
-    <section class="section" id="current-prize">
-      <div class="container">
-        <h2 class="section-title">Current Giveaway</h2>
-        <div class="current-prize">
-          <div>
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_0503.jpg?v=1746640338" alt="Chevrolet C8 HellBoar Edition" class="prize-image" width="560" height="375">
-          </div>
-          <div class="prize-content">
-            <h3 class="prize-title">Chevrolet Corvette C8 + $20k cash</h3>
-            <p class="prize-subtitle">Valued at $80,000</p>
-            <p class="prize-text">This mid-engine American sports car is an absolute head-turner with amazing performance. 6.2L V8 engine, 8-speed dual-clutch transmission, and a 0-60 time under 3 seconds. Loaded with features: leather interior, touchscreen display, backup camera, Bluetooth, and more.</p>
-            
-            <div class="prize-features">
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>6.2L V8 Engine</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>670 Horsepower & 460 lb-ft of Torque</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>0-60 MPH in Just 2.9 Seconds</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Custom HellBoar Edition Interior Package</span>
-              </div>
-              <!-- <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>All Taxes and Delivery Covered</span>
-              </div> -->
-            </div>
-            
-            <a href="#shop-collection" class="cta-button">Shop Now To Enter</a>
-          </div>
-        </div>
-        
-        <!-- Countdown Timer -->
-        <!-- <div class="countdown-container">
-          <h3 class="countdown-title">Giveaway Ends In:</h3>
-          <div class="countdown-timer">
-            <div class="countdown-item">
-              <div class="countdown-number" id="days">27</div>
-              <div class="countdown-label">Days</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-number" id="hours">14</div>
-              <div class="countdown-label">Hours</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-number" id="minutes">33</div>
-              <div class="countdown-label">Minutes</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-number" id="seconds">59</div>
-              <div class="countdown-label">Seconds</div>
-            </div>
-          </div>
-        </div> -->
-        
-        <!-- Detailed Specifications -->
-        <h3 class="section-title">Car Specifications</h3>
-        <div class="prize-specs">
-            <div class="spec-item">
-                <div class="spec-label">Engine</div>
-                <div class="spec-value">6.2L Naturally Aspirated V8</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Power</div>
-                <div class="spec-value">495 hp @ 6,450 rpm</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Torque</div>
-                <div class="spec-value">470 lb-ft @ 5,150 rpm</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Transmission</div>
-                <div class="spec-value">8-Speed Dual-Clutch Automatic</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Top Speed</div>
-                <div class="spec-value">194 mph</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">0-60 MPH</div>
-                <div class="spec-value">2.9 seconds</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Exterior Color</div>
-                <div class="spec-value">Torch Red</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Interior</div>
-                <div class="spec-value">Red Leather</div>
-            </div>
-        </div>
-
-        
-        <!-- Car Gallery -->
-        <h3 class="section-title">Gallery</h3>
-        <div class="car-gallery">
-          <div class="gallery-item">
-            <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0366.jpg?v=1746623405" alt="Corvette C8 left side" class="gallery-img" width="373" height="249">
-          </div>
-          <div class="gallery-item">
-            <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0058.jpg?v=1746623404" alt="Corvette C8 left side" class="gallery-img" width="373" height="249">
-          </div>
-          <div class="gallery-item">
-            <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0052.jpg?v=1746623405" alt="Corvette C8 rear" class="gallery-img" width="373" height="249">
-          </div>
-          <div class="gallery-item">
-            <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0463.jpg?v=1746623406" alt="Corvette C8 left side" class="gallery-img" width="373" height="249">
-          </div>
-          <div class="gallery-item">
-            <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0075.jpg?v=1746623404" alt="Corvette C8 right side" class="gallery-img" width="373" height="249">
-          </div>
-          <div class="gallery-item">
-            <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0398.jpg?v=1746623406" alt="Corvette C8 back" class="gallery-img" width="373" height="249">
-          </div>
-        </div>
-      </div>
-    </section>
-
-  <style>
-    :root {
-      --primary-red: #e5172c;
-      --dark-red: #b5121e;
-      --black: #121212;
-      --light-gray: #f2f2f2;
-      --white: #ffffff;
-    }
-
-    /* Merchandise Shop Styles */
-    .section-subtitle {
-      text-align: center;
-      color: #f2f2f2;
-      font-size: 14px;
-      margin-bottom: 50px;
-      font-weight: 300;
-    }
-
-    .merchandise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-bottom: 25px;
-    }
-
-    .merchandise-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(229, 23, 44, 0.1);
-    }
-
-    .merchandise-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(229, 23, 44, 0.2);
-      border-color: rgba(229, 23, 44, 0.3);
-    }
-
-    .merchandise-image {
-      position: relative;
-      height: 250px;
-      overflow: hidden;
-    }
-
-    .merchandise-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .merchandise-card:hover .merchandise-img {
-      transform: scale(1.05);
-    }
-
-    .merchandise-content {
-      padding: 15px;
-    }
-
-    .merchandise-title {
-      font-size: 16px;
-      color: #fff;
-      margin-bottom: 10px;
-      line-height: 1.3;
-      text-align: left;
-    }
-
-    .merchandise-cta {
-      text-align: center;
-      margin-top: 25px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: var(--primary-red);
-      color: var(--white);
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 15px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(229, 23, 44, 0.4);
-    }
-
-    .cta-button:hover {
-      background-color: var(--dark-red);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(229, 23, 44, 0.6);
-    }
-
-    .entry-bonus {
-      background-color: rgba(229, 23, 44, 0.1);
-      color: var(--primary-red);
-      padding: 5px 10px;
-      border-radius: 3px;
-      font-size: 14px;
-      font-weight: 700;
-      display: inline-block;
-      margin-bottom: 15px;
-      border: 1px dashed var(--primary-red);
-      animation: pulse 2s infinite;
-      width: 94%;
-      display: flex;
-      margin: 0 auto;
-      justify-content: center;
-      margin-top: 15px;
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(229, 23, 44, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(229, 23, 44, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(229, 23, 44, 0);
-      }
-    }
-
-    /* Responsive Design for Merchandise */
-    @media (max-width: 768px) {
-      .merchandise-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 15px;
-      }
-
-      .merchandise-image {
-        height: 200px;
-      }
-
-      .merchandise-content {
-        padding: 15px;
-      }
-
-      .merchandise-title {
-        font-size: 14px;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .merchandise-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-</style>
-
-<section style="background: #000;display:flex;flex-direction: column;gap: 60px;">
-
-  <!-- Our Merchandise Shop Section -->
-  <div class="section merchandise-section" id="merchandise">
+  <!-- Page Header -->
+  <section class="page-header">
     <div class="container">
-      <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
-      <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'More chances to win if you are in' }}</p>
-      
-      {% if section.settings.collection != blank %}
-        {% assign collection = collections[section.settings.collection] %}
-        {% assign products_limit = section.settings.products_limit | default: 9 %}
-        
-        <div class="merchandise-grid">
-          {% for product in collection.products limit: products_limit %}
-            <a href="{{ product.url }}" style="text-decoration: none;">
-            <div class="merchandise-card">
-              <div class="merchandise-image">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | image_url: width: 365, height: 250 }}" 
-                       alt="{{ product.title | escape }}" 
-                       class="merchandise-img" 
-                       width="300" 
-                       height="250"
-                       loading="lazy">
-                {% else %}
-                  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802" 
-                       alt="Product placeholder" 
-                       class="merchandise-img" 
-                       width="300" 
-                       height="250"
-                       loading="lazy">
-                {% endif %}
-                <p class="entry-bonus">{{ product.metafields.product.entries_multiplier }} ENTRIES</p>
-              </div>
-              <div class="merchandise-content">
-                <h3 class="merchandise-title">{{ product.title }}</h3>
-                <div class="merchandise-price">
-                  {% render 'usessnt-entries-product', product: product %}
-                  </div>
-                </div>
-              </div>
-            </a>
-          {% endfor %}
-        </div>
-        
-        {% if section.settings.show_cta_button %}
-          <div class="merchandise-cta">
-            <a href="{{ routes.all_products_collection_url }}" class="cta-button">
-              {{ section.settings.cta_button_text | default: 'Shop all' }}
-            </a>
-          </div>
-        {% endif %}
-      {% else %}
-        <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
-          <p>Please select a collection in the theme editor to display products.</p>
-        </div>
-      {% endif %}
+      <div class="header-content">
+        <h1 class="page-title">The
+          <span class="highlight">Prize</span>
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown Timer -->
+  <div class="countdown-container section-alt" style="margin:0;">
+    <h3 class="countdown-title">Giveaway Ends In:</h3>
+    <div class="countdown-timer">
+      <div class="countdown-item">
+        <div class="countdown-number" id="days">27</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="hours">14</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="minutes">33</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="seconds">59</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
     </div>
   </div>
 
-</section>
-
-    <!-- Previous Winners Section -->
-    <section class="section" id="testimonials">
-      <div class="container">
-        <h2 class="section-title">Previous Winners</h2>
-        <div class="winners-grid">
-          <div class="winner-card">
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_9460_2.png?v=1739371131" alt="Unknown winner" class="winner-img" width='367' height='250'>
-            <div class="winner-content">
-              <h3 class="winner-name">Dawid Blazej</h3>
-              <p class="winner-prize">Tesla CyberBeast</p>
-              <p class="winner-text">Thanks to everyone who entered! <span class="highlight">The Beast Car Giveaway #01</span> has ended, and the winner has been selected in line with our official rules.</p>
-            </div>
-          </div>
-          <!-- <div class="winner-card">
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Sarah Johnson" class="winner-img">
-            <div class="winner-content">
-              <h3 class="winner-name">Sarah Johnson</h3>
-              <p class="winner-prize">2023 Porsche 911 GT3</p>
-              <p class="winner-text">"HellBoar's giveaways are 100% legitimate. I was skeptical until they delivered a brand new Porsche to my driveway with all taxes paid. Best day ever!"</p>
-            </div>
-          </div>
-          <div class="winner-card">
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="David Chen" class="winner-img">
-            <div class="winner-content">
-              <h3 class="winner-name">David Chen</h3>
-              <p class="winner-prize">2022 Tesla Model S Plaid</p>
-              <p class="winner-text">"From ordering a t-shirt to driving a Tesla in just one month. The HellBoar team was amazing throughout the entire process. They even flew me out for the handover ceremony!"</p>
-            </div>
-          </div> -->
+  <!-- Current Prize Section -->
+  <section class="section" id="current-prize">
+    <div class="container">
+      <h2 class="section-title">Current Giveaway</h2>
+      <div class="current-prize">
+        <div>
+          <img
+            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_0503.jpg?v=1746640338"
+            alt="Chevrolet C8 HellBoar Edition"
+            class="prize-image"
+            width="560"
+            height="375">
         </div>
-        
-        <!-- Review Slider -->
-        {% comment %} <div class="review-slider">
-          <div class="review-slide">
-            <p class="review-quote">"The whole experience was surreal. From the moment I got the call to receiving the keys to my McLaren, HellBoar treated me like family. Their giveaways are the real deal."</p>
-            <p class="review-author">- James Wilson, 2023 Winner</p>
+        <div class="prize-content">
+          <h3 class="prize-title">Chevrolet Corvette C8 + $20k cash</h3>
+          <p class="prize-subtitle">Valued at $80,000</p>
+          <p class="prize-text">This mid-engine American sports car is an absolute head-turner with amazing performance. 6.2L V8 engine, 8-speed dual-clutch transmission, and a 0-60 time under 3 seconds. Loaded with features: leather interior, touchscreen display, backup camera, Bluetooth, and more.</p>
+
+          <div class="prize-features">
+            <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              <span>6.2L V8 Engine</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              <span>670 Horsepower & 460 lb-ft of Torque</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              <span>0-60 MPH in Just 2.9 Seconds</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              <span>Custom HellBoar Edition Interior Package</span>
+            </div>
+          <!-- <div class="feature-item">  <span class="feature-icon">✓</span>  <span>All Taxes and Delivery Covered</span></div> -->
           </div>
-        </div> {% endcomment %}
+
+          <a href="#shop-collection" class="cta-button">Shop Now To Enter</a>
+        </div>
       </div>
-    </section>
+
+      <!-- Detailed Specifications -->
+      <h3 class="section-title">Car Specifications</h3>
+      <div class="prize-specs">
+        <div class="spec-item">
+          <div class="spec-label">Engine</div>
+          <div class="spec-value">6.2L Naturally Aspirated V8</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Power</div>
+          <div class="spec-value">495 hp @ 6,450 rpm</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Torque</div>
+          <div class="spec-value">470 lb-ft @ 5,150 rpm</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Transmission</div>
+          <div class="spec-value">8-Speed Dual-Clutch Automatic</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Top Speed</div>
+          <div class="spec-value">194 mph</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">0-60 MPH</div>
+          <div class="spec-value">2.9 seconds</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Exterior Color</div>
+          <div class="spec-value">Torch Red</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Interior</div>
+          <div class="spec-value">Red Leather</div>
+        </div>
+      </div>
+
+
+      <!-- Car Gallery -->
+      <h3 class="section-title">Gallery</h3>
+      <div class="car-gallery">
+        <div class="gallery-item">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0366.jpg?v=1746623405"
+            alt="Corvette C8 left side"
+            class="gallery-img"
+            width="373"
+            height="249">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0058.jpg?v=1746623404"
+            alt="Corvette C8 left side"
+            class="gallery-img"
+            width="373"
+            height="249">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0052.jpg?v=1746623405"
+            alt="Corvette C8 rear"
+            class="gallery-img"
+            width="373"
+            height="249">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0463.jpg?v=1746623406"
+            alt="Corvette C8 left side"
+            class="gallery-img"
+            width="373"
+            height="249">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0075.jpg?v=1746623404"
+            alt="Corvette C8 right side"
+            class="gallery-img"
+            width="373"
+            height="249">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0398.jpg?v=1746623406"
+            alt="Corvette C8 back"
+            class="gallery-img"
+            width="373"
+            height="249">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #000;display:flex;flex-direction: column;gap: 60px;">
+
+    <!-- Our Merchandise Shop Section -->
+    <div class="section section-alt merchandise-section" id="merchandise">
+      <div class="container">
+        <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
+        <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'More chances to win if you are in' }}</p>
+
+        {% if section.settings.collection != blank %}
+          {% assign collection = collections[section.settings.collection] %}
+          {% assign products_limit = section.settings.products_limit | default: 9 %}
+
+          <div class="merchandise-grid">
+            {% for product in collection.products limit: products_limit %}
+              <a href="{{ product.url }}" style="text-decoration: none;">
+                <div class="merchandise-card">
+                  <div class="merchandise-image">
+                    {% if product.featured_image %}
+                      <img
+                        src="{{ product.featured_image | image_url: width: 365, height: 250 }}"
+                        alt="{{ product.title | escape }}"
+                        class="merchandise-img"
+                        width="300"
+                        height="250"
+                        loading="lazy">
+                    {% else %}
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802"
+                        alt="Product placeholder"
+                        class="merchandise-img"
+                        width="300"
+                        height="250"
+                        loading="lazy">
+                    {% endif %}
+                    <p class="entry-bonus">{{ product.metafields.product.entries_multiplier }} ENTRIES</p>
+                  </div>
+                  <div class="merchandise-content">
+                    <h3 class="merchandise-title">{{ product.title }}</h3>
+                    <div class="merchandise-price">
+                      {% render 'usessnt-entries-product'
+                        , product: product %}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+
+          {% if section.settings.show_cta_button %}
+            <div class="merchandise-cta">
+              <a href="{{ routes.all_products_collection_url }}" class="cta-button">
+                {{ section.settings.cta_button_text | default: 'Shop all' }}
+              </a>
+            </div>
+          {% endif %}
+        {% else %}
+          <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
+            <p>Please select a collection in the theme editor to display products.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Previous Winners Section -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <h2 class="section-title">Previous Winners</h2>
+      <div class="winners-grid">
+        <div class="winner-card">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_9460_2.png?v=1739371131"
+            alt="Unknown winner"
+            class="winner-img"
+            width='367'
+            height='250'>
+          <div class="winner-content">
+            <h3 class="winner-name">Dawid Blazej</h3>
+            <p class="winner-prize">Tesla CyberBeast</p>
+            <p class="winner-text">Thanks to everyone who entered!
+              <span class="highlight">The Beast Car Giveaway #01</span>
+              has ended, and the winner has been selected in line with our official rules.</p>
+          </div>
+        </div>
+      <!-- <div class="winner-card">  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Sarah Johnson" class="winner-img">  <div class="winner-content">    <h3 class="winner-name">Sarah Johnson</h3>    <p class="winner-prize">2023 Porsche 911 GT3</p>
+          <p class="winner-text">"HellBoar's giveaways are 100% legitimate. I was skeptical until they delivered a brand new Porsche to my driveway with all taxes paid. Best day ever!"</p>
+        </div>
+      </div>
+      <div class="winner-card">
+        <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="David Chen" class="winner-img">
+        <div class="winner-content">
+          <h3 class="winner-name">David Chen</h3>
+          <p class="winner-prize">2022 Tesla Model S Plaid</p>
+          <p class="winner-text">"From ordering a t-shirt to driving a Tesla in just one month. The HellBoar team was amazing throughout the entire process. They even flew me out for the handover ceremony!"</p>
+        </div>
+      </div> -->
+      </div>
+
+    <!-- Review Slider -->
+    {% comment %} <div class="review-slider">
+                                <div class="review-slide">
+                                  <p class="review-quote">"The whole experience was surreal. From the moment I got the call to receiving the keys to my McLaren, HellBoar treated me like family. Their giveaways are the real deal."</p>
+                                  <p class="review-author">- James Wilson, 2023 Winner</p>
+                                </div>
+                      </div> {% endcomment %}
+    </div>
+  </section>
 
   <section class="winner-announcement video-text-section section-alt">
     <div class="container">
@@ -1002,13 +309,16 @@
     </div>
   </section>
 
-    <!-- Entry Section -->
-    <section class="section" id="entry">
-      <div class="container">
-        <h2 class="section-title">Enter The Giveaway</h2>
-        <div class="current-prize">
-          <div class="prize-content">
-            <h3 class="prize-title">Shop Now To Enter</h3>
+  <!-- Entry Section -->
+  <section
+    class="section"
+    id="entry"
+    style="margin-bottom: 60px;">
+    <div class="container">
+      <h2 class="section-title">Enter The Giveaway</h2>
+      <div class="current-prize">
+        <div class="prize-content">
+          <h3 class="prize-title">Shop Now To Enter</h3>
           <p style="text-align: left;">
             This jaw-dropping Chevrolet Corvette C8 HellBoar Edition isn’t just a car — it’s a symbol of power, progress, and pure American spirit. We didn’t choose it by accident. The Corvette C8 stands for everything that makes America iconic — daring speed, fearless engineering, and a legacy of pushing boundaries. With its bold aerodynamic design, mid-engine layout, and precision handling, it’s not just fast — it’s a force of nature on wheels.
           </p>
@@ -1017,233 +327,239 @@
           <p style="text-align: left;">
             We believe the C8 Corvette represents the unstoppable energy of modern America. It’s a car that looks like the future and drives like a dream. From the roar of its engine to the refined details of its premium leather interior, everything about this machine screams excellence. It’s fully loaded with the latest driver assistance technologies, a state-of-the-art entertainment system, and performance features that make every ride unforgettable.
           </p>
-            <a href="#shop-collection" class="cta-button">Enter now</a>
-          </div>
-          <div>
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_0463.jpg?v=1746640339" alt="Chevrolet Corvette C8 HellBoar Edition" class="prize-image" width="373" height="249">
-          </div>
+          <a href="#shop-collection" class="cta-button">Enter now</a>
+        </div>
+        <div>
+          <img
+            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_0463.jpg?v=1746640339"
+            alt="Chevrolet Corvette C8 HellBoar Edition"
+            class="prize-image"
+            width="373"
+            height="249">
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Collection Preview -->
-    <section class="section section-alt" id="shop-collection">
-      <div class="container">
-        <h2 class="section-title">ENTER NOW</h2>
-        <p class="section-subtitle">More chances to win if you are in</p>
-        <div class="car-gallery">
-          <div class="gallery-item">
-            <a href="{{ shop.url }}/products/challenger-entry" style="text-decoration:none;">
-              <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770" alt="challenger boost entries" class="gallery-img" width="373" height="373">
-              <p class="entry-bonus">1500 ENTRIES</p>
-            </a>
-          </div>
-          <div class="gallery-item">
-            <a href="{{ shop.url }}/products/trailblazer-entry" style="text-decoration:none;">
-              <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667" alt="trailblazer boost entries" class="gallery-img" width="373" height="373">
-              <p class="entry-bonus">500 ENTRIES</p>
-            </a>
-          </div>
-          <div class="gallery-item">
-            <a href="{{ shop.url }}/products/beast-entry" style="text-decoration:none;">
-              <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802" alt="beast mode boost entries" class="gallery-img" width="373" height="373">
-              <p class="entry-bonus">6000 ENTRIES</p>
-            </a>
-          </div>
+  <!-- Collection Preview -->
+  <section class="section section-alt" id="shop-collection">
+    <div class="container">
+      <h2 class="section-title">ENTER NOW</h2>
+      <p class="section-subtitle">More chances to win if you are in</p>
+      <div class="car-gallery">
+        <div class="gallery-item">
+          <a href="{{ shop.url }}/products/challenger-entry" style="text-decoration:none;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770"
+              alt="challenger boost entries"
+              class="gallery-img"
+              width="373"
+              height="373">
+            <p class="entry-bonus">1500 ENTRIES</p>
+          </a>
         </div>
-        <div style="text-align: center; margin-top: 40px;">
-          <a href="{{ routes.all_products_collection_url }}" class="cta-button">View all products</a>
+        <div class="gallery-item">
+          <a href="{{ shop.url }}/products/trailblazer-entry" style="text-decoration:none;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667"
+              alt="trailblazer boost entries"
+              class="gallery-img"
+              width="373"
+              height="373">
+            <p class="entry-bonus">500 ENTRIES</p>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="{{ shop.url }}/products/beast-entry" style="text-decoration:none;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802"
+              alt="beast mode boost entries"
+              class="gallery-img"
+              width="373"
+              height="373">
+            <p class="entry-bonus">6000 ENTRIES</p>
+          </a>
         </div>
       </div>
-    </section>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="{{ routes.all_products_collection_url }}" class="cta-button">View all products</a>
+      </div>
+    </div>
+  </section>
 
   <!-- How to Win Section -->
-    <section class="section section-alt" id="how-it-works">
-      <div class="container">
-        <h2 class="section-title">How To Win</h2>
-        <div class="steps-container">
-          <div class="step-card">
-            <div class="step-number">1</div>
-            <h3 class="step-title">Choose your product</h3>
-            <p class="step-text">Browse our premium streetwear collection and find your style. Every item you purchase equals one entry into our giveaway.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">2</div>
-            <h3 class="step-title">Complete your purchase</h3>
-            <p class="step-text">Check out and create an account. Your entry is automatically registered with your purchase confirmation.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">3</div>
-            <h3 class="step-title">Receive your entry & wait for the draw</h3>
-            <p class="step-text">The winner is selected at random and announced live on our social media. We contact the winner directly after the announcement.</p>
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How To Win</h2>
+      <div class="steps-container">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Choose your product</h3>
+          <p class="step-text">Browse our premium streetwear collection and find your style. Every item you purchase equals one entry into our giveaway.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Complete your purchase</h3>
+          <p class="step-text">Check out and create an account. Your entry is automatically registered with your purchase confirmation.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Receive your entry & wait for the draw</h3>
+          <p class="step-text">The winner is selected at random and announced live on our social media. We contact the winner directly after the announcement.</p>
+        </div>
+      </div>
+
+    <!-- Additional Entry Methods -->
+    <!-- <div class="countdown-container">  <h3 class="countdown-title">Maximize Your Chances</h3>  <p class="prize-text">While every purchase gives you one entry, there are ways to increase your odds:</p>  <div class="prize-features">
+        <div class="feature-item">
+          <span class="feature-icon">+</span>
+          <span>Join our VIP membership for 2x entries on every purchase</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">+</span>
+          <span>Share your purchase on social media for an additional entry, don't forget to tag us @hellboarapparel</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">+</span>
+          <span>Refer a friend who makes a purchase for 5 bonus entries</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">+</span>
+          <span>Digital products offer 3x entry multiplier</span>
+        </div>
+      </div>
+    </div> -->
+    </div>
+  </section>
+
+  <!-- Previous Prizes -->
+  <!-- <section class="section">  <div class="container">    <h2 class="section-title">Previous Prizes</h2>    <div class="winners-grid">      <div class="winner-card">
+          <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Lamborghini Huracán" class="winner-img">
+          <div class="winner-content">
+            <h3 class="winner-name">2024 Lamborghini Huracán</h3>
+            <p class="winner-prize">Valued at $275,000</p>
+            <p class="winner-text">Our previous headline prize featuring a custom HellBoar edition interior and exclusive Arancio Borealis paint.</p>
           </div>
         </div>
-        
-        <!-- Additional Entry Methods -->
-        <!-- <div class="countdown-container">
-          <h3 class="countdown-title">Maximize Your Chances</h3>
-          <p class="prize-text">While every purchase gives you one entry, there are ways to increase your odds:</p>
-          
-          <div class="prize-features">
-            <div class="feature-item">
-              <span class="feature-icon">+</span>
-              <span>Join our VIP membership for 2x entries on every purchase</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">+</span>
-              <span>Share your purchase on social media for an additional entry, don't forget to tag us @hellboarapparel</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">+</span>
-              <span>Refer a friend who makes a purchase for 5 bonus entries</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">+</span>
-              <span>Digital products offer 3x entry multiplier</span>
-            </div>
+        <div class="winner-card">
+          <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Porsche 911 GT3" class="winner-img">
+          <div class="winner-content">
+            <h3 class="winner-name">2023 Porsche 911 GT3</h3>
+            <p class="winner-prize">Valued at $220,000</p>
+            <p class="winner-text">A track-ready beast with HellBoar's signature styling touches and upgraded performance package.</p>
           </div>
-        </div> -->
-      </div>
-    </section>
-
-    <!-- Previous Prizes -->
-    <!-- <section class="section">
-      <div class="container">
-        <h2 class="section-title">Previous Prizes</h2>
-        <div class="winners-grid">
-          <div class="winner-card">
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Lamborghini Huracán" class="winner-img">
-            <div class="winner-content">
-              <h3 class="winner-name">2024 Lamborghini Huracán</h3>
-              <p class="winner-prize">Valued at $275,000</p>
-              <p class="winner-text">Our previous headline prize featuring a custom HellBoar edition interior and exclusive Arancio Borealis paint.</p>
-            </div>
-          </div>
-          <div class="winner-card">
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Porsche 911 GT3" class="winner-img">
-            <div class="winner-content">
-              <h3 class="winner-name">2023 Porsche 911 GT3</h3>
-              <p class="winner-prize">Valued at $220,000</p>
-              <p class="winner-text">A track-ready beast with HellBoar's signature styling touches and upgraded performance package.</p>
-            </div>
-          </div>
-          <div class="winner-card">
-            <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Tesla Model S Plaid" class="winner-img">
-            <div class="winner-content">
-              <h3 class="winner-name">2022 Tesla Model S Plaid</h3>
-              <p class="winner-prize">Valued at $135,000</p>
-              <p class="winner-text">The world's fastest production electric vehicle, featuring custom HellBoar badging and interior accents.</p>
-            </div>
+        </div>
+        <div class="winner-card">
+          <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Tesla Model S Plaid" class="winner-img">
+          <div class="winner-content">
+            <h3 class="winner-name">2022 Tesla Model S Plaid</h3>
+            <p class="winner-prize">Valued at $135,000</p>
+            <p class="winner-text">The world's fastest production electric vehicle, featuring custom HellBoar badging and interior accents.</p>
           </div>
         </div>
       </div>
-    </section> -->
-
-    <!-- Testimonials Section -->
-    <!-- <section class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Customer Reviews</h2>
-        <div class="review-sliders">
-            <div class="review-slider">
-            <div class="review-slide">
-                <p class="review-quote">"Not only is the clothing amazing quality, but knowing each purchase could win me a supercar makes shopping at HellBoar even more exciting. The anticipation of each draw is addictive!"</p>
-                <p class="review-author">- Emma Parker</p>
-            </div>
-            </div>
-            <div class="review-slider">
-            <div class="review-slide">
-                <p class="review-quote">"I've been wearing HellBoar for two years now. The designs are unique and the quality is unmatched. The possibility of winning a Ferrari is just the cherry on top of an already excellent product."</p>
-                <p class="review-author">- Thomas Wright</p>
-            </div>
-            </div>
-            <div class="review-slider">
-            <div class="review-slide">
-                <p class="review-quote">"After seeing my friend win last year's Porsche, I know these giveaways are 100% real. I've made it a point to order from every new collection drop since then. My time is coming!"</p>
-                <p class="review-author">- Ryan Martinez</p>
-            </div>
-            </div>
-        </div>
-
+    </div>
+  </section> -->
+  <!-- Testimonials Section -->
+  <!-- <section class="section section-alt">  <div class="container">    <h2 class="section-title">Customer Reviews</h2>    <div class="review-sliders">        <div class="review-slider">
+          <div class="review-slide">
+              <p class="review-quote">"Not only is the clothing amazing quality, but knowing each purchase could win me a supercar makes shopping at HellBoar even more exciting. The anticipation of each draw is addictive!"</p>
+              <p class="review-author">- Emma Parker</p>
+          </div>
+          </div>
+          <div class="review-slider">
+          <div class="review-slide">
+              <p class="review-quote">"I've been wearing HellBoar for two years now. The designs are unique and the quality is unmatched. The possibility of winning a Ferrari is just the cherry on top of an already excellent product."</p>
+              <p class="review-author">- Thomas Wright</p>
+          </div>
+          </div>
+          <div class="review-slider">
+          <div class="review-slide">
+              <p class="review-quote">"After seeing my friend win last year's Porsche, I know these giveaways are 100% real. I've made it a point to order from every new collection drop since then. My time is coming!"</p>
+              <p class="review-author">- Ryan Martinez</p>
+          </div>
+          </div>
       </div>
-    </section> -->
+  
+    </div>
+  </section> -->
+  <!-- Legal Information -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Legal Information</h2>
+      <div class="countdown-container">
+        <h3 class="countdown-title">Giveaway Terms & Conditions</h3>
+        <p class="prize-text">Our giveaways are conducted with complete transparency and in compliance with all applicable laws. Full terms and conditions are available on our website, but here are some key points:</p>
 
-    <!-- Legal Information -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Legal Information</h2>
-        <div class="countdown-container">
-          <h3 class="countdown-title">Giveaway Terms & Conditions</h3>
-          <p class="prize-text">Our giveaways are conducted with complete transparency and in compliance with all applicable laws. Full terms and conditions are available on our website, but here are some key points:</p>
-          
-          <div class="prize-features" style="margin-top: 20px;">
-            <div class="feature-item">
-              <span class="feature-icon">•</span>
-              <span>You must be 18 years or older to participate</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">•</span>
-              <span>No purchase necessary entry option available</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">•</span>
-              <span>All entries have an equal chance of winning</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">•</span>
-              <span>Drawing conducted by independent third party</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">•</span>
-              <span>Prize is as described, including tax and delivery coverage</span>
-            </div>
+        <div class="prize-features" style="margin-top: 20px;">
+          <div class="feature-item">
+            <span class="feature-icon">•</span>
+            <span>You must be 18 years or older to participate</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">•</span>
+            <span>No purchase necessary entry option available</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">•</span>
+            <span>All entries have an equal chance of winning</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">•</span>
+            <span>Drawing conducted by independent third party</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">•</span>
+            <span>Prize is as described, including tax and delivery coverage</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FAQ Section -->
-    <section class="section section-alt" id="faq">
-      <div class="container">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <div class="faq-container">
-          <div class="faq-item">
-            <div class="faq-question">Is this giveaway legal?</div>
-            <div class="faq-answer">Yes, all our giveaways comply with international laws and regulations. We work with legal experts to ensure transparency and fairness in every draw. Full terms and conditions are available on our website.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">How are winners selected?</div>
-            <div class="faq-answer">Winners are selected using a certified random number generator, with each entry assigned a unique number. The drawing is overseen by an independent auditor.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">What about taxes and delivery?</div>
-            <div class="faq-answer">HellBoar covers all taxes, registration fees, and delivery costs associated with the prize. We believe in giving you a truly free prize with no hidden costs or financial surprises.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">How many entries can I have?</div>
-            <div class="faq-answer">There’s no limit to how many entries you can earn. Every purchase scores you x5 or x10 entries — and the multiplier can increase during special events.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Can I win if I live outside the USA?</div>
-            <div class="faq-answer">Absolutely! Our giveaways are open worldwide to entrants in eligible countries. International winners receive the same benefits, including covered shipping and import duties where legally possible.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">Can I choose cash instead of the car?</div>
-            <div class="faq-answer">Yes, winners have the option to choose a cash alternative valued at 80% of the vehicle's MSRP. This gives you the flexibility to decide what works best for your situation.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">When is the next drawing?</div>
-            <div class="faq-answer">The current Chevrolet Corvette C8 HellBoar Edition giveaway drawing will take place on November 14, 2025. The event will be streamed live across all our social media platforms.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question">How will I be notified if I win?</div>
-            <div class="faq-answer">Winners are announced in our social media. We'll contact you directly via email and phone. We'll make multiple attempts to reach you over a 7-day period before selecting an alternate winner.</div>
-          </div>
+  <!-- FAQ Section -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">Is this giveaway legal?</div>
+          <div class="faq-answer">Yes, all our giveaways comply with international laws and regulations. We work with legal experts to ensure transparency and fairness in every draw. Full terms and conditions are available on our website.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">How are winners selected?</div>
+          <div class="faq-answer">Winners are selected using a certified random number generator, with each entry assigned a unique number. The drawing is overseen by an independent auditor.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">What about taxes and delivery?</div>
+          <div class="faq-answer">HellBoar covers all taxes, registration fees, and delivery costs associated with the prize. We believe in giving you a truly free prize with no hidden costs or financial surprises.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">How many entries can I have?</div>
+          <div class="faq-answer">There’s no limit to how many entries you can earn. Every purchase scores you x5 or x10 entries — and the multiplier can increase during special events.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Can I win if I live outside the USA?</div>
+          <div class="faq-answer">Absolutely! Our giveaways are open worldwide to entrants in eligible countries. International winners receive the same benefits, including covered shipping and import duties where legally possible.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Can I choose cash instead of the car?</div>
+          <div class="faq-answer">Yes, winners have the option to choose a cash alternative valued at 80% of the vehicle's MSRP. This gives you the flexibility to decide what works best for your situation.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">When is the next drawing?</div>
+          <div class="faq-answer">The current Chevrolet Corvette C8 HellBoar Edition giveaway drawing will take place on November 14, 2025. The event will be streamed live across all our social media platforms.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">How will I be notified if I win?</div>
+          <div class="faq-answer">Winners are announced in our social media. We'll contact you directly via email and phone. We'll make multiple attempts to reach you over a 7-day period before selecting an alternate winner.</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- JavaScript -->
-    <script>
+  <!-- JavaScript -->
+  <script>
       // Scroll to sections smoothly
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', function (e) {
@@ -1282,68 +598,66 @@
         });
       });
 
-    </script>
-    </main>
-
-
+  </script>
+</main>
 {% schema %}
   {
-  "name": "Giveaway Page",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Merchandise Section"
-    },
-    {
-      "type": "text",
-      "id": "merchandise_title",
-      "label": "Merchandise Section Title",
-      "default": "Our Merchandise Shop"
-    },
-    {
-      "type": "text",
-      "id": "merchandise_subtitle",
-      "label": "Merchandise Section Subtitle",
-      "default": "More chances to win if you are in"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection",
-      "info": "Select a collection to display products"
-    },
-    {
-      "type": "range",
-      "id": "products_limit",
-      "label": "Number of products to show",
-      "min": 3,
-      "max": 12,
-      "step": 3,
-      "default": 9
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Product Button Text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_cta_button",
-      "label": "Show CTA Button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "cta_button_text",
-      "label": "CTA Button Text",
-      "default": "View All Merchandise"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Giveaway Page"
-    }
-  ]
-}  
+    "name": "Giveaway Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Merchandise Section"
+      },
+      {
+        "type": "text",
+        "id": "merchandise_title",
+        "label": "Merchandise Section Title",
+        "default": "Our Merchandise Shop"
+      },
+      {
+        "type": "text",
+        "id": "merchandise_subtitle",
+        "label": "Merchandise Section Subtitle",
+        "default": "More chances to win if you are in"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection",
+        "info": "Select a collection to display products"
+      },
+      {
+        "type": "range",
+        "id": "products_limit",
+        "label": "Number of products to show",
+        "min": 3,
+        "max": 12,
+        "step": 3,
+        "default": 9
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Product Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cta_button",
+        "label": "Show CTA Button",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cta_button_text",
+        "label": "CTA Button Text",
+        "default": "View All Merchandise"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Giveaway Page"
+      }
+    ]
+  }
 {% endschema %}

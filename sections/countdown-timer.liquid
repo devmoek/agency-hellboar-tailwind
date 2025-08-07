@@ -1,0 +1,248 @@
+<style>
+  #countdown {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 2px;
+  }
+
+  .countdown-title {
+    font-size: 24px;
+    margin-bottom: 1rem;
+    color: #ff0000;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .countdown-description {
+    font-size: 14px;
+    margin-bottom: 2.5rem;
+    color: #333;
+    font-weight: 400;
+  }
+
+  .countdown-description a {
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .countdown-description a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #ff0000;
+    transition: width 0.3s ease;
+  }
+
+  .countdown-description a:hover {
+    color: #cc0000;
+  }
+
+  .countdown-description a:hover::after {
+    width: 100%;
+  }
+
+  .countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .time-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+  }
+
+  .time-value {
+    font-size: 28px;
+    font-weight: 500;
+    color: #ff0000;
+    margin-bottom: 0.25rem;
+    font-family: 'Helvetica Neue'
+    , sans-serif;
+  }
+
+  .time-label {
+    font-size: 11px;
+    font-weight: 400;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  .separator {
+    color: #ff0000;
+    font-size: 28px;
+    font-weight: 500;
+    padding: 0 2px;
+    margin-bottom: 25px;
+  }
+
+  /* Medium screens */
+  @media (min-width: 768px) {
+    .time-value {
+      font-size: 32px;
+    }
+
+    .separator {
+      font-size: 32px;
+    }
+  }
+
+  /* Large screens */
+  @media (min-width: 1024px) {
+    .time-value {
+      font-size: 38px;
+    }
+
+    .separator {
+      font-size: 38px;
+    }
+
+    .time-label {
+      font-size: 12px;
+    }
+  }
+
+  /* Add subtle animation for seconds changing */
+  @keyframes fadeNumber {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .seconds-block .time-value {
+    animation: fadeNumber 1s infinite;
+  }
+</style>
+
+<div id="countdown">
+  <h2 class="countdown-title">BCG#01 Ends In</h2>
+  <p class="countdown-description">Don't miss out —
+    <a href="{{ routes.all_products_collection_url }}">
+      <strong>shop now</strong>
+    </a>
+    before the giveaway ends on May 7, 2025</p>
+  <div class="countdown-container"></div>
+</div>
+
+<script>
+    // Using the existing launch date from your code
+    const launchDate = new Date(2025, 4, 7, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
+    const countdownElement = document.querySelector(".countdown-container");
+    
+    // Modified createBlock function for minimal design
+    const createBlock = (label, value) => {
+      const block = document.createElement("div");
+      block.className = "time-block";
+      
+      // Add special class for seconds block
+      if (label === "Seconds") {
+        block.classList.add("seconds-block");
+      }
+    
+      const valueEl = document.createElement("span");
+      valueEl.className = "time-value";
+      // Add leading zeros for single-digit values
+      valueEl.textContent = value < 10 ? `0${value}` : value;
+    
+      const labelEl = document.createElement("p");
+      labelEl.className = "time-label";
+      labelEl.textContent = label;
+    
+      block.appendChild(valueEl);
+      block.appendChild(labelEl);
+      return block;
+    };
+    
+    // Create separator dot
+    const createSeparator = () => {
+      const separator = document.createElement("div");
+      separator.className = "separator";
+      separator.textContent = ":";
+      return separator;
+    };
+    
+    // Modified updateCountdown function
+    const updateCountdown = () => {
+      // Convert current time to EST (Eastern Time)
+      const nowUTC = new Date();
+      const nowEST = new Date(
+        nowUTC.toLocaleString("en-US", { timeZone: "America/New_York" })
+      );
+      
+      const difference = launchDate - nowEST;
+      
+      if (difference > 0) {
+        const timeLeft = {
+          Days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          Hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          Minutes: Math.floor((difference / 1000 / 60) % 60),
+          Seconds: Math.floor((difference / 1000) % 60)
+        };
+      
+        countdownElement.innerHTML = "";
+        
+        const timeEntries = Object.entries(timeLeft);
+        for (let i = 0; i < timeEntries.length; i++) {
+          const [label, value] = timeEntries[i];
+          countdownElement.appendChild(createBlock(label, value));
+          
+          // Add separator after each block except the last one
+          if (i < timeEntries.length - 1) {
+            countdownElement.appendChild(createSeparator());
+          }
+        }
+      } else {
+        countdownElement.innerHTML = "";
+        document.querySelector(".countdown-title").textContent = "Launch Day";
+        document.querySelector(".countdown-description").textContent = "The day has arrived.";
+      
+        const messageBlock = document.createElement("div");
+        messageBlock.className = "time-block expired-message";
+        messageBlock.style.padding = "2rem";
+        messageBlock.style.fontSize = "18px";
+        messageBlock.style.fontWeight = "500";
+        messageBlock.style.color = "#ff0000";
+        messageBlock.textContent = "We're live now";
+      
+        countdownElement.appendChild(messageBlock);
+        clearInterval(timer);
+      }
+    };
+    
+    // Initialize and set the interval
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+</script>
+
+{% schema %}
+  {
+    "name": "Countdown Timer",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Countdown Timer"
+      }
+    ]
+  }
+{% endschema %}
