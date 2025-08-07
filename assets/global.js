@@ -1556,15 +1556,9 @@ function setupCounter(element) {
 
 // Countdown Timer
 function updateCountdown() {
-  // Set a fixed end date - 30 days from when the page loads
-  // We'll store this in localStorage so it persists across page refreshes
-  if (!localStorage.getItem("countdownEndDate")) {
-    const endDate = new Date();
-    endDate.setDate(endDate.getDate() + 30);
-    localStorage.setItem("countdownEndDate", endDate.getTime());
-  }
-
-  const endTime = parseInt(localStorage.getItem("countdownEndDate"));
+  // Set a fixed end date - November 14, 2025 at 11:59:59 PM EST
+  const endDate = new Date(2025, 10, 14, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
+  const endTime = endDate.getTime();
   const now = new Date().getTime();
   const distance = endTime - now;
 
