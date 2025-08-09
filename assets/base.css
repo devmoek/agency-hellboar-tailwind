@@ -5575,7 +5575,7 @@ footer {
 }
 
 .merchandise-section {
-  padding: 4rem 0;
+  padding-bottom: 4rem;
 }
 
 @keyframes pulse {
