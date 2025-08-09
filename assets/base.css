@@ -5149,6 +5149,7 @@ footer {
   margin: 0 auto;
   justify-content: center;
   margin-top: 15px;
+  gap: 5px;
 }
 
 @media (max-width: 992px) {
