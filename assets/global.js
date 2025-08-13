@@ -1665,7 +1665,7 @@ entryForm.addEventListener("submit", (e) => {
   // Redirect to product collection
   alert("Thanks for your interest! Redirecting you to our shop now...");
   // In a real implementation, redirect to your Shopify collection page
-  // window.location.href = '/collections/all';
+  // window.location.href = '/collections/all-products';
 });
 
 newsletterForm.addEventListener("submit", (e) => {
