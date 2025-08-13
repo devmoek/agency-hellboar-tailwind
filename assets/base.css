@@ -4618,6 +4618,10 @@ footer {
   color: var(--white);
 }
 
+.about-page-cta {
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .winner-announcement .two-column-grid {
     grid-template-columns: 1fr;
