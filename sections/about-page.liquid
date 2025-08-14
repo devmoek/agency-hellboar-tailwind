@@ -1,8 +1,6 @@
 <main style="background:black;">
 
-<style> 
-  
-  :root
+  <style > :root
   {
     --primary-red: #e5172c;
     --dark-red: #b5121e;
@@ -597,6 +595,11 @@
         <p class="about-text">Axes: Garage started as a small workshop but quickly became a recognized name in the custom-building community. Our YouTube channel, @DashingAxe, has grown to over 500,000 subscribers, where we showcase our most ambitious builds. Hell Boar is the next step—bringing together premium apparel, powerful giveaways, and a movement for those who build, create, and go beyond the ordinary.</p>
         <div>
           <a href="{{ routes.collections_url }}/all-products" class="cta-button">Shop & Enter Now</a>
+          <a
+            href="https://www.youtube.com/@DashingAxe"
+            class="cta-button"
+            style=" background: transparent; border: var(--primary-red);"
+            target="_blank">Axes: Garage YT channel</a>
         </div>
       </div>
     </div>
@@ -647,8 +650,7 @@
           width="278"
           height="390">
         <h3 class="member-name">Dmitry</h3>
-        <!-- <p class="member-role">Founder & CEO</p>
-        <p class="member-bio">Former street artist turned entrepreneur with a passion for automotive culture and disruptive fashion.</p> -->
+      <!-- <p class="member-role">Founder & CEO</p><p class="member-bio">Former street artist turned entrepreneur with a passion for automotive culture and disruptive fashion.</p> -->
       </div>
       <div class="team-member">
         <img
@@ -739,29 +741,59 @@
 <section class="section section-alt">
   <div class="container">
     <h2 class="section-title">Current Giveaway</h2>
-      <div class="gallery">
-        <div class="gallery-item">
-          <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0366.jpg?v=1746623405" alt="Corvette C8 left side" class="gallery-img" width="373" height="249">
-        </div>
-        <div class="gallery-item">
-          <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0058.jpg?v=1746623404" alt="Corvette C8 left side" class="gallery-img" width="373" height="249">
-        </div>
-        <div class="gallery-item">
-          <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0052.jpg?v=1746623405" alt="Corvette C8 rear" class="gallery-img" width="373" height="249">
-        </div>
-        <div class="gallery-item">
-          <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0463.jpg?v=1746623406" alt="Corvette C8 left side" class="gallery-img" width="373" height="249">
-        </div>
-        <div class="gallery-item">
-          <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0075.jpg?v=1746623404" alt="Corvette C8 right side" class="gallery-img" width="373" height="249">
-        </div>
-        <div class="gallery-item">
-          <img src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0398.jpg?v=1746623406" alt="Corvette C8 back" class="gallery-img" width="373" height="249">
-        </div>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0366.jpg?v=1746623405"
+          alt="Corvette C8 left side"
+          class="gallery-img"
+          width="373"
+          height="249">
       </div>
-      <div class="about-page-cta">
-        <a href="{{ routes.collections_url }}/all-products" class="cta-button">Enter Now</a>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0058.jpg?v=1746623404"
+          alt="Corvette C8 left side"
+          class="gallery-img"
+          width="373"
+          height="249">
       </div>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0052.jpg?v=1746623405"
+          alt="Corvette C8 rear"
+          class="gallery-img"
+          width="373"
+          height="249">
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0463.jpg?v=1746623406"
+          alt="Corvette C8 left side"
+          class="gallery-img"
+          width="373"
+          height="249">
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0075.jpg?v=1746623404"
+          alt="Corvette C8 right side"
+          class="gallery-img"
+          width="373"
+          height="249">
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0398.jpg?v=1746623406"
+          alt="Corvette C8 back"
+          class="gallery-img"
+          width="373"
+          height="249">
+      </div>
+    </div>
+    <div class="about-page-cta">
+      <a href="{{ routes.collections_url }}/all-products" class="cta-button">Enter Now</a>
+    </div>
   </div>
 </section>
 
@@ -793,10 +825,7 @@
           }
         });
       });
-</script>
-</main>
-
-{% schema %}
+</script></main>{% schema %}
 {
   "name": "About Page",
   "settings": [],
