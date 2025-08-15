@@ -4915,11 +4915,12 @@ footer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+  
 }
 
 .gallery-item {
   position: relative;
-  height: fit-content;
+  height: 250px;
 }
 
 .gallery-item h2 {
