@@ -4416,7 +4416,6 @@ footer {
   border: 2px solid var(--primary-red);
   padding: 10px 20px;
   border-radius: 5px;
-  margin-bottom: 20px;
   display: inline-block;
   animation: pulse-v2 2s infinite;
   font-weight: bold;
