@@ -1590,23 +1590,27 @@ updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
 // FAQ Accordion
-const faqItems = document.querySelectorAll(".faq-item");
+  document.addEventListener(
+    "click",
+    (e) => {
+      const question = e.target.closest(".faq-question");
+      if (!question) return; // Not a FAQ click
 
-faqItems.forEach((item) => {
-  const question = item.querySelector(".faq-question");
+      const item = question.closest(".faq-item");
+      if (!item) return;
 
-  question.addEventListener("click", () => {
-    // Close all other items
-    faqItems.forEach((otherItem) => {
-      if (otherItem !== item) {
-        otherItem.classList.remove("active");
-      }
-    });
+      // Close all others
+      document.querySelectorAll(".faq-item.active").forEach((other) => {
+        if (other !== item) {
+          other.classList.remove("active");
+        }
+      });
 
-    // Toggle current item
-    item.classList.toggle("active");
-  });
-});
+      // Toggle the clicked one
+      item.classList.toggle("active");
+    },
+    { capture: true } // Fires before other click handlers
+  );
 
 // Testimonial Slider
 const dots = document.querySelectorAll(".dot");
