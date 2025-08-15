@@ -3894,7 +3894,7 @@ details-disclosure>details {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 25px;
   margin-top: 50px;
 }
 
