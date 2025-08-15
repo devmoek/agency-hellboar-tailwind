@@ -43,6 +43,13 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
         "complementary_PcUxgF": {
           "type": "complementary",
           "settings": {
@@ -55,13 +62,6 @@
             "image_ratio": "square",
             "enable_quick_add": false
           }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
         }
       },
       "block_order": [
@@ -71,8 +71,8 @@
         "variant_picker",
         "popup_PtVzRK",
         "quantity_selector",
-        "complementary_PcUxgF",
-        "buy_buttons"
+        "buy_buttons",
+        "complementary_PcUxgF"
       ],
       "settings": {
         "enable_sticky_info": true,
