@@ -9,6 +9,42 @@
  */
 {
   "sections": {
+    "175636613375a9437a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_acfd916_A9gaEn": {
+          "type": "ai_gen_block_acfd916",
+          "settings": {
+            "blog": "news",
+            "posts_count": 8,
+            "show_title": true,
+            "title": "Latest Stories",
+            "subtitle": "Discover our latest articles and insights",
+            "title_alignment": "center",
+            "show_categories": true,
+            "show_excerpt": true,
+            "show_author": true,
+            "show_date": true,
+            "background_color": "#ffffff",
+            "title_color": "#000000",
+            "subtitle_color": "#666666",
+            "text_color": "#333333",
+            "card_background_color": "#ffffff",
+            "category_color": "#e5172c",
+            "category_text_color": "#ffffff",
+            "title_size": 36,
+            "subtitle_size": 16,
+            "section_padding": 60,
+            "card_border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_acfd916_A9gaEn"
+      ],
+      "settings": {}
+    },
     "main": {
       "type": "main-article",
       "blocks": {
@@ -25,12 +61,6 @@
             "blog_show_author": false
           }
         },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        },
         "content": {
           "type": "content",
           "settings": {}
@@ -39,13 +69,48 @@
       "block_order": [
         "featured_image",
         "title",
-        "share",
         "content"
       ],
       "settings": {}
+    },
+    "newsletter_dmAUzM": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_t7kwRX": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_dQ9cqh": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          }
+        },
+        "email_form_MRwJyi": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_t7kwRX",
+        "paragraph_dQ9cqh",
+        "email_form_MRwJyi"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
-    "main"
+    "175636613375a9437a",
+    "main",
+    "newsletter_dmAUzM"
   ]
 }
