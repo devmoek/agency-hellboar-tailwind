@@ -9,42 +9,6 @@
  */
 {
   "sections": {
-    "175636613375a9437a": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_acfd916_A9gaEn": {
-          "type": "ai_gen_block_acfd916",
-          "settings": {
-            "blog": "news",
-            "posts_count": 8,
-            "show_title": true,
-            "title": "Latest Stories",
-            "subtitle": "Discover our latest articles and insights",
-            "title_alignment": "center",
-            "show_categories": true,
-            "show_excerpt": true,
-            "show_author": true,
-            "show_date": true,
-            "background_color": "#ffffff",
-            "title_color": "#000000",
-            "subtitle_color": "#666666",
-            "text_color": "#333333",
-            "card_background_color": "#ffffff",
-            "category_color": "#e5172c",
-            "category_text_color": "#ffffff",
-            "title_size": 36,
-            "subtitle_size": 16,
-            "section_padding": 60,
-            "card_border_radius": 8
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_acfd916_A9gaEn"
-      ],
-      "settings": {}
-    },
     "main": {
       "type": "main-article",
       "blocks": {
@@ -71,6 +35,43 @@
         "title",
         "content"
       ],
+      "settings": {}
+    },
+    "175636613375a9437a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_acfd916_A9gaEn": {
+          "type": "ai_gen_block_acfd916",
+          "settings": {
+            "blog": "news",
+            "posts_count": 4,
+            "show_title": true,
+            "title": "Latest Stories",
+            "subtitle": "Discover our latest articles and insights",
+            "title_alignment": "center",
+            "show_categories": true,
+            "show_excerpt": true,
+            "show_author": true,
+            "show_date": true,
+            "background_color": "#000000",
+            "title_color": "#ffffff",
+            "subtitle_color": "#666666",
+            "text_color": "#333333",
+            "card_background_color": "#ffffff",
+            "category_color": "#e5172c",
+            "category_text_color": "#ffffff",
+            "title_size": 36,
+            "subtitle_size": 16,
+            "section_padding": 60,
+            "card_border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_acfd916_A9gaEn"
+      ],
+      "disabled": true,
       "settings": {}
     },
     "newsletter_dmAUzM": {
@@ -109,8 +110,8 @@
     }
   },
   "order": [
-    "175636613375a9437a",
     "main",
+    "175636613375a9437a",
     "newsletter_dmAUzM"
   ]
 }
