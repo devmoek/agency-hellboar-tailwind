@@ -75,6 +75,46 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <!-- ADD BACK BUTTON OR BREADCRUMBS HERE -->
+      <div class="product-header">
+        <div class="back-navigation">
+          <button onclick="history.back()" class="back-button">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Back</span>
+          </button>
+        </div>
+        
+        <div class="breadcrumbs">
+          <nav aria-label="Breadcrumb navigation">
+            <ol class="breadcrumb-list">
+              <li class="breadcrumb-item">
+                <a href="{{ routes.root_url }}" class="breadcrumb-link">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2L2 8H3V14H13V8H14L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Home</span>
+                </a>
+              </li>
+              
+              {% if product.collections.size > 0 %}
+                {% assign main_collection = product.collections.first %}
+                <li class="breadcrumb-item">
+                  <a href="{{ main_collection.url }}" class="breadcrumb-link">
+                    {{ main_collection.title }}
+                  </a>
+                </li>
+              {% endif %}
+              
+              <li class="breadcrumb-item breadcrumb-current" aria-current="page">
+                {{ product.title }}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
