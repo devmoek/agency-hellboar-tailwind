@@ -15,7 +15,47 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .button--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .quantity--disabled .quantity__button {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .quantity--disabled .quantity__input {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+  }
+
+  /* Hide dynamic checkout buttons when cart has only promo products */
+  {% if has_promo_products and has_non_promo_products == false %}
+    .cart__dynamic-checkout-buttons,
+    .additional-checkout-buttons,
+    .shopify-payment-button,
+    [data-shopify="payment-button"] {
+      display: none !important;
+    }
+  {% endif %}
 {%- endstyle -%}
+
+{% liquid
+  assign has_non_promo_products = false
+  assign has_promo_products = false
+  for item in cart.items
+    if item.product.title contains 'PROMO'
+      assign has_promo_products = true
+    else
+      assign has_non_promo_products = true
+    endif
+  endfor
+%}
 
 <div
   class="gradient color-{{ section.settings.color_scheme }}{% if cart == empty %} is-empty{% endif %}"
@@ -63,6 +103,25 @@
                   <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
                 </div>
 
+                <div class="totals" style="margin-top: 10px;">
+                  <h2 class="totals__total">Total entries</h2>
+                  <div class="product-ticket-entries entry-bonus totals__total-value" style="float:unset;">
+                      {% assign total_entries = 0 %}
+                      {% for item in cart.items %}
+                        {% assign multiplier = 5 %}
+                        {% if item.product.metafields.product.entries_multiplier.value != blank %}
+                          {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+                        {% endif %}
+                        {% assign entries = item.price | divided_by: 100 | times: multiplier | times: item.quantity | round %}
+                        {% assign total_entries = total_entries | plus: entries %}
+                      {% endfor %}
+
+                      <span class="entries">
+                        🎟 <span class="entries_cl">{{ total_entries }} Entries</span>
+                      </span>
+                  </div>
+                </div>
+
                 <small class="tax-note caption-large rte">
                   {%- if cart.duties_included and cart.taxes_included -%}
                     {%- if shop.shipping_policy.body == blank -%}
@@ -105,12 +164,17 @@
               </div>
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
+                {% if has_promo_products and has_non_promo_products == false %}
+                  <div class="promo-only-warning" style="background: #ff0000; border-radius: 5px; padding: 10px; text-transform: uppercase; margin-bottom: 15px;">
+                    <p class="promo-warning-text" style="color: #ffffff; font-size: 1.3rem; margin: 0; text-align: center; font-weight: 500;">You cannot checkout with only promo products in the cart. Please add regular products to your cart to checkout.</p>
+                  </div>
+                {% endif %}
                 <button
                   type="submit"
                   id="checkout"
-                  class="cart__checkout-button button"
+                  class="cart__checkout-button button{% if has_promo_products and has_non_promo_products == false %} button--disabled{% endif %}"
                   name="checkout"
-                  {% if cart == empty %}
+                  {% if cart == empty or has_promo_products and has_non_promo_products == false %}
                     disabled
                   {% endif %}
                   form="cart"
@@ -120,9 +184,11 @@
               </div>
 
               {%- if additional_checkout_buttons -%}
-                <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
-                  {{ content_for_additional_checkout_buttons }}
-                </div>
+                {%- unless has_promo_products and has_non_promo_products == false -%}
+                  <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                    {{ content_for_additional_checkout_buttons }}
+                  </div>
+                {%- endunless -%}
               {%- endif -%}
           {%- endcase -%}
         {% endfor %}

@@ -5,60 +5,116 @@
         autoplay
         muted
         playsinline
-        class="background-video">
+        controls="false"
+        disablepictureinpicture
+        controlslist="nodownload nofullscreen noremoteplayback"
+        class="background-video"
+        id="hero-video">
         <source src="https://cdn.shopify.com/videos/c/o/v/508db523b4934728aeb0262266bb9d60.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const heroVideo = document.getElementById('hero-video');
+          if (heroVideo) {
+            // Ensure controls are disabled
+            heroVideo.controls = false;
+            heroVideo.removeAttribute('controls');
+            
+            // Prevent any control interactions
+            heroVideo.addEventListener('loadedmetadata', function() {
+              this.controls = false;
+            });
+            
+            // Hide controls on mobile devices
+            if (window.innerWidth <= 768) {
+              heroVideo.style.pointerEvents = 'none';
+              heroVideo.controls = false;
+            }
+            
+            // Re-hide controls if they appear
+            const observer = new MutationObserver(function(mutations) {
+              mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'controls') {
+                  heroVideo.controls = false;
+                }
+              });
+            });
+            
+            observer.observe(heroVideo, {
+              attributes: true,
+              attributeFilter: ['controls']
+            });
+          }
+        });
+      </script>
+
       <div class="hero-content">
         <div class="timer-box">Limited Time Offer</div>
         <h1 class="hero-title" style="font-size:30px;">
           BCG #02
         </h1>
-
-        <h2 class="hero-title">
-          Win Your
-          <span>Dream Car</span>
-          Today!
-        </h2>
         <p class="hero-subtitle">
           Purchase any item from our store and automatically get entered to win
         </p>
 
         <div class="prize">
-          <p>Chevrolet Corvette C8 HellBoar Edition</p>
-          <p>+ $20k cash</p>
+          <a href="{{ shop.url }}/pages/giveaway" style="text-decoration:none;">
+            <p>Chevrolet Corvette C8 HellBoar Edition</p>
+            <p>+ $20k cash</p>
+          </a>
         </div>
 
       {% comment %} <div class="cta-button-container">
-                                                                  <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
-                                                  </div> {% endcomment %}
+                                                                                                  <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
+                                                                          </div> {% endcomment %}
+      </div>
+    </div>
+  </section>
+  <section class="countdown">
+    <div class="countdown-title">
+      <h3>Giveaway ends in:</h3>
+    </div>
+    <div class="countdown-timer">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days">29</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours">23</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes">59</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds">59</span>
+        <span class="countdown-label">Seconds</span>
       </div>
     </div>
   </section>
 
-  {% comment %} <section class="countdown">
-                                <div class="countdown-title">
-                                  <h3>Giveaway ends in:</h3>
-                                </div>
-                                <div class="countdown-timer">
-                                  <div class="countdown-item">
-                                    <span class="countdown-number" id="days">29</span>
-                                    <span class="countdown-label">Days</span>
-                                  </div>
-                                  <div class="countdown-item">
-                                    <span class="countdown-number" id="hours">23</span>
-                                    <span class="countdown-label">Hours</span>
-                                  </div>
-                                  <div class="countdown-item">
-                                    <span class="countdown-number" id="minutes">59</span>
-                                    <span class="countdown-label">Minutes</span>
-                                  </div>
-                                  <div class="countdown-item">
-                                    <span class="countdown-number" id="seconds">59</span>
-                                    <span class="countdown-label">Seconds</span>
-                                  </div>
-                                </div>
-                </section> {% endcomment %}
+  <!-- How to Enter Section -->
+  <section class="how-to-enter-section">
+    <div class="container">
+      <h2 class="section-title">How to Enter</h2>
+      <p class="section-subtitle">Watch this video to learn how to participate in our giveaway</p>
+
+      <div class="video-container">
+        <div class="video-wrapper">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/IN492aIaFPk"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Collection Preview -->
   <section
@@ -69,105 +125,200 @@
       <h2 class="section-title">ENTER NOW</h2>
       <p class="section-subtitle">More chances to win if you are in</p>
       <div class="car-gallery">
-        <div class="gallery-item" style="height:fit-content;">
-          <a href="{{ shop.url }}/products/challenger-entry" style="text-decoration:none;">
-            <picture>
-              <source media="(min-width: 768px)" srcset="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770">
-              <source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/CHALLENGER.png?v=1756836724">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770"
-                alt="challenger boost entries"
-                class="gallery-img"
-                width="373"
-                height="373">
-            </picture>
-            <p class="entry-bonus">1500 ENTRIES</p>
-          </a>
-        </div>
-        <div class="gallery-item" style="height:fit-content;">
-          <a href="{{ shop.url }}/products/trailblazer-entry" style="text-decoration:none;">
-            <picture>
-              <source media="(min-width: 768px)" srcset="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667">
-              <source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/TRAILBLAZER.png?v=1756836724">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667"
-                alt="trailblazer boost entries"
-                class="gallery-img"
-                width="373"
-                height="373">
-            </picture>
-            <p class="entry-bonus">500 ENTRIES</p>
-          </a>
-        </div>
-        <div class="gallery-item gallery-item-full-width" style="height:fit-content;">
-          <a href="{{ shop.url }}/products/beast-entry" style="text-decoration:none;">
-            <picture>
-              <source media="(min-width: 768px)" srcset="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802">
-              <source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/BEAST-MODE.png?v=1756836724">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802"
-                alt="beast mode boost entries"
-                class="gallery-img"
-                width="373"
-                height="373">
-            </picture>
-            <p class="entry-bonus">6000 ENTRIES</p>
-          </a>
-        </div>
+        {%- liquid
+          assign challenger_product = all_products['challenger-entry']
+          assign trailblazer_product = all_products['trailblazer-entry']
+          assign beast_product = all_products['beast-entry']
+        -%}
+
+        {%- if challenger_product -%}
+          <div class="gallery-item" style="height:fit-content;">
+            {% render 'card-product'
+              , card_product: challenger_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: true
+              , skip_styles: false
+              , section_id: section.id
+            %}
+          </div>
+        {%- else -%}
+          <div class="gallery-item" style="height:fit-content;">
+            <div class="card-wrapper product-card-wrapper">
+              <div class="card card--standard">
+                <div class="card__inner">
+                  <div class="card__media">
+                    <div class="media media--transparent">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770"
+                        alt="challenger boost entries"
+                        class="motion-reduce"
+                        width="373"
+                        height="373">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h5">
+                      <a href="{{ shop.url }}/products/challenger-entry" class="full-unstyled-link">
+                        Challenger Entry
+                      </a>
+                    </h3>
+                    <div class="card-information">
+                      <div class="price">
+                        <div class="price__container">
+                          <div class="price__regular">
+                            <span class="price-item price-item--regular">$100.00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-ticket-entries" style="float:unset;">
+                        <div class="entries-badge">
+                          <div class="entries-section">
+                            <span class="entries_cl">1500 Entries</span>
+                          </div>
+                          <div class="multiplier-section x15">
+                            <span class="multiplier">15X</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if trailblazer_product -%}
+          <div class="gallery-item" style="height:fit-content;">
+            {% render 'card-product'
+              , card_product: trailblazer_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: true
+              , skip_styles: true
+              , section_id: section.id
+            %}
+          </div>
+        {%- else -%}
+          <div class="gallery-item" style="height:fit-content;">
+            <div class="card-wrapper product-card-wrapper">
+              <div class="card card--standard">
+                <div class="card__inner">
+                  <div class="card__media">
+                    <div class="media media--transparent">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667"
+                        alt="trailblazer boost entries"
+                        class="motion-reduce"
+                        width="373"
+                        height="373">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h5">
+                      <a href="{{ shop.url }}/products/trailblazer-entry" class="full-unstyled-link">
+                        Trailblazer Entry
+                      </a>
+                    </h3>
+                    <div class="card-information">
+                      <div class="price">
+                        <div class="price__container">
+                          <div class="price__regular">
+                            <span class="price-item price-item--regular">$50.00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-ticket-entries" style="float:unset;">
+                        <div class="entries-badge">
+                          <div class="entries-section">
+                            <span class="entries_cl">500 Entries</span>
+                          </div>
+                          <div class="multiplier-section x10">
+                            <span class="multiplier">10X</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if beast_product -%}
+          <div class="gallery-item gallery-item-full-width" style="height:fit-content;">
+            {% render 'card-product'
+              , card_product: beast_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: true
+              , skip_styles: true
+              , section_id: section.id
+            %}
+          </div>
+        {%- else -%}
+          <div class="gallery-item gallery-item-full-width" style="height:fit-content;">
+            <div class="card-wrapper product-card-wrapper">
+              <div class="card card--standard">
+                <div class="card__inner">
+                  <div class="card__media">
+                    <div class="media media--transparent">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802"
+                        alt="beast mode boost entries"
+                        class="motion-reduce"
+                        width="373"
+                        height="373">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h5">
+                      <a href="{{ shop.url }}/products/beast-entry" class="full-unstyled-link">
+                        Beast Mode Entry
+                      </a>
+                    </h3>
+                    <div class="card-information">
+                      <div class="price">
+                        <div class="price__container">
+                          <div class="price__regular">
+                            <span class="price-item price-item--regular">$300.00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-ticket-entries" style="float:unset;">
+                        <div class="entries-badge">
+                          <div class="entries-section">
+                            <span class="entries_cl">6000 Entries</span>
+                          </div>
+                          <div class="multiplier-section x20">
+                            <span class="multiplier">20X</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
       </div>
-      <div style="text-align: center; margin-top: 40px;">
+      <div class="cta-button-container">
         <a href="{{ routes.collections_url }}/all-products" class="cta-button">View all products</a>
       </div>
     </div>
   </section>
-
-  <style>
-    .car-gallery {
-      display: grid;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    /* Desktop layout - 3 columns */
-    @media (min-width: 768px) {
-      .car-gallery {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    /* Mobile layout - 2 columns with third item full width */
-    @media (max-width: 767px) {
-      .car-gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .gallery-item-full-width {
-        grid-column: 1 / -1;
-        /* Span full width */
-      }
-    }
-
-    .gallery-item {
-      text-align: center;
-    }
-
-    .gallery-img {
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-      border-radius: 8px;
-    }
-
-
-    /*
-   .entry-bonus {
-   margin-top: 10px;
-   font-weight: bold;
-   font-size: 18px;
-   color: #333;
-   }
-*/
-  </style>
 
   <!-- Gallery Section -->
   <section class="section gallery-section">
@@ -248,36 +399,6 @@
     </div>
   </section>
 
-  <style>
-    .gallery-item-hidden {
-      display: none;
-    }
-
-    .gallery-expand {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .expand-button {
-      display: flex;
-      align-items: center;
-      margin: 0 auto;
-      gap: 5px;
-    }
-
-    .expand-arrow {
-      transition: transform 0.3s ease;
-    }
-
-    .expand-button.expanded .expand-arrow {
-      transform: rotate(180deg);
-    }
-
-    .expand-button.expanded .expand-text {
-      content: "Show Less";
-    }
-  </style>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const expandButton = document.getElementById('expandGallery');
@@ -350,38 +471,24 @@
           {% assign products_limit = section.settings.products_limit | default: 9 %}
 
           <div class="merchandise-grid">
+            {% assign skip_card_product_styles = false %}
             {% for product in collection.products limit: products_limit %}
-              <a href="{{ product.url }}" style="text-decoration: none;">
-                <div class="merchandise-card">
-                  <div class="merchandise-image">
-                    {% if product.featured_image %}
-                      <img
-                        src="{{ product.featured_image | image_url: width: 365, height: 250 }}"
-                        alt="{{ product.title | escape }}"
-                        class="merchandise-img"
-                        width="300"
-                        height="250"
-                        loading="lazy">
-                    {% else %}
-                      <img
-                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802"
-                        alt="Product placeholder"
-                        class="merchandise-img"
-                        width="300"
-                        height="250"
-                        loading="lazy">
-                    {% endif %}
-                    <p class="entry-bonus">{{ product.metafields.product.entries_multiplier }} ENTRIES</p>
-                  </div>
-                  <div class="merchandise-content">
-                    <h3 class="merchandise-title">{{ product.title }}</h3>
-                    <div class="merchandise-price">
-                      {% render 'usessnt-entries-product'
-                        , product: product %}
-                    </div>
-                  </div>
-                </div>
-              </a>
+              {% assign lazy_load = false %}
+              {%- if forloop.index > 2 -%}
+                {%- assign lazy_load = true -%}
+              {%- endif -%}
+              <div class="merchandise-grid-item">
+                {% render 'card-product'
+                  , card_product: product
+                  , media_aspect_ratio: 'square'
+                  , show_vendor: false
+                  , show_rating: false
+                  , lazy_load: lazy_load
+                  , skip_styles: skip_card_product_styles
+                  , section_id: section.id
+                %}
+              </div>
+              {%- assign skip_card_product_styles = true -%}
             {% endfor %}
           </div>
 
@@ -402,16 +509,6 @@
 
   </section>
 
-  <style>
-    /* Mobile-specific styles for merchandise section only */
-    @media (max-width: 767px) {
-      #merchandise .merchandise-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-    }
-  </style>
-
   <section class="features">
     <div class="container">
       <h2 class="section-title">Why Participate?</h2>
@@ -429,7 +526,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Easy Entry</h3>
             <p class="feature-desc">
-              Simply make any purchase on our store and you're automatically                    
+              Simply make any purchase on our store and you're automatically                                    
  
                 entered to win. Plus, get bonus entries with every $50 spent!
             </p>
@@ -449,7 +546,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Guaranteed Winner</h3>
             <p class="feature-desc">
-              Unlike other giveaways, we GUARANTEE a winner will be selected.                    
+              Unlike other giveaways, we GUARANTEE a winner will be selected.                                    
  
                 Someone WILL drive away in this dream car!
             </p>
@@ -470,7 +567,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Transparent Process</h3>
             <p class="feature-desc">
-              Our winner selection is conducted live and publicly. Fair and                    
+              Our winner selection is conducted live and publicly. Fair and                                    
  
                 transparent with a trusted third-party verification.
             </p>
@@ -521,7 +618,7 @@
           <div class="step-number">1</div>
           <h3 class="step-title">Choose your product</h3>
           <p>
-            Browse our collection and make any purchase. Every order qualifies                    
+            Browse our collection and make any purchase. Every order qualifies                                    
  
               you for entry!
           </p>
@@ -531,7 +628,7 @@
           <div class="step-number">2</div>
           <h3 class="step-title">Complete your purchase</h3>
           <p>
-            Get 1 entry for any purchase, plus 1 BONUS entry for every $50                    
+            Get 1 entry for any purchase, plus 1 BONUS entry for every $50                                    
  
               spent on eligible products.
           </p>
@@ -541,7 +638,7 @@
           <div class="step-number">3</div>
           <h3 class="step-title">Receive your entry & wait for the draw</h3>
           <p>
-            When the countdown ends, we'll randomly select and announce a                    
+            When the countdown ends, we'll randomly select and announce a                                    
  
               winner who takes home the car!
           </p>
@@ -558,72 +655,80 @@
       <h2 class="section-title">Previous Winners</h2>
       <div class="testimonial-slider">
         <div class="testimonial-slide active">
-          <p class="testimonial-text">
-            Thanks to everyone who entered!
-            <span class="highlight">The Beast Car Giveaway #01</span>
-            has ended, and the winner has been selected in accordance with our official rules.</p>
-          <p class="testimonial-author">- Dawid Blazej, Tesla CyberBeast Winner</p>
+          <div class="testimonial-content">
+            <div class="testimonial-image">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/ph2.png?v=1759326219"
+                alt="Dawid Blazej - Tesla CyberBeast Winner"
+                class="winner-photo"
+                width="200"
+                height="200"
+                loading="lazy">
+            </div>
+            <div class="testimonial-text-content">
+              <p class="testimonial-text">
+                Thanks to everyone who entered!
+                <span class="highlight">The Beast Car Giveaway #01</span>
+                has ended, and the winner has been selected in accordance with our official rules.</p>
+              <p class="testimonial-author">- Dawid Blazej, Tesla CyberBeast Winner</p>
+            </div>
+          </div>
         </div>
-
-      <!-- <div class="testimonial-slide">  <p class="testimonial-text">    "I only made a small purchase to support the brand, and next thing      I know I'm picking up the keys to a brand new luxury vehicle! This      giveaway changed my life completely. Forever grateful!"  </p>  <p class="testimonial-author">- Sarah J., Previous Winner</p></div> -->
-      <!-- <div class="testimonial-slide">  <p class="testimonial-text">    "The moment they announced my name during the live drawing was      surreal. I've entered many giveaways before but this was the first      legitimate one where they actually delivered exactly as promised.      Truly amazing experience!"  </p>  <p class="testimonial-author">- Robert K., Grand Prize Winner</p></div> -->
-      <!--
-        <div class="slider-dots">          <span class="dot active" data-slide="0"></span>          <span class="dot" data-slide="1"></span>          <span class="dot" data-slide="2"></span>        </div> -->
       </div>
     </div>
   </section>
 
-{% comment %} <section class="faq" id="faq">
-                  <div class="container">
-                    <h2 class="section-title">Frequently Asked Questions</h2>
-                    <div class="faq-list">
-                      <div class="faq-item">
-                        <div class="faq-question">What’s the catch? Do you really give these cars away?</div>
-                        <div class="faq-answer">
-                          <p>
-                            There’s no catch! We are genuinely giving away the Chevrolet Corvette C8 HellBoar Edition to one lucky winner. It’s 100% real, and the winner is chosen randomly.
-                          </p>
-                        </div>
-                      </div>
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">What’s the catch? Do you really give these cars away?</div>
+          <div class="faq-answer">
+            <p>
+              There’s no catch! We are genuinely giving away the Chevrolet Corvette C8 HellBoar Edition to one lucky winner. It’s 100% real, and the winner is chosen randomly.
+            </p>
+          </div>
+        </div>
 
-                      <div class="faq-item">
-                        <div class="faq-question">What are the requirements to be able to win?</div>
-                        <div class="faq-answer">
-                          <p>
-                            Anyone who is of legal age and resides in a region where this giveaway is permitted can participate. Full terms and conditions are listed in the official rules.
-                          </p>
-                        </div>
-                      </div>
+        <div class="faq-item">
+          <div class="faq-question">What are the requirements to be able to win?</div>
+          <div class="faq-answer">
+            <p>
+              Anyone who is of legal age and resides in a region where this giveaway is permitted can participate. Full terms and conditions are listed in the official rules.
+            </p>
+          </div>
+        </div>
 
-                      <div class="faq-item">
-                        <div class="faq-question">How many miles are on the car, and is the title clean?</div>
-                        <div class="faq-answer">
-                          <p>
-                            Our Corvette has extremely low mileage with a clean title. The winner will receive it in pristine condition.
-                          </p>
-                        </div>
-                      </div>
+        <div class="faq-item">
+          <div class="faq-question">How many miles are on the car, and is the title clean?</div>
+          <div class="faq-answer">
+            <p>
+              Our Corvette has extremely low mileage with a clean title. The winner will receive it in pristine condition.
+            </p>
+          </div>
+        </div>
 
-                      <div class="faq-item">
-                        <div class="faq-question">Who chooses the winner?</div>
-                        <div class="faq-answer">
-                          <p>
-                            The winner is selected randomly using a certified system. Everything is conducted transparently and in accordance with the rules.
-                          </p>
-                        </div>
-                      </div>
+        <div class="faq-item">
+          <div class="faq-question">Who chooses the winner?</div>
+          <div class="faq-answer">
+            <p>
+              The winner is selected randomly using a certified system. Everything is conducted transparently and in accordance with the rules.
+            </p>
+          </div>
+        </div>
 
-                      <div class="faq-item">
-                        <div class="faq-question">When do you announce the winner of BCG#01?</div>
-                        <div class="faq-answer">
-                          <p>
-                            The potential winner will be selected by random drawing on or about May 14, 2025, and will be contacted by the Sweepstakes Administrator for verification. Once confirmed, the winner's name will be announced on our social media channels shortly thereafter. Stay tuned for updates so you don’t miss the exciting reveal!
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-  </section> {% endcomment %}
+        <div class="faq-item">
+          <div class="faq-question">When do you announce the winner of BCG#02?</div>
+          <div class="faq-answer">
+            <p>
+              The potential winner will be selected by random drawing on or about November 14, 2025, and will be contacted by the Sweepstakes Administrator for verification. Once confirmed, the winner's name will be announced on our social media channels shortly thereafter. Stay tuned for updates so you don’t miss the exciting reveal!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 {% schema %}

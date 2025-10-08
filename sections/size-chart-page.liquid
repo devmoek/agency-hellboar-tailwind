@@ -1,0 +1,816 @@
+<style>
+  .size-chart-page {
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid #3a3a3a;
+    max-width: 1300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  .size-chart-page .size-chart-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e5172c;
+    position: relative;
+  }
+
+  .size-chart-page .size-chart-page__header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(229, 23, 44, 0.1) 50%, transparent 70%);
+  }
+
+  .size-chart-page .logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .size-chart-page .subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .size-chart-page .size-chart-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px;
+    background: #1a1a1a;
+    border-bottom: 1px solid #e5172c;
+    justify-content: center;
+  }
+
+  .size-chart-page .nav-tab {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #3a3a3a;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .size-chart-page .nav-tab:hover {
+    background: #333;
+    border-color: #e5172c;
+    color: #fff;
+  }
+
+  .size-chart-page .nav-tab.active {
+    background: #e5172c;
+    color: #fff;
+    border-color: #e5172c;
+    box-shadow: 0 2px 8px rgba(229, 23, 44, 0.3);
+  }
+
+  .size-chart-page .chart-section {
+    margin-bottom: 40px;
+  }
+
+  .size-chart-page .chart-section.active {
+    display: block;
+  }
+
+  /* More specific selector to override */
+  .size-chart-page .chart-section[data-chart].active {
+    display: block;
+  }
+
+  .size-chart-page .chart-title {
+    color: #e0e0e0;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    border-left: 3px solid #e5172c;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .size-chart-page .table-wrapper {
+    overflow-x: auto;
+    margin: 0;
+    background: #2a2a2a;
+  }
+
+  .size-chart-page .size-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #2a2a2a;
+  }
+
+  .size-chart-page .size-table th {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5172c;
+    font-size: 12px;
+    border-right: 1px solid #3a3a3a;
+  }
+
+  .size-chart-page .size-table td {
+    padding: 14px 12px;
+    text-align: center;
+    border-bottom: 1px solid #3a3a3a;
+    border-right: 1px solid #3a3a3a;
+    color: #e0e0e0;
+    font-weight: 500;
+    background: #2a2a2a;
+  }
+
+  .size-chart-page .size-table tbody tr:hover {
+    background-color: #333;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(229, 23, 44, 0.2);
+  }
+
+  .size-chart-page .size-table tbody tr:hover td {
+    background-color: #333;
+  }
+
+  .size-chart-page .measurement-label {
+    text-align: left;
+    font-weight: 600;
+    color: white;
+    background: #1a1a1a;
+    padding-left: 20px;
+    border-right: 1px solid #e5172c;
+  }
+
+  /* .size-chart-page .tolerance {
+    background: #e5172c !important;
+    color: white !important;
+    font-style: italic;
+    font-weight: 600;
+  } */
+
+  .size-chart-page .size-s {
+    background: #2f2f2f;
+  }
+  .size-chart-page .size-m {
+    background: #323232;
+  }
+  .size-chart-page .size-l {
+    background: #353535;
+  }
+  .size-chart-page .size-xl {
+    background: #383838;
+  }
+  .size-chart-page .size-xxl {
+    background: #3b3b3b;
+  }
+
+  .size-chart-page .diagram {
+    text-align: center;
+    padding: 40px 20px;
+    background: #222;
+    border-top: 1px solid #e5172c;
+  }
+
+  .size-chart-page .diagram-text {
+    color: #e0e0e0;
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+
+  .size-chart-page .measurement-guide {
+    display: inline-block;
+    margin: 5px;
+    padding: 20px;
+    background: #2a2a2a;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid #3a3a3a;
+    border-top: 1px solid #e5172c;
+    font-size: 13px;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    vertical-align: top;
+    width: 220px;
+  }
+
+  .size-chart-page .measurement-guide:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(229, 23, 44, 0.3);
+    border-color: #e5172c;
+  }
+
+  .size-chart-page .measurement-image {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    border: 1px solid #e5172c;
+    border-radius: 12px;
+    margin: 0 auto 15px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #e5172c;
+    font-weight: bold;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .size-chart-page .note {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #e0e0e0;
+    border-left: 3px solid #e5172c;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .size-chart-page .size-chart-nav {
+      padding: 15px 10px;
+      gap: 6px;
+    }
+
+    .size-chart-page .nav-tab {
+      padding: 10px 12px;
+      font-size: 12px;
+      flex: 1;
+      min-width: calc(50% - 3px);
+    }
+
+    .size-chart-page {
+      margin: 20px;
+    }
+
+    .size-chart-page .size-chart-page__header {
+      padding: 20px 15px;
+    }
+
+    .size-chart-page .logo {
+      font-size: 24px;
+    }
+
+    .size-chart-page .subtitle {
+      font-size: 16px;
+    }
+
+    .size-chart-page .size-table {
+      font-size: 13px;
+    }
+
+    .size-chart-page .size-table th,
+    .size-chart-page .size-table td {
+      padding: 10px 8px;
+    }
+
+    .size-chart-page .measurement-label {
+      padding-left: 12px !important;
+      font-size: 12px;
+    }
+
+    .size-chart-page .note {
+      margin: 15px 10px;
+      padding: 15px;
+      font-size: 13px;
+    }
+
+    .size-chart-page .measurement-guide {
+      width: 100%;
+      margin: 8px;
+      padding: 15px;
+    }
+
+    .size-chart-page .measurement-image {
+      width: 90px;
+      height: 90px;
+      font-size: 20px;
+    }
+
+    .size-chart-page .diagram {
+      padding: 30px 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .size-chart-page .size-table th,
+    .size-chart-page .size-table td {
+      padding: 8px 4px;
+      font-size: 12px;
+    }
+
+    .size-chart-page .logo {
+      font-size: 20px;
+    }
+
+    .size-chart-page {
+      border-radius: 4px;
+    }
+
+    .size-chart-page .measurement-guide {
+      width: 100%;
+      margin: 5px;
+    }
+
+    .size-chart-page .measurement-image {
+      width: 70px;
+      height: 70px;
+      font-size: 18px;
+    }
+  }
+</style>
+
+<div class="size-chart-page">
+  <div class="size-chart-page__header">
+    <img
+      src="https://hellboar.com/cdn/shop/files/logo_white_png_1.png?v=1746628554&width=110"
+      class="logo"
+      alt="Hell Boar logo" />
+    <h2 class="subtitle">Complete Size Guide</h2>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="size-chart-nav">
+    <button class="nav-tab active" data-chart="t-shirt">T-Shirt</button>
+    <button class="nav-tab" data-chart="sweatshirt">Sweatshirt</button>
+    <button class="nav-tab" data-chart="hoodie">Hoodie</button>
+    <button class="nav-tab" data-chart="zipper-hoodie">Zipper Hoodie</button>
+    <button class="nav-tab" data-chart="shorts">Shorts</button>
+    <button class="nav-tab" data-chart="sweatpants">SweatPants</button>
+  </div>
+
+  <!-- T-Shirt Size Chart -->
+  <div class="chart-section active" data-chart="t-shirt">
+    <h3 class="chart-title">T-Shirt Size Chart</h3>
+    <div class="table-wrapper">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th class="tolerance">TOL</th>
+            <th class="size-s">S</th>
+            <th class="size-m">M</th>
+            <th class="size-l">L</th>
+            <th class="size-xl">XL</th>
+            <th class="size-xxl">2XL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="measurement-label">Shoulder Width (A)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">56</td>
+            <td class="size-m">59</td>
+            <td class="size-l">62</td>
+            <td class="size-xl">65.2</td>
+            <td class="size-xxl">68.4</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Body Length (B)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">74</td>
+            <td class="size-m">75</td>
+            <td class="size-l">76</td>
+            <td class="size-xl">77</td>
+            <td class="size-xxl">78</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Sleeve Length (C)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">21.5</td>
+            <td class="size-m">22</td>
+            <td class="size-l">22</td>
+            <td class="size-xl">22.5</td>
+            <td class="size-xxl">22.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Sweatshirt Size Chart -->
+  <div class="chart-section" data-chart="sweatshirt">
+    <h3 class="chart-title">Sweatshirt Size Chart</h3>
+    <div class="table-wrapper">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th class="tolerance">TOL</th>
+            <th class="size-s">S</th>
+            <th class="size-m">M</th>
+            <th class="size-l">L</th>
+            <th class="size-xl">XL</th>
+            <th class="size-xxl">2XL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="measurement-label">Shoulder Width (A)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">47.1</td>
+            <td class="size-m">48.5</td>
+            <td class="size-l">49.9</td>
+            <td class="size-xl">52.3</td>
+            <td class="size-xxl">54.7</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Body Length (B)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">74</td>
+            <td class="size-m">75</td>
+            <td class="size-l">76</td>
+            <td class="size-xl">76</td>
+            <td class="size-xxl">77</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Chest Width (C)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">54.9</td>
+            <td class="size-m">58.9</td>
+            <td class="size-l">62.9</td>
+            <td class="size-xl">67.9</td>
+            <td class="size-xxl">72.9</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Sleeve Length (D)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">65.3</td>
+            <td class="size-m">66</td>
+            <td class="size-l">66.6</td>
+            <td class="size-xl">67.2</td>
+            <td class="size-xxl">67.8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Hoodie Size Chart -->
+  <div class="chart-section" data-chart="hoodie">
+    <h3 class="chart-title">Hoodie Size Chart</h3>
+    <div class="table-wrapper">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th class="tolerance">TOL</th>
+            <th class="size-s">S</th>
+            <th class="size-m">M</th>
+            <th class="size-l">L</th>
+            <th class="size-xl">XL</th>
+            <th class="size-xxl">2XL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="measurement-label">Shoulder Width (A)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">47.1</td>
+            <td class="size-m">48.5</td>
+            <td class="size-l">49.9</td>
+            <td class="size-xl">52.3</td>
+            <td class="size-xxl">54.7</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Body Length (B)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">74</td>
+            <td class="size-m">75</td>
+            <td class="size-l">76</td>
+            <td class="size-xl">77</td>
+            <td class="size-xxl">78</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Chest Width (C)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">54.9</td>
+            <td class="size-m">58.9</td>
+            <td class="size-l">62.9</td>
+            <td class="size-xl">67.9</td>
+            <td class="size-xxl">72.9</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Sleeve Length (D)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">65.3</td>
+            <td class="size-m">66</td>
+            <td class="size-l">66.6</td>
+            <td class="size-xl">67.2</td>
+            <td class="size-xxl">67.8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Zipper Hoodie Size Chart -->
+  <div class="chart-section" data-chart="zipper-hoodie">
+    <h3 class="chart-title">Zipper Hoodie Size Chart</h3>
+    <div class="table-wrapper">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th class="tolerance">TOL</th>
+            <th class="size-s">S</th>
+            <th class="size-m">M</th>
+            <th class="size-l">L</th>
+            <th class="size-xl">XL</th>
+            <th class="size-xxl">2XL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="measurement-label">Shoulder Width (A)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">47.1</td>
+            <td class="size-m">48.5</td>
+            <td class="size-l">49.9</td>
+            <td class="size-xl">52.3</td>
+            <td class="size-xxl">54.7</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Body Length (B)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">74</td>
+            <td class="size-m">75</td>
+            <td class="size-l">76</td>
+            <td class="size-xl">77</td>
+            <td class="size-xxl">78</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Chest Width (C)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">54.9</td>
+            <td class="size-m">58.9</td>
+            <td class="size-l">62.9</td>
+            <td class="size-xl">67.9</td>
+            <td class="size-xxl">72.9</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Sleeve Length (D)</td>
+            <td class="tolerance">1.5</td>
+            <td class="size-s">65.3</td>
+            <td class="size-m">66</td>
+            <td class="size-l">66.6</td>
+            <td class="size-xl">67.2</td>
+            <td class="size-xxl">67.8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Shorts Size Chart -->
+  <div class="chart-section" data-chart="shorts">
+    <h3 class="chart-title">Shorts Size Chart</h3>
+    <div class="table-wrapper">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th class="tolerance">TOL</th>
+            <th class="size-s">S</th>
+            <th class="size-m">M</th>
+            <th class="size-l">L</th>
+            <th class="size-xl">XL</th>
+            <th class="size-xxl">2XL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="measurement-label">Waist - Relaxed (A)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">35</td>
+            <td class="size-m">38.5</td>
+            <td class="size-l">40</td>
+            <td class="size-xl">42.5</td>
+            <td class="size-xxl">48</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Thigh Width (B)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">30.6</td>
+            <td class="size-m">32.7</td>
+            <td class="size-l">35</td>
+            <td class="size-xl">37.2</td>
+            <td class="size-xxl">39.6</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Leg Opening (C)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">25.7</td>
+            <td class="size-m">27.8</td>
+            <td class="size-l">30</td>
+            <td class="size-xl">32.3</td>
+            <td class="size-xxl">34.7</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SweatPants Size Chart -->
+  <div class="chart-section" data-chart="sweatpants">
+    <h3 class="chart-title">SweatPants Size Chart</h3>
+    <div class="table-wrapper">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Measurement</th>
+            <th class="tolerance">TOL</th>
+            <th class="size-s">S</th>
+            <th class="size-m">M</th>
+            <th class="size-l">L</th>
+            <th class="size-xl">XL</th>
+            <th class="size-xxl">2XL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="measurement-label">Waist - Relaxed (A)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">36.5</td>
+            <td class="size-m">39</td>
+            <td class="size-l">41.5</td>
+            <td class="size-xl">44</td>
+            <td class="size-xxl">46.5</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Thigh Width (B)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">32.6</td>
+            <td class="size-m">34.6</td>
+            <td class="size-l">36.9</td>
+            <td class="size-xl">39.2</td>
+            <td class="size-xxl">40.7</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Leg Opening (C)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">10.5</td>
+            <td class="size-m">11.5</td>
+            <td class="size-l">12.4</td>
+            <td class="size-xl">13.2</td>
+            <td class="size-xxl">14.1</td>
+          </tr>
+          <tr>
+            <td class="measurement-label">Inseam (D)</td>
+            <td class="tolerance">1</td>
+            <td class="size-s">75.5</td>
+            <td class="size-m">75.5</td>
+            <td class="size-l">76</td>
+            <td class="size-xl">76.5</td>
+            <td class="size-xxl">77</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="diagram">
+    <h3 class="diagram-text">Measurement Reference Points</h3>
+    <div class="measurement-guides">
+        <div class="measurement-guide">
+          <img class="measurement-image" src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/A_white_v4.svg?v=1757328041" alt="Shoulder Width Diagram" />
+
+          <strong>Shoulder Width (A)</strong><br>
+          Measured across shoulders<br>
+          <small style="opacity: 0.7;">Point to point measurement</small>
+        </div>
+        <div class="measurement-guide">
+          <img class="measurement-image" src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/B_white.svg?v=1757328116" alt="Body Length Diagram" />
+          <strong>Body Length (B)</strong><br>
+          From shoulder to hem<br>
+          <small style="opacity: 0.7;">Total garment length</small>
+        </div>
+        <div class="measurement-guide">
+          <img class="measurement-image" src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/C_white.svg?v=1757328492" alt="Chest Width Diagram"/>
+          <strong>Chest Width (C)</strong><br>
+          Measured across chest<br>
+          <small style="opacity: 0.7;">Body width measurement</small>
+        </div>
+        <div class="measurement-guide">
+          <img class="measurement-image" src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/D_white.svg?v=1757328492" alt="Sleeve Length Diagram"/>
+          <strong>Sleeve Length (D)</strong><br>
+          From shoulder seam to cuff<br>
+          <small style="opacity: 0.7;">Arm coverage measurement</small>
+        </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Note:</strong>
+    All measurements are in centimeters (cm). TOL indicates measurement tolerance. 
+    <br><br>
+    <strong>T-Shirt:</strong> Oversized fit designed for relaxed, comfortable wear.
+    <br><br>
+    <strong>Sweatshirt:</strong> Relaxed fit with longer sleeves and additional chest width for comfortable layering.
+    <br><br>
+    <strong>Hoodie & Zipper Hoodie:</strong> Similar measurements with hood and front pouch pocket for casual comfort.
+    <br><br>
+    <strong>Shorts:</strong> Relaxed fit with comfortable waistband and roomy thigh area.
+    <br><br>
+    <strong>SweatPants:</strong> Relaxed fit with elastic waistband and tapered leg opening for comfort and style.
+  </div>
+</div>
+
+<script>
+// Direct style manipulation approach
+window.addEventListener('load', function() {
+  console.log('Page loaded, initializing tabs...');
+  
+  let tabs = document.querySelectorAll('.size-chart-page .nav-tab');
+  let sections = document.querySelectorAll('.size-chart-page .chart-section');
+  
+  console.log('Tabs found:', tabs.length);
+  console.log('Sections found:', sections.length);
+  
+  // Function to show a specific section
+  function showSection(chartName) {
+    console.log('Showing section:', chartName);
+    
+    // Hide all sections by removing active class
+    for (let i = 0; i < sections.length; i++) {
+      sections[i].classList.remove('active');
+      console.log('Removed active from section:', i);
+    }
+    
+    // Show target section by adding active class
+    let targetSection = document.querySelector('.size-chart-page [data-chart="' + chartName + '"]');
+    if (targetSection) {
+      targetSection.classList.add('active');
+      console.log('Added active to section:', chartName);
+      console.log('Target section classes:', targetSection.className);
+    } else {
+      console.error('Section not found:', chartName);
+    }
+  }
+  
+  // Add click events to tabs
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Tab clicked:', this.textContent.trim());
+      
+      let chartName = this.getAttribute('data-chart');
+      console.log('Chart name:', chartName);
+      
+      // Remove active from all tabs
+      for (let j = 0; j < tabs.length; j++) {
+        tabs[j].classList.remove('active');
+      }
+      
+      // Add active to clicked tab
+      this.classList.add('active');
+      
+      // Show the section
+      showSection(chartName);
+    });
+  }
+  
+  console.log('Tabs initialized successfully');
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Size Chart Page",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Size Chart Page"
+      }
+    ]
+  }
+{% endschema %}

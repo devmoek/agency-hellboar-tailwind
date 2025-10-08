@@ -1,0 +1,45 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "landing_page_9zYaLQ": {
+      "type": "landing-page",
+      "name": "Landing Page",
+      "settings": {
+        "hero_title": "Chevrolet Corvette C8 Z51 + $20,000 Cash Giveaway!",
+        "hero_description": "Become a participant and get closer to your dream. You have a chance to win a Corvette and $20,000 cash! Fill out the form and receive a promo code for bonus entries. Time is limited – do not miss your shot!",
+        "cta_text": "Enter BCG#02 Now",
+        "hero_bg_color": "#1a1a1a",
+        "text_color": "#ffffff",
+        "accent_color": "#e5172c",
+        "video_title": "How to enter",
+        "video_url": "https://www.youtube.com/embed/IN492aIaFPk",
+        "form_title": "Enter the Giveaway",
+        "form_description": "Fill out the form below to enter the giveaway and receive your bonus promo code!",
+        "submit_text": "Submit",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "landing_page_9zYaLQ"
+  ]
+}

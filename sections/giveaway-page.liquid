@@ -13,26 +13,26 @@
 
   <!-- Countdown Timer -->
   {% comment %} <div class="countdown-container section-alt" style="margin:0;">
-    <h3 class="countdown-title">Giveaway Ends In:</h3>
-    <div class="countdown-timer">
-      <div class="countdown-item">
-        <div class="countdown-number" id="days">27</div>
-        <div class="countdown-label">Days</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-number" id="hours">14</div>
-        <div class="countdown-label">Hours</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-number" id="minutes">33</div>
-        <div class="countdown-label">Minutes</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-number" id="seconds">59</div>
-        <div class="countdown-label">Seconds</div>
-      </div>
-    </div>
-  </div> {% endcomment %}
+                            <h3 class="countdown-title">Giveaway Ends In:</h3>
+                            <div class="countdown-timer">
+                              <div class="countdown-item">
+                                <div class="countdown-number" id="days">27</div>
+                                <div class="countdown-label">Days</div>
+                              </div>
+                              <div class="countdown-item">
+                                <div class="countdown-number" id="hours">14</div>
+                                <div class="countdown-label">Hours</div>
+                              </div>
+                              <div class="countdown-item">
+                                <div class="countdown-number" id="minutes">33</div>
+                                <div class="countdown-label">Minutes</div>
+                              </div>
+                              <div class="countdown-item">
+                                <div class="countdown-number" id="seconds">59</div>
+                                <div class="countdown-label">Seconds</div>
+                              </div>
+                            </div>
+              </div> {% endcomment %}
 
   <!-- Current Prize Section -->
   <section class="section" id="current-prize">
@@ -169,79 +169,81 @@
     </div>
   </section>
 
-  <section style="background: #000;display:flex;flex-direction: column;gap: 60px;">
+  <!-- How to Enter Section -->
+  <section class="how-to-enter-section section-alt">
+    <div class="container">
+      <h2 class="section-title">How to Enter</h2>
+      <p class="section-subtitle">Watch this video to learn how to participate in our giveaway</p>
 
-    <!-- Our Merchandise Shop Section -->
-    <div class="section section-alt merchandise-section" id="merchandise">
-      <div class="container">
-        <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
-        <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'More chances to win if you are in' }}</p>
-
-        {% if section.settings.collection != blank %}
-          {% assign collection = collections[section.settings.collection] %}
-          {% assign products_limit = section.settings.products_limit | default: 9 %}
-
-          <div class="merchandise-grid">
-            {% for product in collection.products limit: products_limit %}
-              <a href="{{ product.url }}" style="text-decoration: none;">
-                <div class="merchandise-card">
-                  <div class="merchandise-image">
-                    {% if product.featured_image %}
-                      <img
-                        src="{{ product.featured_image | image_url: width: 365, height: 250 }}"
-                        alt="{{ product.title | escape }}"
-                        class="merchandise-img"
-                        width="300"
-                        height="250"
-                        loading="lazy">
-                    {% else %}
-                      <img
-                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/merch-placeholder.jpg?v=1749916802"
-                        alt="Product placeholder"
-                        class="merchandise-img"
-                        width="300"
-                        height="250"
-                        loading="lazy">
-                    {% endif %}
-                    <p class="entry-bonus">{{ product.metafields.product.entries_multiplier }} ENTRIES</p>
-                  </div>
-                  <div class="merchandise-content">
-                    <h3 class="merchandise-title">{{ product.title }}</h3>
-                    <div class="merchandise-price">
-                      {% render 'usessnt-entries-product'
-                        , product: product %}
-                    </div>
-                  </div>
-                </div>
-              </a>
-            {% endfor %}
-          </div>
-
-          {% if section.settings.show_cta_button %}
-            <div class="merchandise-cta">
-              <a href="{{ routes.collections_url }}/all-products" class="cta-button">
-                {{ section.settings.cta_button_text | default: 'Shop all' }}
-              </a>
-            </div>
-          {% endif %}
-        {% else %}
-          <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
-            <p>Please select a collection in the theme editor to display products.</p>
-          </div>
-        {% endif %}
+      <div class="video-container">
+        <div class="video-wrapper">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/IN492aIaFPk"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
       </div>
     </div>
+  </section>
 
+  <!-- Our Merchandise Shop Section -->
+  <section class="section merchandise-section" id="merchandise">
+    <div class="container">
+      <h2 class="section-title">{{ section.settings.merchandise_title | default: 'Our Merchandise Shop' }}</h2>
+      <p class="section-subtitle">{{ section.settings.merchandise_subtitle | default: 'More chances to win if you are in' }}</p>
+
+      {% if section.settings.collection != blank %}
+        {% assign collection = collections[section.settings.collection] %}
+        {% assign products_limit = section.settings.products_limit | default: 9 %}
+
+        <div class="merchandise-grid">
+          {% assign skip_card_product_styles = false %}
+          {% for product in collection.products limit: products_limit %}
+            {% assign lazy_load = false %}
+            {%- if forloop.index > 2 -%}
+              {%- assign lazy_load = true -%}
+            {%- endif -%}
+            <div class="merchandise-grid-item">
+              {% render 'card-product'
+                , card_product: product
+                , media_aspect_ratio: 'square'
+                , show_vendor: false
+                , show_rating: false
+                , lazy_load: lazy_load
+                , skip_styles: skip_card_product_styles
+                , section_id: section.id
+              %}
+            </div>
+            {%- assign skip_card_product_styles = true -%}
+          {% endfor %}
+        </div>
+
+        {% if section.settings.show_cta_button %}
+          <div class="merchandise-cta">
+            <a href="{{ routes.collections_url }}/all-products" class="cta-button">
+              {{ section.settings.cta_button_text | default: 'Shop all' }}
+            </a>
+          </div>
+        {% endif %}
+      {% else %}
+        <div style="text-align: center; padding: 60px 20px; color: #f2f2f2;">
+          <p>Please select a collection in the theme editor to display products.</p>
+        </div>
+      {% endif %}
+    </div>
   </section>
 
   <!-- Previous Winners Section -->
-  <section class="section" id="testimonials">
+  <section class="section section-alt" id="testimonials">
     <div class="container">
       <h2 class="section-title">Previous Winners</h2>
       <div class="winners-grid">
         <div class="winner-card">
           <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_9460_2.png?v=1739371131"
+            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/ph2.png?v=1759326219"
             alt="Unknown winner"
             class="winner-img"
             width='367'
@@ -254,13 +256,7 @@
               has ended, and the winner has been selected in line with our official rules.</p>
           </div>
         </div>
-      <!-- <div class="winner-card">  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Sarah Johnson" class="winner-img">  <div class="winner-content">    <h3 class="winner-name">Sarah Johnson</h3>    <p class="winner-prize">2023 Porsche 911 GT3</p>
-          <p class="winner-text">"HellBoar's giveaways are 100% legitimate. I was skeptical until they delivered a brand new Porsche to my driveway with all taxes paid. Best day ever!"</p>
-        </div>
-      </div>
-      <div class="winner-card">
-        <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="David Chen" class="winner-img">
-        <div class="winner-content">
+      <!-- <div class="winner-card">  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Sarah Johnson" class="winner-img">  <div class="winner-content">    <h3 class="winner-name">Sarah Johnson</h3>    <p class="winner-prize">2023 Porsche 911 GT3</p>    <p class="winner-text">"HellBoar's giveaways are 100% legitimate. I was skeptical until they delivered a brand new Porsche to my driveway with all taxes paid. Best day ever!"</p>  </div></div><div class="winner-card">  <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="David Chen" class="winner-img">  <div class="winner-content">
           <h3 class="winner-name">David Chen</h3>
           <p class="winner-prize">2022 Tesla Model S Plaid</p>
           <p class="winner-text">"From ordering a t-shirt to driving a Tesla in just one month. The HellBoar team was amazing throughout the entire process. They even flew me out for the handover ceremony!"</p>
@@ -270,15 +266,15 @@
 
     <!-- Review Slider -->
     {% comment %} <div class="review-slider">
-                                <div class="review-slide">
-                                  <p class="review-quote">"The whole experience was surreal. From the moment I got the call to receiving the keys to my McLaren, HellBoar treated me like family. Their giveaways are the real deal."</p>
-                                  <p class="review-author">- James Wilson, 2023 Winner</p>
-                                </div>
-                      </div> {% endcomment %}
+                                                                    <div class="review-slide">
+                                                                      <p class="review-quote">"The whole experience was surreal. From the moment I got the call to receiving the keys to my McLaren, HellBoar treated me like family. Their giveaways are the real deal."</p>
+                                                                      <p class="review-author">- James Wilson, 2023 Winner</p>
+                                                                    </div>
+                                              </div> {% endcomment %}
     </div>
   </section>
 
-  <section class="winner-announcement video-text-section section-alt">
+  <section class="winner-announcement video-text-section">
     <div class="container">
       <div class="two-column-grid">
         <div class="video-column">
@@ -311,7 +307,7 @@
 
   <!-- Entry Section -->
   <section
-    class="section"
+    class="section section-alt"
     id="entry"
     style="margin-bottom: 60px;">
     <div class="container">
@@ -342,53 +338,208 @@
   </section>
 
   <!-- Collection Preview -->
-  <section class="section section-alt" id="shop-collection">
+  <section class="section" id="shop-collection">
     <div class="container">
       <h2 class="section-title">ENTER NOW</h2>
       <p class="section-subtitle">More chances to win if you are in</p>
       <div class="car-gallery">
-        <div class="gallery-item" style="height:fit-content;">
-          <a href="{{ shop.url }}/products/challenger-entry" style="text-decoration:none;">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770"
-              alt="challenger boost entries"
-              class="gallery-img"
-              width="373"
-              height="373">
-            <p class="entry-bonus" style="height:fit-content;">1500 ENTRIES</p>
-          </a>
-        </div>
-        <div class="gallery-item" style="height:fit-content;">
-          <a href="{{ shop.url }}/products/trailblazer-entry" style="text-decoration:none;">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667"
-              alt="trailblazer boost entries"
-              class="gallery-img"
-              width="373"
-              height="373">
-            <p class="entry-bonus" style="height:fit-content;">500 ENTRIES</p>
-          </a>
-        </div>
-        <div class="gallery-item" style="height:fit-content;">
-          <a href="{{ shop.url }}/products/beast-entry" style="text-decoration:none;">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802"
-              alt="beast mode boost entries"
-              class="gallery-img"
-              width="373"
-              height="373">
-            <p class="entry-bonus">6000 ENTRIES</p>
-          </a>
-        </div>
+        {%- liquid
+          assign challenger_product = all_products['challenger-entry']
+          assign trailblazer_product = all_products['trailblazer-entry']
+          assign beast_product = all_products['beast-entry']
+        -%}
+
+        {%- if challenger_product -%}
+          <div class="gallery-item" style="height:fit-content;">
+            {% render 'card-product'
+              , card_product: challenger_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: true
+              , skip_styles: false
+              , section_id: section.id
+            %}
+          </div>
+        {%- else -%}
+          <div class="gallery-item" style="height:fit-content;">
+            <div class="card-wrapper product-card-wrapper">
+              <div class="card card--standard">
+                <div class="card__inner">
+                  <div class="card__media">
+                    <div class="media media--transparent">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/100.png?v=1749916770"
+                        alt="challenger boost entries"
+                        class="motion-reduce"
+                        width="373"
+                        height="373">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h5">
+                      <a href="{{ shop.url }}/products/challenger-entry" class="full-unstyled-link">
+                        Challenger Entry
+                      </a>
+                    </h3>
+                    <div class="card-information">
+                      <div class="price">
+                        <div class="price__container">
+                          <div class="price__regular">
+                            <span class="price-item price-item--regular">$100.00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-ticket-entries" style="float:unset;">
+                        <div class="entries-badge">
+                          <div class="entries-section">
+                            <span class="entries_cl">1500 Entries</span>
+                          </div>
+                          <div class="multiplier-section x15">
+                            <span class="multiplier">15X</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if trailblazer_product -%}
+          <div class="gallery-item" style="height:fit-content;">
+            {% render 'card-product'
+              , card_product: trailblazer_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: true
+              , skip_styles: true
+              , section_id: section.id
+            %}
+          </div>
+        {%- else -%}
+          <div class="gallery-item" style="height:fit-content;">
+            <div class="card-wrapper product-card-wrapper">
+              <div class="card card--standard">
+                <div class="card__inner">
+                  <div class="card__media">
+                    <div class="media media--transparent">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/50_4dd80679-2ee5-420f-93b1-11542dbab903.png?v=1749916667"
+                        alt="trailblazer boost entries"
+                        class="motion-reduce"
+                        width="373"
+                        height="373">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h5">
+                      <a href="{{ shop.url }}/products/trailblazer-entry" class="full-unstyled-link">
+                        Trailblazer Entry
+                      </a>
+                    </h3>
+                    <div class="card-information">
+                      <div class="price">
+                        <div class="price__container">
+                          <div class="price__regular">
+                            <span class="price-item price-item--regular">$50.00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-ticket-entries" style="float:unset;">
+                        <div class="entries-badge">
+                          <div class="entries-section">
+                            <span class="entries_cl">500 Entries</span>
+                          </div>
+                          <div class="multiplier-section x10">
+                            <span class="multiplier">10X</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if beast_product -%}
+          <div class="gallery-item gallery-item-full-width" style="height:fit-content;">
+            {% render 'card-product'
+              , card_product: beast_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: true
+              , skip_styles: true
+              , section_id: section.id
+            %}
+          </div>
+        {%- else -%}
+          <div class="gallery-item gallery-item-full-width" style="height:fit-content;">
+            <div class="card-wrapper product-card-wrapper">
+              <div class="card card--standard">
+                <div class="card__inner">
+                  <div class="card__media">
+                    <div class="media media--transparent">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/300.png?v=1749916802"
+                        alt="beast mode boost entries"
+                        class="motion-reduce"
+                        width="373"
+                        height="373">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h5">
+                      <a href="{{ shop.url }}/products/beast-entry" class="full-unstyled-link">
+                        Beast Mode Entry
+                      </a>
+                    </h3>
+                    <div class="card-information">
+                      <div class="price">
+                        <div class="price__container">
+                          <div class="price__regular">
+                            <span class="price-item price-item--regular">$300.00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-ticket-entries" style="float:unset;">
+                        <div class="entries-badge">
+                          <div class="entries-section">
+                            <span class="entries_cl">6000 Entries</span>
+                          </div>
+                          <div class="multiplier-section x20">
+                            <span class="multiplier">20X</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
       </div>
-      <div style="text-align: center; margin-top: 40px;">
+      <div class="cta-button-container">
         <a href="{{ routes.collections_url }}/all-products" class="cta-button">View all products</a>
       </div>
     </div>
   </section>
 
   <!-- How to Win Section -->
-  <section class="section" id="how-it-works">
+  <section class="section section-alt" id="how-it-works">
     <div class="container">
       <h2 class="section-title">How To Win</h2>
       <div class="steps-container">
@@ -410,13 +561,7 @@
       </div>
 
     <!-- Additional Entry Methods -->
-    <!-- <div class="countdown-container">  <h3 class="countdown-title">Maximize Your Chances</h3>  <p class="prize-text">While every purchase gives you one entry, there are ways to increase your odds:</p>  <div class="prize-features">
-        <div class="feature-item">
-          <span class="feature-icon">+</span>
-          <span>Join our VIP membership for 2x entries on every purchase</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">+</span>
+    <!-- <div class="countdown-container">  <h3 class="countdown-title">Maximize Your Chances</h3>  <p class="prize-text">While every purchase gives you one entry, there are ways to increase your odds:</p>  <div class="prize-features">    <div class="feature-item">      <span class="feature-icon">+</span>      <span>Join our VIP membership for 2x entries on every purchase</span>    </div>    <div class="feature-item">      <span class="feature-icon">+</span>
           <span>Share your purchase on social media for an additional entry, don't forget to tag us @hellboarapparel</span>
         </div>
         <div class="feature-item">
@@ -433,13 +578,7 @@
   </section>
 
   <!-- Previous Prizes -->
-  <!-- <section class="section">  <div class="container">    <h2 class="section-title">Previous Prizes</h2>    <div class="winners-grid">      <div class="winner-card">
-          <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Lamborghini Huracán" class="winner-img">
-          <div class="winner-content">
-            <h3 class="winner-name">2024 Lamborghini Huracán</h3>
-            <p class="winner-prize">Valued at $275,000</p>
-            <p class="winner-text">Our previous headline prize featuring a custom HellBoar edition interior and exclusive Arancio Borealis paint.</p>
-          </div>
+  <!-- <section class="section">  <div class="container">    <h2 class="section-title">Previous Prizes</h2>    <div class="winners-grid">      <div class="winner-card">        <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Lamborghini Huracán" class="winner-img">        <div class="winner-content">          <h3 class="winner-name">2024 Lamborghini Huracán</h3>          <p class="winner-prize">Valued at $275,000</p>          <p class="winner-text">Our previous headline prize featuring a custom HellBoar edition interior and exclusive Arancio Borealis paint.</p>        </div>
         </div>
         <div class="winner-card">
           <img src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990" alt="Porsche 911 GT3" class="winner-img">
@@ -461,13 +600,7 @@
     </div>
   </section> -->
   <!-- Testimonials Section -->
-  <!-- <section class="section section-alt">  <div class="container">    <h2 class="section-title">Customer Reviews</h2>    <div class="review-sliders">        <div class="review-slider">
-          <div class="review-slide">
-              <p class="review-quote">"Not only is the clothing amazing quality, but knowing each purchase could win me a supercar makes shopping at HellBoar even more exciting. The anticipation of each draw is addictive!"</p>
-              <p class="review-author">- Emma Parker</p>
-          </div>
-          </div>
-          <div class="review-slider">
+  <!-- <section class="section section-alt">  <div class="container">    <h2 class="section-title">Customer Reviews</h2>    <div class="review-sliders">        <div class="review-slider">        <div class="review-slide">            <p class="review-quote">"Not only is the clothing amazing quality, but knowing each purchase could win me a supercar makes shopping at HellBoar even more exciting. The anticipation of each draw is addictive!"</p>            <p class="review-author">- Emma Parker</p>        </div>        </div>        <div class="review-slider">
           <div class="review-slide">
               <p class="review-quote">"I've been wearing HellBoar for two years now. The designs are unique and the quality is unmatched. The possibility of winning a Ferrari is just the cherry on top of an already excellent product."</p>
               <p class="review-author">- Thomas Wright</p>
@@ -484,7 +617,7 @@
     </div>
   </section> -->
   <!-- Legal Information -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="container">
       <h2 class="section-title">Legal Information</h2>
       <div class="countdown-container">
@@ -518,7 +651,7 @@
   </section>
 
   <!-- FAQ Section -->
-  <section class="section" id="faq">
+  <section class="section section-alt" id="faq">
     <div class="container">
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-container">
@@ -587,16 +720,87 @@
         });
       });
 
-      // FAQ Toggle
-      const faqQuestions = document.querySelectorAll('.faq-question');
-      
-      faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-          const answer = question.nextElementSibling;
-          question.classList.toggle('active');
-          answer.classList.toggle('show');
+      // FAQ functionality - Direct implementation for giveaway page
+      function initializeGiveawayFAQ() {
+        console.log('Initializing FAQ for giveaway page...');
+        
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        console.log(`Found ${faqQuestions.length} FAQ questions on giveaway page`);
+        
+        if (faqQuestions.length === 0) {
+          console.log('No FAQ questions found on giveaway page');
+          return;
+        }
+        
+        faqQuestions.forEach((question, index) => {
+          // Skip if already initialized
+          if (question.dataset.giveawayFaqInitialized) {
+            return;
+          }
+          question.dataset.giveawayFaqInitialized = 'true';
+          
+          console.log(`Setting up FAQ question ${index + 1}:`, question.textContent.trim());
+          
+          // Add visual styling
+          question.style.cursor = 'pointer';
+          question.title = 'Click to expand/collapse';
+          
+          // Add click handler
+          question.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('FAQ question clicked:', this.textContent.trim());
+            
+            const faqItem = this.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const isActive = faqItem.classList.contains('active');
+            const indicator = this.querySelector('.faq-indicator');
+            
+            console.log('FAQ item found:', faqItem);
+            console.log('Answer element found:', answer);
+            console.log('Currently active:', isActive);
+            
+            // Find the container
+            const container = faqItem.closest('.faq-container') || faqItem.closest('.faq-list');
+            
+            if (container) {
+              // Close all other FAQ items in the same container
+              container.querySelectorAll('.faq-item').forEach((item) => {
+                if (item !== faqItem) {
+                  item.classList.remove('active');
+                  const otherIndicator = item.querySelector('.faq-indicator');
+                  if (otherIndicator) otherIndicator.textContent = '+';
+                }
+              });
+            }
+            
+            // Toggle current item
+            if (isActive) {
+              faqItem.classList.remove('active');
+              if (indicator) indicator.textContent = '+';
+              console.log('FAQ item closed');
+            } else {
+              faqItem.classList.add('active');
+              if (indicator) indicator.textContent = '−';
+              console.log('FAQ item opened');
+            }
+          });
         });
-      });
+      }
+      
+      // Initialize FAQ when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeGiveawayFAQ);
+      } else {
+        initializeGiveawayFAQ();
+      }
+      
+      // Also try to initialize after a delay as fallback
+      setTimeout(initializeGiveawayFAQ, 500);
+      setTimeout(initializeGiveawayFAQ, 1000);
+      setTimeout(initializeGiveawayFAQ, 2000);
+      
+      // Make function globally available for debugging
+      window.initializeGiveawayFAQ = initializeGiveawayFAQ;
 
   </script>
 </main>

@@ -63,14 +63,13 @@
   /* Collection Filter Buttons */
   .collection-filter-buttons {
     margin-bottom: 40px;
-    padding: 0 20px;
+    padding: 0;
   }
 
   .filter-buttons-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
-    justify-content: center;
   }
 
   .filter-buttons-container--hidden {
@@ -81,7 +80,7 @@
   }
 
   .filter-buttons-container--hidden.show {
-    display: flex;
+    display: grid;
   }
 
   .filter-button {
@@ -90,7 +89,6 @@
     gap: 4px;
     padding: 12px 20px;
     border: 2px solid rgba(var(--color-foreground), 0.2);
-    border-radius: 25px;
     background: transparent;
     color: rgb(var(--color-foreground));
     text-decoration: none;
@@ -102,8 +100,6 @@
   }
 
   .filter-button--toggle {
-    background: rgba(var(--color-foreground), 0.05);
-    border-color: rgba(var(--color-foreground), 0.3);
     cursor: pointer;
   }
 
@@ -168,15 +164,15 @@
     opacity: 0.9;
   }
 
-  @media screen and (max-width: 749px) {
+  @media screen and (max-width: 768px) {
     .collection-filter-buttons {
       margin-bottom: 30px;
-      padding: 0 15px;
+      padding: 0;
     }
 
     .filter-buttons-container {
       gap: 8px;
-      justify-content: flex-start;
+      grid-template-columns: repeat(4, 1fr);
       overflow-x: auto;
       padding-bottom: 10px;
       -webkit-overflow-scrolling: touch;
@@ -191,6 +187,12 @@
 
     .filter-button__count {
       font-size: 11px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .filter-buttons-container {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 {%- endstyle -%}
@@ -300,21 +302,23 @@
             <!-- Collection Filter Buttons -->
             <div class="collection-filter-buttons">
               <div class="filter-buttons-container">
-                {%- assign visible_collections = 6 -%}
+                {%- assign visible_collections = 4 -%}
                 {%- assign collection_count = 0 -%}
 
                 {%- for collection_item in collections -%}
-                  {%- if collection_item.products.size > 0 and collection_count < visible_collections -%}
-                    {%- assign is_active = false -%}
-                    {%- if collection_item.url == collection.url -%}
-                      {%- assign is_active = true -%}
+                  {%- unless collection_item.title == 'homepage' or collection_item.title == 'home-page' -%}
+                    {%- if collection_item.products.size > 0 and collection_count < visible_collections -%}
+                      {%- assign is_active = false -%}
+                      {%- if collection_item.url == collection.url -%}
+                        {%- assign is_active = true -%}
+                      {%- endif -%}
+                      <a href="{{ collection_item.url }}" class="filter-button{% if is_active %} filter-button--active{% endif %}">
+                        <span class="filter-button__text">{{ collection_item.title }}</span>
+                        <span class="filter-button__count">({{ collection_item.products.size }})</span>
+                      </a>
+                      {%- assign collection_count = collection_count | plus: 1 -%}
                     {%- endif -%}
-                    <a href="{{ collection_item.url }}" class="filter-button{% if is_active %} filter-button--active{% endif %}">
-                      <span class="filter-button__text">{{ collection_item.title }}</span>
-                      <span class="filter-button__count">({{ collection_item.products.size }})</span>
-                    </a>
-                    {%- assign collection_count = collection_count | plus: 1 -%}
-                  {%- endif -%}
+                  {%- endunless -%}
                 {%- endfor -%}
 
                 {%- if collections.size > visible_collections -%}
@@ -340,16 +344,18 @@
               {%- if collections.size > visible_collections -%}
                 <div class="filter-buttons-container filter-buttons-container--hidden" id="hiddenCollections">
                   {%- for collection_item in collections -%}
-                    {%- if collection_item.products.size > 0 and forloop.index > visible_collections -%}
-                      {%- assign is_active = false -%}
-                      {%- if collection_item.url == collection.url -%}
-                        {%- assign is_active = true -%}
+                    {%- unless collection_item.title contains 'Home' -%}
+                      {%- if collection_item.products.size > 0 and forloop.index > visible_collections -%}
+                        {%- assign is_active = false -%}
+                        {%- if collection_item.url == collection.url -%}
+                          {%- assign is_active = true -%}
+                        {%- endif -%}
+                        <a href="{{ collection_item.url }}" class="filter-button{% if is_active %} filter-button--active{% endif %}">
+                          <span class="filter-button__text">{{ collection_item.title }}</span>
+                          <span class="filter-button__count">({{ collection_item.products.size }})</span>
+                        </a>
                       {%- endif -%}
-                      <a href="{{ collection_item.url }}" class="filter-button{% if is_active %} filter-button--active{% endif %}">
-                        <span class="filter-button__text">{{ collection_item.title }}</span>
-                        <span class="filter-button__count">({{ collection_item.products.size }})</span>
-                      </a>
-                    {%- endif -%}
+                    {%- endunless -%}
                   {%- endfor -%}
                 </div>
               {%- endif -%}
