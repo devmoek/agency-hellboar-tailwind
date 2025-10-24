@@ -175,6 +175,7 @@
       },
       "share": "Share this product",
       "sold_out": "Sold out",
+      "featured": "Featured",
       "unavailable": "Unavailable",
       "vendor": "Vendor",
       "value_unavailable": "{{ option_value }} - Unavailable",
@@ -265,6 +266,7 @@
         "comment": "Comment",
         "send": "Send",
         "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+        "post_success_description": "Your message has been sent successfully and we'll respond within 24 hours.",
         "error_heading": "Please adjust the following:"
       }
     },

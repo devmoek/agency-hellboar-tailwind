@@ -67,8 +67,8 @@
         </div>
 
       {% comment %} <div class="cta-button-container">
-                                                                                                  <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
-                                                                          </div> {% endcomment %}
+                                                                                                                                  <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
+                                                                                                  </div> {% endcomment %}
       </div>
     </div>
   </section>
@@ -118,12 +118,58 @@
 
   <!-- Collection Preview -->
   <section
-    class="section section-alt"
+    class="section section-alt collection-preview-section"
     id="shop-collection"
     style="margin-top:0;">
     <div class="container">
-      <h2 class="section-title">ENTER NOW</h2>
-      <p class="section-subtitle">More chances to win if you are in</p>
+      <h2 class="section-title">Limited Offer</h2>
+      <p class="section-subtitle">Exclusive product to boost your entries. Expires in 1 week.</p>
+
+      {% assign featured_product = all_products['shorts-tee-set'] %}
+      {% if featured_product %}
+        <div class="collection-preview-grid">
+          <div class="collection-preview-item">
+            {% render 'card-product'
+              , card_product: featured_product
+              , media_aspect_ratio: 'square'
+              , show_vendor: false
+              , show_rating: false
+              , lazy_load: false
+              , skip_styles: false
+              , section_id: section.id
+              , show_featured_badge: true
+            %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  {% stylesheet %}
+    .collection-preview-section {
+      padding: 4rem 0;
+    }
+
+    .collection-preview-grid {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .collection-preview-item {
+      max-width: 400px;
+      width: 100%;
+    }
+  {% endstylesheet %}
+
+  <!-- Collection Preview -->
+  <section
+    class="section"
+    id="shop-collection"
+    style="margin-top:0;">
+    <div class="container">
+      <h2 class="section-title">Boar Boost Entries</h2>
+      <p class="section-subtitle">Digital products that will boost your entries</p>
       <div class="car-gallery">
         {%- liquid
           assign challenger_product = all_products['challenger-entry']
@@ -477,6 +523,10 @@
               {%- if forloop.index > 2 -%}
                 {%- assign lazy_load = true -%}
               {%- endif -%}
+              {% assign show_featured_badge = false %}
+              {%- if forloop.first -%}
+                {%- assign show_featured_badge = true -%}
+              {%- endif -%}
               <div class="merchandise-grid-item">
                 {% render 'card-product'
                   , card_product: product
@@ -486,6 +536,7 @@
                   , lazy_load: lazy_load
                   , skip_styles: skip_card_product_styles
                   , section_id: section.id
+                  , show_featured_badge: show_featured_badge
                 %}
               </div>
               {%- assign skip_card_product_styles = true -%}
@@ -526,7 +577,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Easy Entry</h3>
             <p class="feature-desc">
-              Simply make any purchase on our store and you're automatically                                    
+              Simply make any purchase on our store and you're automatically                                        
  
                 entered to win. Plus, get bonus entries with every $50 spent!
             </p>
@@ -546,7 +597,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Guaranteed Winner</h3>
             <p class="feature-desc">
-              Unlike other giveaways, we GUARANTEE a winner will be selected.                                    
+              Unlike other giveaways, we GUARANTEE a winner will be selected.                                        
  
                 Someone WILL drive away in this dream car!
             </p>
@@ -567,7 +618,7 @@
           <div class="feature-content">
             <h3 class="feature-title">Transparent Process</h3>
             <p class="feature-desc">
-              Our winner selection is conducted live and publicly. Fair and                                    
+              Our winner selection is conducted live and publicly. Fair and                                        
  
                 transparent with a trusted third-party verification.
             </p>
@@ -618,7 +669,7 @@
           <div class="step-number">1</div>
           <h3 class="step-title">Choose your product</h3>
           <p>
-            Browse our collection and make any purchase. Every order qualifies                                    
+            Browse our collection and make any purchase. Every order qualifies                                        
  
               you for entry!
           </p>
@@ -628,7 +679,7 @@
           <div class="step-number">2</div>
           <h3 class="step-title">Complete your purchase</h3>
           <p>
-            Get 1 entry for any purchase, plus 1 BONUS entry for every $50                                    
+            Get 1 entry for any purchase, plus 1 BONUS entry for every $50                                        
  
               spent on eligible products.
           </p>
@@ -638,7 +689,7 @@
           <div class="step-number">3</div>
           <h3 class="step-title">Receive your entry & wait for the draw</h3>
           <p>
-            When the countdown ends, we'll randomly select and announce a                                    
+            When the countdown ends, we'll randomly select and announce a                                        
  
               winner who takes home the car!
           </p>

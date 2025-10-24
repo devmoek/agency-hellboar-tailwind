@@ -16,6 +16,7 @@
   - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
   - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
+  - show_featured_badge: {Boolean} Show the "Featured" badge. Default: false (optional)
 
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
@@ -125,7 +126,14 @@
             </h3>
           </div>
           <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
+            {%- if show_featured_badge -%}
+              <span
+                id="NoMediaFeaturedBadge-{{ section_id }}-{{ card_product.id }}"
+                class="badge badge--top-left color-accent-1"
+              >
+                {{- 'products.product.featured' | t -}}
+              </span>
+            {%- elsif card_product.available == false -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
@@ -206,19 +214,24 @@
 
             {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
 
+            <span class="product-price">{{ card_product.price | money }}</span>
             <div class="product-ticket-entries" style="float:unset;">
                 {% assign multiplier = 5 %}
             
                 {% if card_product.metafields.product.entries_multiplier.value != blank %}
-                    {% assign multiplier = card_product.metafields.product.entries_multiplier.value %}
+                  {% assign multiplier = card_product.metafields.product.entries_multiplier.value %}
                 {% endif %}
             
                 {% assign entries = card_product.price | divided_by: 100 | times: multiplier %}
             
-                <span class="entries entry-bonus">
-                    <span class="product-item-icon" style="">🎟</span>
-                    <span class="entries_cl">{{ entries }} Entries</span>
-                </span>
+                <div class="entries-badge">
+                    <div class="entries-section">
+                        <span class="entries_cl">{{ entries }} Entries</span>
+                    </div>
+                    <div class="multiplier-section x{{ multiplier }}">
+                        <span class="multiplier">{{ multiplier }}X</span>
+                    </div>
+                </div>
             </div>
             
             {%- if card_product.quantity_price_breaks_configured? -%}
@@ -565,7 +578,14 @@
           {% endif %}
         {% endif %}
         <div class="card__badge {{ settings.badge_position }}">
-          {%- if card_product.available == false -%}
+          {%- if show_featured_badge -%}
+            <span
+              id="FeaturedBadge-{{ section_id }}-{{ card_product.id }}"
+              class="badge badge--top-left color-accent-1"
+            >
+              {{- 'products.product.featured' | t -}}
+            </span>
+          {%- elsif card_product.available == false -%}
             <span
               id="Badge-{{ section_id }}-{{ card_product.id }}"
               class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
