@@ -1,15 +1,7 @@
 <style>
-  :root {
-    --primary-red: #e5172c;
-    --dark-red: #b5121e;
-    --black: #121212;
-    --light-gray: #f2f2f2;
-    --white: #ffffff;
-  }
-
   .page-header {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))
-    , url('/api/placeholder/1200/600') center/cover no-repeat;
+    , url('https://cdn.shopify.com/s/files/1/0667/8036/4971/files/photo_2025-04-22_14-49-29.jpg?v=1745318990') center/cover no-repeat;
     text-align: center;
     position: relative;
   }
@@ -110,9 +102,8 @@
     padding: 15px 30px;
     border-radius: 30px;
     cursor: pointer;
-    font-weight: 600;
     transition: all 0.3s ease;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .tab-btn:hover,
@@ -210,13 +201,12 @@
 
   .search-input {
     width: 100%;
-    padding: 15px 25px;
+    padding: 15px 50px 15px 25px;
     border-radius: 50px;
     border: none;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--white);
-    font-size: 14px;
-    padding-right: 50px;
+    font-size: 16px;
     border: 2px solid rgba(229, 23, 44, 0.3);
     transition: all 0.3s ease;
   }
@@ -421,6 +411,22 @@
     font-size: 0.9rem;
   }
 
+  #faq-newsletter-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    grid-column-gap: 10px;
+  }
+
+  #faq-newsletter-form input {
+    border-radius: 0;
+  }
+
+  #faq-newsletter-form .cta-button {
+    margin-top: 0;
+    border-radius: 30px;
+  }
+
   @media (max-width: 992px) {
     .quick-links-grid {
       grid-template-columns: 1fr 1fr;
@@ -441,13 +447,25 @@
       padding: 20px;
     }
   }
+
+  @media screen and (max-width: 430px) {
+    #faq-newsletter-form {
+      grid-template-columns: 1fr;
+    }
+
+    #faq-newsletter-form .cta-button {
+      margin-top: 10px;
+    }
+  }
 </style>
 
 <!-- Page Header -->
 <section class="page-header">
   <div class="container">
     <div class="header-content">
-      <h1 class="page-title">Frequently <span class="highlight">Asked</span> Questions</h1>
+      <h1 class="page-title">Frequently
+        <span class="highlight">Asked</span>
+        Questions</h1>
     </div>
   </div>
 </section>
@@ -456,17 +474,28 @@
 <section class="section">
   <div class="container">
     <div class="faq-intro">
-      <h2 class="section-title">Get Answers Fast</h2>
-      <p>Everything you need to know about HellBoar's products, shipping, returns, and our legendary giveaways. Can't find what you're looking for? Contact our support team 24/7.</p>
+      <h2 class="section-title">Get Answers</h2>
+      <p>Everything you need to know about HellBoar's products, shipping, returns, and our giveaways. Can't find what you're looking for? Contact us via email or contact form.</p>
     </div>
 
     <!-- Search Bar -->
     <div class="search-section">
       <div class="container">
-        <h3>Find Your Answer Quickly</h3>
+        <h3>Find Your Answer</h3>
         <div class="search-container">
-          <input type="text" class="search-input" placeholder="Type your question here...">
-          <button class="search-button">&#128269;</button>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="I'm looking for...">
+          <button class="search-button">
+            <svg
+              width="22"
+              height="22"
+              viewBox="-0.069 -0.069 0.66 0.66"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMinYMin"
+              class="jam jam-search"><path fill="rgba(255, 255, 255, 0.6)" d="M.22.385a.165.165 0 1 0 0-.33.165.165 0 0 0 0 .33m.174-.03.098.098a.028.028 0 1 1-.039.039L.355.394A.22.22 0 1 1 .394.355" /></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -475,7 +504,7 @@
     <div class="faq-tabs">
       <button class="tab-btn active" data-category="order-status">Order Status</button>
       <button class="tab-btn" data-category="returns-shipping">Returns & Shipping</button>
-      <button class="tab-btn" data-category="giveaway">Giveaway Questions</button>
+      <button class="tab-btn" data-category="giveaway">Giveaway</button>
     </div>
 
     <!-- FAQ Content -->
@@ -565,11 +594,21 @@
           <div class="faq-answer">
             <p>Shipping costs are calculated based on your location and selected shipping method:</p>
             <ul>
-              <li><strong>US Standard Shipping (5-7 business days):</strong> $7.99 or FREE on orders over $75</li>
-              <li><strong>US Express Shipping (2-3 business days):</strong> $15.99</li>
-              <li><strong>US Next Day Shipping:</strong> $24.99</li>
-              <li><strong>International Standard (10-14 business days):</strong> $19.99 - $29.99</li>
-              <li><strong>International Express (5-7 business days):</strong> $39.99 - $49.99</li>
+              <li>
+                <strong>US Standard Shipping (5-7 business days):</strong>
+                $7.99 or FREE on orders over $75</li>
+              <li>
+                <strong>US Express Shipping (2-3 business days):</strong>
+                $15.99</li>
+              <li>
+                <strong>US Next Day Shipping:</strong>
+                $24.99</li>
+              <li>
+                <strong>International Standard (10-14 business days):</strong>
+                $19.99 - $29.99</li>
+              <li>
+                <strong>International Express (5-7 business days):</strong>
+                $39.99 - $49.99</li>
             </ul>
             <p>HellBoar Premium members receive free standard shipping on all orders and 50% off expedited shipping options.</p>
           </div>
@@ -646,7 +685,8 @@
               <li>All giveaways comply with state and federal laws regarding sweepstakes</li>
               <li>Full giveaway terms and conditions are available on our website</li>
             </ul>
-            <p>You can view our previous winners and their testimonials on our <a href="#winners" style="color: var(--primary-red);">Winners Page</a>.</p>
+            <p>You can view our previous winners and their testimonials on our
+              <a href="#winners" style="color: var(--primary-red);">Winners Page</a>.</p>
           </div>
         </div>
 
@@ -681,11 +721,21 @@
           <div class="faq-answer">
             <p>Yes! There are several ways to earn bonus entries:</p>
             <ul>
-              <li><strong>Limited Edition Drops:</strong> Purchases from our limited collections earn 2x or 3x entries</li>
-              <li><strong>Referral Program:</strong> Earn 100 bonus entries for each friend who makes their first purchase</li>
-              <li><strong>Social Media Challenges:</strong> Participate in our monthly social media challenges for 250 bonus entries</li>
-              <li><strong>HellBoar Premium:</strong> Members earn 2x entries on all purchases year-round</li>
-              <li><strong>Anniversary Bonus:</strong> Earn 5x entries during your HellBoar account anniversary month</li>
+              <li>
+                <strong>Limited Edition Drops:</strong>
+                Purchases from our limited collections earn 2x or 3x entries</li>
+              <li>
+                <strong>Referral Program:</strong>
+                Earn 100 bonus entries for each friend who makes their first purchase</li>
+              <li>
+                <strong>Social Media Challenges:</strong>
+                Participate in our monthly social media challenges for 250 bonus entries</li>
+              <li>
+                <strong>HellBoar Premium:</strong>
+                Members earn 2x entries on all purchases year-round</li>
+              <li>
+                <strong>Anniversary Bonus:</strong>
+                Earn 5x entries during your HellBoar account anniversary month</li>
             </ul>
             <p>Check our social media and email newsletters for special promotions offering additional bonus entry opportunities!</p>
           </div>
@@ -700,25 +750,21 @@
 
       <div class="contact-options">
         <div class="contact-card">
-          <div class="contact-icon">✉️</div>
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 0.66 0.66" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="#fff" stroke-width=".055" stroke-linecap="round" stroke-linejoin="round" d="M.138.165h.384A.055.055 0 0 1 .578.22v.22a.055.055 0 0 1-.056.055H.138A.055.055 0 0 1 .083.44V.22A.055.055 0 0 1 .138.165"/><path d="M.566.193.33.357.094.193" stroke="#fff" stroke-width=".055" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
           <h4 class="contact-title">Email Support</h4>
           <p class="contact-info">support@hellboar.com</p>
-          <p>Response within 24 hours</p>
+          <p>Response within 24 hours.</p>
         </div>
 
-        <!-- <div class="contact-card">
-          <div class="contact-icon">💬</div>
-          <h4 class="contact-title">Live Chat</h4>
-          <p class="contact-info">Available 24/7</p>
-          <a href="#chat" class="cta-button">Chat Now</a>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-icon">📞</div>
-          <h4 class="contact-title">Phone Support</h4>
-          <p class="contact-info">1-800-HELLBOAR</p>
-          <p>Mon-Fri: 9am - 8pm EST</p>
-        </div> -->
+      <div class="contact-card">  <div class="contact-icon">
+        <svg width="22" height="22" viewBox="0 0 0.55 0.55" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M.275 0C.422 0 .55.121.55.261.55.399.425.507.275.507A.3.3 0 0 1 .181.492L.137.535q-.03.024-.054.01Q.058.53.065.493L.076.429A.22.22 0 0 1 0 .261C0 .121.128 0 .275 0m0 .038C.149.038.039.142.039.261c0 .056.025.108.069.147h.001l.008.007-.002.011-.004.022L.11.454.102.5.101.509v.003l.01-.006.06-.058.011.004a.3.3 0 0 0 .092.017C.404.469.51.377.51.262.51.144.4.039.274.039m-.13.176a.041.041 0 1 1 0 .082.041.041 0 0 1 0-.082m.137 0a.041.041 0 1 1 0 .082.041.041 0 0 1 0-.082m.137 0a.041.041 0 1 1 0 .082.041.041 0 0 1 0-.082"/></svg>
+      </div>
+        <h4 class="contact-title">Contact Form</h4>
+        <p class="contact-info">Fill out the form to contact us.</p>
+        <a href="{{ shop.url }}/pages/contact-us" class="cta-button">Contact Us</a>
+      </div>
       </div>
     </div>
 
@@ -728,22 +774,25 @@
 
       <div class="quick-links-grid">
         <a href="{{ shop.url }}/policies/shipping-policy" class="quick-link-card">
-          <div class="quick-link-icon">🚚</div>
+          <div class="quick-link-icon">
+            <svg fill="#000000" width="22px" height="22px" viewBox="0 0 0.66 0.66" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0.028 0.344v0.138a0.028 0.028 0 0 0 0.028 0.028h0.028a0.083 0.083 0 0 0 0.165 0h0.165a0.083 0.083 0 0 0 0.165 0h0.028a0.028 0.028 0 0 0 0.028 -0.028v-0.33a0.083 0.083 0 0 0 -0.083 -0.083h-0.247a0.083 0.083 0 0 0 -0.083 0.083v0.055H0.165a0.083 0.083 0 0 0 -0.066 0.033l-0.066 0.088a0.017 0.017 0 0 0 -0.002 0.004l-0.002 0.003a0.028 0.028 0 0 0 -0.002 0.01m0.44 0.165a0.028 0.028 0 1 1 0.028 0.028 0.028 0.028 0 0 1 -0.028 -0.028m-0.193 -0.357a0.028 0.028 0 0 1 0.028 -0.028h0.247a0.028 0.028 0 0 1 0.028 0.028v0.302h-0.021a0.083 0.083 0 0 0 -0.122 0H0.275Zm-0.055 0.165H0.11l0.033 -0.044a0.028 0.028 0 0 1 0.022 -0.011h0.055Zm-0.083 0.193a0.028 0.028 0 1 1 0.028 0.028 0.028 0.028 0 0 1 -0.028 -0.028m-0.055 -0.138h0.138v0.076a0.083 0.083 0 0 0 -0.116 0.006H0.083Z"/></svg>
+          </div>
           <h3 class="quick-link-title">Shipping Policy</h3>
           <p class="quick-link-text">Detailed information about our shipping methods, timeframes, and costs.</p>
         </a>
 
         <a href="{{ shop.url }}/policies/refund-policy" class="quick-link-card">
-          <div class="quick-link-icon">↩️</div>
+          <div class="quick-link-icon">
+            <svg width="22" height="22" viewBox="0 0 1.32 1.32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M.357.22.164.385l.193.193" stroke="#fff" stroke-width=".11" stroke-linecap="round" stroke-linejoin="round"/><path d="M.165.385h.632c.189 0 .35.155.357.344a.36.36 0 0 1-.357.371H.33" stroke="#fff" stroke-width=".11" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
           <h3 class="quick-link-title">Returns & Exchanges</h3>
           <p class="quick-link-text">Everything you need to know about our return process.</p>
         </a>
 
-        <!-- <a href="#winners" class="quick-link-card">
-          <div class="quick-link-icon">🏆</div>
-          <h3 class="quick-link-title">Winners Gallery</h3>
-          <p class="quick-link-text">Meet our previous giveaway winners and their incredible prizes.</p>
-        </a> -->
+      <!-- <a href="#winners" class="quick-link-card">  <div class="quick-link-icon">🏆</div>
+        <h3 class="quick-link-title">Winners Gallery</h3>
+        <p class="quick-link-text">Meet our previous giveaway winners and their incredible prizes.</p>
+      </a> -->
       </div>
     </div>
   </div>
@@ -1062,14 +1111,23 @@
 <!-- Add Newsletter Section -->
 <section class="section section-alt">
   <div class="container">
-    <h2 class="section-title">Stay <span class="highlight">Updated</span></h2>
+    <h2 class="section-title">Stay
+      <span class="highlight">Updated</span>
+    </h2>
     <div style="max-width: 600px; margin: 0 auto; text-align: center;">
       <p style="margin-bottom: 30px; color: var(--light-gray); font-size: 1.1rem;">
         Subscribe to our newsletter to get the latest updates on upcoming drops, exclusive deals, and bonus giveaway entries.
       </p>
-      {% form 'customer', id: "faq-newsletter-form", class: "faq-newsletter-form" %}
-          {{ form.errors | default_errors }}
-          <input type="email" name="contact[email]" placeholder="Your email address" required style="
+      {% form 'customer'
+        , id: "faq-newsletter-form"
+        , class: "faq-newsletter-form" %}
+        {{ form.errors | default_errors }}
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="Your email address"
+          required
+          style="
             flex: 1;
             min-width: 250px;
             padding: 15px 25px;
@@ -1080,7 +1138,10 @@
             font-size: 14px;
             border: 2px solid rgba(229, 23, 44, 0.3);
           ">
-          <button type="submit" class="cta-button" value="Sign up">Subscribe</button>
+        <button
+          type="submit"
+          class="cta-button"
+          value="Sign up">Subscribe</button>
       {% endform %}
       <p style="margin-top: 20px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
         By subscribing, you agree to receive marketing emails from HellBoar. You can unsubscribe at any time.
@@ -1090,10 +1151,9 @@
 </section>
 
 <!-- Add More FAQ Categories -->
-<!-- <section class="section">
-  <div class="container">
+<!-- <section class="section">  <div class="container">
     <h2 class="section-title">More <span class="highlight">Topics</span></h2>
-    
+
     <div class="quick-links-grid" style="margin-bottom: 80px;">
       <a href="#payment" class="quick-link-card">
         <div class="quick-link-icon">💳</div>
@@ -1106,7 +1166,6 @@
         <h3 class="quick-link-title">Premium Membership</h3>
         <p class="quick-link-text">Discover the exclusive benefits of HellBoar Premium.</p>
       </a>
-
       <a href="#sizes" class="quick-link-card">
         <div class="quick-link-icon">📏</div>
         <h3 class="quick-link-title">Size Guide</h3>
@@ -1115,15 +1174,14 @@
     </div>
   </div>
 </section> -->
-
 {% schema %}
   {
-  "name": "FAQ Page",
-  "settings": [],
-  "presets": [
-    {
-      "name": "FAQ Page"
-    }
-  ]
-}  
+    "name": "FAQ Page",
+    "settings": [],
+    "presets": [
+      {
+        "name": "FAQ Page"
+      }
+    ]
+  }
 {% endschema %}

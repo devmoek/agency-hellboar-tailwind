@@ -354,6 +354,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    height: 60vh;
   }
 
   .landing-hero::before {
@@ -365,6 +366,8 @@
     bottom: 0;
     background: url('https://cdn.shopify.com/s/files/1/0908/1746/2565/files/website-header_desktop_1.3.png?v=1759752497');
     opacity: 0.3;
+    background-position: center;
+    background-size: cover;
   }
 
   .hero-content {
@@ -745,6 +748,12 @@
     .popup-caption {
       font-size: 1rem;
       margin-top: 10px;
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    .landing-hero {
+      height: 40vh;
     }
   }
 {% endstylesheet %}
