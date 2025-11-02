@@ -11,13 +11,20 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "size_chart_page_FHNRaP": {
+      "type": "size-chart-page",
+      "name": "Size Chart Page",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "size_chart_page_FHNRaP"
   ]
 }

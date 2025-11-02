@@ -3425,6 +3425,12 @@
       "presets": {
         "name": "Collapsible content"
       }
+    },
+    "size_chart": {
+      "name": "Size Chart Page",
+      "presets": {
+        "name": "Size Chart Page"
+      }
     }
   }
 }

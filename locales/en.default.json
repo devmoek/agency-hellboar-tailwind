@@ -383,6 +383,59 @@
       "min_error": "This item has a minimum of {{ min }}",
       "max_error": "This item has a maximum of {{ max }}",
       "step_error": "You can only add this item in increments of {{ step }}"
+    },
+    "size_chart": {
+      "name": "Size Chart Page",
+      "complete_size_guide": "Complete Size Guide",
+      "t_shirt": "T-Shirt",
+      "sweatshirt": "Sweatshirt",
+      "hoodie": "Hoodie",
+      "zipper_hoodie": "Zipper Hoodie",
+      "shorts": "Shorts",
+      "sweatpants": "SweatPants",
+      "t_shirt_size_chart": "T-Shirt Size Chart",
+      "sweatshirt_size_chart": "Sweatshirt Size Chart",
+      "hoodie_size_chart": "Hoodie Size Chart",
+      "zipper_hoodie_size_chart": "Zipper Hoodie Size Chart",
+      "shorts_size_chart": "Shorts Size Chart",
+      "sweatpants_size_chart": "SweatPants Size Chart",
+      "measurement": "Measurement",
+      "tolerance": "TOL",
+      "shoulder_width": "Shoulder Width",
+      "body_length": "Body Length",
+      "chest_width": "Chest Width",
+      "sleeve_length": "Sleeve Length",
+      "waist_relaxed": "Waist - Relaxed",
+      "thigh_width": "Thigh Width",
+      "leg_opening": "Leg Opening",
+      "inseam": "Inseam",
+      "measurement_reference_points": "Measurement Reference Points",
+      "shoulder_width_diagram": "Shoulder Width Diagram",
+      "shoulder_width_desc": "Measured across shoulders",
+      "point_to_point": "Point to point measurement",
+      "body_length_diagram": "Body Length Diagram",
+      "body_length_desc": "From shoulder to hem",
+      "total_garment_length": "Total garment length",
+      "chest_width_diagram": "Chest Width Diagram",
+      "chest_width_desc": "Measured across chest",
+      "body_width_measurement": "Body width measurement",
+      "sleeve_length_diagram": "Sleeve Length Diagram",
+      "sleeve_length_desc": "From shoulder seam to cuff",
+      "arm_coverage_measurement": "Arm coverage measurement",
+      "note": "Note",
+      "measurements_cm": "All measurements are in centimeters (cm).",
+      "measurements_inches": "All measurements are in inches (in).",
+      "tolerance_indicator": "TOL indicates measurement tolerance.",
+      "t_shirt_note": "Oversized fit designed for relaxed, comfortable wear.",
+      "sweatshirt_note": "Relaxed fit with longer sleeves and additional chest width for comfortable layering.",
+      "hoodie_zipper_hoodie": "Hoodie & Zipper Hoodie",
+      "hoodie_note": "Similar measurements with hood and front pouch pocket for casual comfort.",
+      "shorts_note": "Relaxed fit with comfortable waistband and roomy thigh area.",
+      "sweatpants_note": "Relaxed fit with elastic waistband and tapered leg opening for comfort and style.",
+      "cm": "CM",
+      "inches": "Inches",
+      "switch_to_cm": "Switch to centimeters",
+      "switch_to_inches": "Switch to inches"
     }
   },
   "localization": {
@@ -536,5 +589,18 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
+  },
+  "names": {
+    "size_chart": "Size Chart Page"
+  },
+  "settings": {
+    "custom_id": "Custom ID",
+    "custom_id_info": "Add a custom ID to this section",
+    "logo": "Logo",
+    "default_unit": "Default Unit",
+    "cm": "Centimeters (CM)",
+    "inches": "Inches (IN)",
+    "padding_top": "Padding Top",
+    "padding_bottom": "Padding Bottom"
   }
 }
