@@ -1557,7 +1557,7 @@ function setupCounter(element) {
 // Countdown Timer
 function updateCountdown() {
   // Set a fixed end date - November 14, 2025 at 11:59:59 PM EST
-  const endDate = new Date(2025, 10, 14, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
+  const endDate = new Date(2025, 10, 15, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
   const endTime = endDate.getTime();
   const now = new Date().getTime();
   const distance = endTime - now;
@@ -1589,24 +1589,164 @@ function updateCountdown() {
 updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
-// FAQ Accordion
-const faqItems = document.querySelectorAll(".faq-item");
+// FAQ Accordion - Simple and robust implementation
+function initializeFAQ() {
+  console.log("Initializing FAQ functionality...");
 
-faqItems.forEach((item) => {
-  const question = item.querySelector(".faq-question");
+  const faqQuestions = document.querySelectorAll(".faq-question");
+  console.log(`Found ${faqQuestions.length} FAQ questions`);
 
-  question.addEventListener("click", () => {
-    // Close all other items
-    faqItems.forEach((otherItem) => {
-      if (otherItem !== item) {
-        otherItem.classList.remove("active");
+  if (faqQuestions.length === 0) {
+    console.log("No FAQ questions found, will retry...");
+    return;
+  }
+
+  // Add visual indicator that FAQ script is loaded
+  faqQuestions.forEach((question) => {
+    if (!question.dataset.faqInitialized) {
+      question.dataset.faqInitialized = "true";
+      question.style.cursor = "pointer";
+      question.title = "Click to expand/collapse";
+    }
+  });
+
+  // Handle all FAQ questions regardless of container
+  faqQuestions.forEach((question, index) => {
+    console.log(
+      `Setting up FAQ question ${index + 1}:`,
+      question.textContent.trim()
+    );
+
+    // Skip if already initialized
+    if (question.dataset.faqClickHandler) {
+      return;
+    }
+    question.dataset.faqClickHandler = "true";
+
+    question.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log("FAQ question clicked:", this.textContent.trim());
+
+      const faqItem = this.closest(".faq-item");
+      const answer = faqItem.querySelector(".faq-answer");
+      const isActive = faqItem.classList.contains("active");
+      const indicator = this.querySelector(".faq-indicator");
+
+      console.log("FAQ item found:", faqItem);
+      console.log("Answer element found:", answer);
+      console.log("Currently active:", isActive);
+
+      // Find the container (faq-list or faq-container)
+      const container =
+        faqItem.closest(".faq-list") || faqItem.closest(".faq-container");
+
+      if (container) {
+        // Close all other FAQ items in the same container
+        container.querySelectorAll(".faq-item").forEach((item) => {
+          if (item !== faqItem) {
+            item.classList.remove("active");
+            const otherIndicator = item.querySelector(".faq-indicator");
+            if (otherIndicator) otherIndicator.textContent = "+";
+          }
+        });
+      }
+
+      // Toggle current item
+      if (isActive) {
+        faqItem.classList.remove("active");
+        if (indicator) indicator.textContent = "+";
+        console.log("FAQ item closed");
+      } else {
+        faqItem.classList.add("active");
+        if (indicator) indicator.textContent = "−";
+        console.log("FAQ item opened");
       }
     });
-
-    // Toggle current item
-    item.classList.toggle("active");
   });
+}
+
+// Initialize FAQ when DOM is loaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeFAQ);
+} else {
+  initializeFAQ();
+}
+
+// Also initialize after multiple delays to catch any dynamically loaded content
+setTimeout(initializeFAQ, 500);
+setTimeout(initializeFAQ, 1000);
+setTimeout(initializeFAQ, 2000);
+setTimeout(initializeFAQ, 3000);
+
+// Initialize on window load as well
+window.addEventListener("load", initializeFAQ);
+
+// Use MutationObserver to detect when FAQ elements are added to the DOM
+const faqObserver = new MutationObserver(function (mutations) {
+  let shouldReinitialize = false;
+  mutations.forEach(function (mutation) {
+    if (mutation.type === "childList") {
+      mutation.addedNodes.forEach(function (node) {
+        if (node.nodeType === 1) {
+          // Element node
+          if (
+            node.classList &&
+            (node.classList.contains("faq-item") ||
+              node.classList.contains("faq-question"))
+          ) {
+            shouldReinitialize = true;
+          }
+          // Check if any child elements are FAQ related
+          if (
+            node.querySelector &&
+            (node.querySelector(".faq-item") ||
+              node.querySelector(".faq-question"))
+          ) {
+            shouldReinitialize = true;
+          }
+        }
+      });
+    }
+  });
+
+  if (shouldReinitialize) {
+    console.log("FAQ elements detected, reinitializing...");
+    setTimeout(initializeFAQ, 100);
+  }
 });
+
+// Start observing
+faqObserver.observe(document.body, {
+  childList: true,
+  subtree: true,
+});
+
+// Make FAQ initialization globally available
+window.reinitializeFAQ = function () {
+  console.log("Manually reinitializing FAQ...");
+  initializeFAQ();
+};
+
+// Debug function to check FAQ status
+window.debugFAQ = function () {
+  const faqQuestions = document.querySelectorAll(".faq-question");
+  const faqItems = document.querySelectorAll(".faq-item");
+  console.log("FAQ Debug Info:");
+  console.log("- FAQ Questions found:", faqQuestions.length);
+  console.log("- FAQ Items found:", faqItems.length);
+  console.log(
+    "- FAQ Questions:",
+    Array.from(faqQuestions).map((q) => q.textContent.trim())
+  );
+  console.log(
+    "- Initialized questions:",
+    Array.from(faqQuestions).filter((q) => q.dataset.faqInitialized).length
+  );
+  console.log(
+    "- Questions with click handlers:",
+    Array.from(faqQuestions).filter((q) => q.dataset.faqClickHandler).length
+  );
+};
 
 // Testimonial Slider
 const dots = document.querySelectorAll(".dot");
