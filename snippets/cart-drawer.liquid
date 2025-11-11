@@ -15,6 +15,56 @@
   .drawer {
     visibility: hidden;
   }
+  
+  .promo-product-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  
+  .promo-product-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+  
+  .promo-only-warning {
+    background: #ff0000;
+    border-radius: 5px;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+  
+  .promo-warning-text {
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin: 0;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  .button--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .quantity--disabled .quantity__button {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .quantity--disabled .quantity__input {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
@@ -139,9 +189,17 @@
                             <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
                           {%- endif -%}
 
-                          <a href="{{ item.url }}" class="cart-item__name h4 break">
-                            {{- item.product.title | escape -}}
-                          </a>
+                          {% unless item.product.title contains 'PROMO' %}
+                            <a href="{{ item.url }}" class="cart-item__name h4 break">
+                              {{- item.product.title | escape -}}
+                            </a>
+                          {% endunless %}
+
+                          {% if item.product.title contains 'PROMO' %}
+                            <p class="cart-item__name h4 break">
+                              PROMO PRODUCT
+                            </p>
+                          {% endif %}
 
                           {%- if item.original_price != item.final_price -%}
                             <div class="cart-item__discounted-prices">
@@ -167,15 +225,28 @@
                          {% assign total_entries = 0 %}
             
                 
-                        {% assign multiplier = 5 %}
-                      
-                        {% if item.product.metafields.product.entries_multiplier.value %}
-                          {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+                        {% comment %} Set specific entry values for giveaway products {% endcomment %}
+                        {% assign entries = 0 %}
+                        {% assign multiplier = 0 %}
+                        
+                        {% if item.product.handle == 'challenger-entry' %}
+                          {% assign entries = 1500 | times: item.quantity %}
+                          {% assign multiplier = 15 %}
+                        {% elsif item.product.handle == 'trailblazer-entry' %}
+                          {% assign entries = 500 | times: item.quantity %}
+                          {% assign multiplier = 10 %}
+                        {% elsif item.product.handle == 'beast-entry' %}
+                          {% assign entries = 6000 | times: item.quantity %}
+                          {% assign multiplier = 20 %}
+                        {% else %}
+                          {% comment %} Fallback to metafield or default calculation {% endcomment %}
+                          {% assign multiplier = 5 %}
+                          {% if item.product.metafields.product.entries_multiplier.value %}
+                            {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+                          {% endif %}
+                          {% assign price = item.product.selected_or_first_available_variant.price | divided_by: 100.0 %}
+                          {% assign entries = price | times: multiplier | times: item.quantity | round %}
                         {% endif %}
-                      
-                        {% assign price = item.product.selected_or_first_available_variant.price | divided_by: 100.0 %}  <!-- Get the price of the product in dollars -->
-                      
-                        {% assign entries = price | times: multiplier | times: item.quantity | round %}  <!-- Multiply price, multiplier, and quantity -->
                       
                         <div class="product-entry-info">
                           <span class="product-entries">{{ entries }} Entries</span>
@@ -300,8 +371,8 @@
                           <quantity-popover>
                             <div class="cart-item__quantity-wrapper quantity-popover-wrapper">
                               <div class="quantity-popover-container{% if has_qty_rules or has_vol_pricing %} quantity-popover-container--hover{% endif %}">
-                                <quantity-input class="quantity cart-quantity">
-                                  <button class="quantity__button" name="minus" type="button">
+                                <quantity-input class="quantity cart-quantity{% if item.product.title contains 'PROMO' %} quantity--disabled{% endif %}">
+                                  <button class="quantity__button" name="minus" type="button"{% if item.product.title contains 'PROMO' %} disabled{% endif %}>
                                     <span class="visually-hidden">
                                       {{-
                                         'products.product.quantity.decrease'
@@ -331,8 +402,9 @@
                                     aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
                                     id="Drawer-quantity-{{ item.index | plus: 1 }}"
                                     data-index="{{ item.index | plus: 1 }}"
+                                    {% if item.product.title contains 'PROMO' %}readonly{% endif %}
                                   >
-                                  <button class="quantity__button" name="plus" type="button">
+                                  <button class="quantity__button" name="plus" type="button"{% if item.product.title contains 'PROMO' %} disabled{% endif %}>
                                     <span class="visually-hidden">
                                       {{-
                                         'products.product.quantity.increase'
@@ -346,6 +418,7 @@
                                   </button>
                                 </quantity-input>
                               </div>
+                              {% unless item.product.title contains 'PROMO' %}
                               <cart-remove-button
                                 id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
                                 data-index="{{ item.index | plus: 1 }}"
@@ -361,6 +434,7 @@
                                   </span>
                                 </button>
                               </cart-remove-button>
+                              {% endunless %}
                             </div>
                             {%- if has_qty_rules or has_vol_pricing -%}
                               <button
@@ -514,13 +588,27 @@
 
           <div class="totals" role="status">
             <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
-            <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
-          
+            <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>    
+          </div>
+
+          <div class="totals">
+            <h2 class="totals__total">Total entries</h2>
             <div class="totals__total-value">
-             {% assign total_entries = cart.total_price | divided_by: 100 | times: multiplier %} 
-               🎟<b> {{ total_entries }} Total Entries</b>
+              {% assign total_entries = 0 %}
+              {% for item in cart.items %}
+                {% comment %} Set specific entry values for giveaway products {% endcomment %}
+                {% assign entries = 0 %}
+                {% assign multiplier = 0 %}
+              
+                  {% comment %} Fallback to metafield or default calculation {% endcomment %}
+                  {% if item.product.metafields.product.entries_multiplier.value != blank %}
+                    {% assign multiplier = item.product.metafields.product.entries_multiplier.value | plus: 0 %}
+                  {% endif %}
+                  {% assign entries = item.price | divided_by: 100 | times: multiplier | times: item.quantity | round %}
+                {% assign total_entries = total_entries | plus: entries %}
+              {% endfor %}
+              🎟<b> {{ total_entries }} Entries</b>
             </div>
-            
           </div>
 
           <small class="tax-note caption-large rte">
@@ -565,15 +653,31 @@
         </div>
 
         <!-- CTAs -->
+        {% liquid
+          assign has_non_promo_products = false
+          assign has_promo_products = false
+          for item in cart.items
+            if item.product.title contains 'PROMO'
+              assign has_promo_products = true
+            else
+              assign has_non_promo_products = true
+            endif
+          endfor
+        %}
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
+          {% if has_promo_products and has_non_promo_products == false %}
+            <div class="promo-only-warning">
+              <p class="promo-warning-text">You cannot checkout with only promo product in the cart. Please add regular products to your cart to checkout.</p>
+            </div>
+          {% endif %}
           <button
             type="submit"
             id="CartDrawer-Checkout"
-            class="cart__checkout-button button"
+            class="cart__checkout-button button{% if has_promo_products and has_non_promo_products == false %} button--disabled{% endif %}"
             name="checkout"
             form="CartDrawer-Form"
-            {% if cart == empty %}
+            {% if cart == empty or has_promo_products and has_non_promo_products == false %}
               disabled
             {% endif %}
           >
