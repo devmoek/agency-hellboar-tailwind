@@ -1556,8 +1556,8 @@ function setupCounter(element) {
 
 // Countdown Timer
 function updateCountdown() {
-  // Set a fixed end date - November 14, 2025 at 11:59:59 PM EST
-  const endDate = new Date(2025, 10, 14, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
+  // Set a fixed end date - November 15, 2025 at 11:59:59 PM EST
+  const endDate = new Date(2025, 10, 15, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
   const endTime = endDate.getTime();
   const now = new Date().getTime();
   const distance = endTime - now;
