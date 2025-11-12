@@ -1556,31 +1556,43 @@ function setupCounter(element) {
 
 // Countdown Timer
 function updateCountdown() {
-  const endDate = new Date(2025, 10, 14, 23, 59, 59); // YYYY, MM (0-based), DD, HH, MM, SS
-  const endTime = endDate.getTime();
-  const now = new Date().getTime();
-  const distance = endTime - now;
+  // Define the Miami timezone
+  const miamiTimeZone = "America/New_York";
+
+  // Define the target date and time in Miami
+  const endDateMiami = new Date(
+    new Date().toLocaleString("en-US", { timeZone: miamiTimeZone })
+  );
+
+  // Set the specific Miami end date/time (2025-11-14 23:59:59)
+  endDateMiami.setFullYear(2025);
+  endDateMiami.setMonth(10); // November (0-based index)
+  endDateMiami.setDate(14);
+  endDateMiami.setHours(23, 59, 59, 0);
+
+  // Convert current time also to Miami time
+  const nowMiami = new Date(
+    new Date().toLocaleString("en-US", { timeZone: miamiTimeZone })
+  );
+
+  const distance = endDateMiami - nowMiami;
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  document.getElementById("days").innerHTML = days;
-  document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-  document.getElementById("minutes").innerHTML =
-    minutes < 10 ? "0" + minutes : minutes;
-  document.getElementById("seconds").innerHTML =
-    seconds < 10 ? "0" + seconds : seconds;
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+  document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+  document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
 
   if (distance < 0) {
     clearInterval(countdownInterval);
-    document.getElementById("days").innerHTML = "0";
-    document.getElementById("hours").innerHTML = "00";
-    document.getElementById("minutes").innerHTML = "00";
-    document.getElementById("seconds").innerHTML = "00";
+    document.getElementById("days").textContent = "0";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
   }
 }
 
