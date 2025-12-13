@@ -215,7 +215,7 @@
             {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
 
             <span class="product-price">{{ card_product.price | money }}</span>
-            <div class="product-ticket-entries" style="float:unset;">
+            {% comment %} <div class="product-ticket-entries" style="float:unset;">
                 {% assign multiplier = 5 %}
             
                 {% if card_product.metafields.product.entries_multiplier.value != blank %}
@@ -232,7 +232,7 @@
                         <span class="multiplier">{{ multiplier }}X</span>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
             
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants.size == 1 and quick_add == 'bulk' %}

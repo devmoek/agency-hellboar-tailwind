@@ -10,7 +10,7 @@
         controlslist="nodownload nofullscreen noremoteplayback"
         class="background-video"
         id="hero-video">
-        <source src="https://cdn.shopify.com/videos/c/o/v/508db523b4934728aeb0262266bb9d60.mp4" type="video/mp4" />
+        <source src="https://cdn.shopify.com/videos/c/o/v/92454bbcc79a43ca875106845ad83dc8.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -51,20 +51,20 @@
       </script>
 
       <div class="hero-content">
-        <div class="timer-box">Limited Time Offer</div>
+        {% comment %} <div class="timer-box">New Giveaway Coming Soon</div> {% endcomment %}
         <h1 class="hero-title" style="font-size:30px;">
-          BCG #02
+          BCG #03 is coming
         </h1>
         <p class="hero-subtitle">
-          Purchase any item from our store and automatically get entered to win
-        </p>
-
+          Buying merchandise will give you entries to participate in the next giveaway.
+        </p> 
+{% comment %} 
         <div class="prize">
           <a href="{{ shop.url }}/pages/giveaway" style="text-decoration:none;">
             <p>Chevrolet Corvette C8 HellBoar Edition</p>
             <p>+ $20k cash</p>
           </a>
-        </div>
+        </div> {% endcomment %}
 
       {% comment %} <div class="cta-button-container">
                                                                                                                                   <a href="{{ shop.url }}/pages/giveaway" class="cta-button">ENTER NOW</a>
@@ -72,7 +72,7 @@
       </div>
     </div>
   </section>
-  <section class="countdown">
+  {% comment %} <section class="countdown">
     <div class="countdown-title">
       <h3>Giveaway ends in:</h3>
     </div>
@@ -94,13 +94,13 @@
         <span class="countdown-label">Seconds</span>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
   <!-- How to Enter Section -->
-  <section class="how-to-enter-section">
+  {% comment %} <section class="how-to-enter-section">
     <div class="container">
       <h2 class="section-title">How to Enter</h2>
-      <p class="section-subtitle">Watch this video to learn how to participate in our giveaway</p>
+      <p class="section-subtitle">Watch this video to learn how to participate in our giveaways</p>
 
       <div class="video-container">
         <div class="video-wrapper">
@@ -114,16 +114,16 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
   <!-- Collection Preview -->
-  <section
+  {% comment %} <section
     class="section section-alt collection-preview-section"
     id="shop-collection"
     style="margin-top:0;">
     <div class="container">
-      <h2 class="section-title">Limited Offer</h2>
-      <p class="section-subtitle">Exclusive product to boost your entries. It is last chance!</p>
+      <h2 class="section-title">Featured products</h2>
+      <p class="section-subtitle">Best value products</p>
 
       {% assign featured_product = all_products['beast-entry'] %}
       {% if featured_product %}
@@ -144,8 +144,8 @@
       {% endif %}
     </div>
   </section>
-
-  {% stylesheet %}
+ {% endcomment %}
+  {% comment %} {% stylesheet %}
     .collection-preview-section {
       padding: 4rem 0;
     }
@@ -160,7 +160,7 @@
       max-width: 400px;
       width: 100%;
     }
-  {% endstylesheet %}
+  {% endstylesheet %} {% endcomment %}
 
   <!-- Collection Preview -->
   <section
@@ -169,7 +169,7 @@
     style="margin-top:0;">
     <div class="container">
       <h2 class="section-title">Boar Boost Entries</h2>
-      <p class="section-subtitle">Digital products that will boost your entries</p>
+      <p class="section-subtitle">Quick boost to your entries</p>
       <div class="car-gallery">
         {%- liquid
           assign challenger_product = all_products['challenger-entry']
@@ -361,87 +361,52 @@
         {%- endif -%}
       </div>
       <div class="cta-button-container">
-        <a href="{{ routes.collections_url }}/all-products" class="cta-button">View all products</a>
+        <a href="{{ routes.collections_url }}/all-products" class="cta-button">View all</a>
       </div>
     </div>
   </section>
 
   <!-- Gallery Section -->
-  <section class="section gallery-section">
+  <section class="section section-alt gallery-section" style="margin-top: 60px;">
     <div class="container">
-      <h2 class="section-title">BCG #01 - Winner is
+      <h2 class="section-title">BCG #02 - The Winner is
         <span class="highlight">
-          Dawid Blazej</span>
+          Rafael Gomez
+        </span>
       </h2>
       <div class="gallery">
         <div class="gallery-item">
           <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_9460_2.png?v=1739371131"
-            alt="Product Showcase"
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0366.jpg?v=1746623405"
+            alt="Chevrolet Corvette C8 - First Image"
             class="gallery-img"
             width="373"
             height="250">
         </div>
         <div class="gallery-item">
           <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/DSC_9353_1_83c51ba3-9d15-4ccb-85f6-bc07d306ce94.png?v=1739374016"
-            alt="Winner Celebration"
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0058.jpg?v=1746623404"
+            alt="Chevrolet Corvette C8 - Second Image"
             class="gallery-img"
             width="373"
             height="250">
         </div>
         <div class="gallery-item">
           <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/AspectRatioBlock_e294c9b9-2a70-4d23-9be0-baf040650706.png?v=1739374016"
-            alt="Team Event"
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0052.jpg?v=1746623405"
+            alt="Chevrolet Corvette C8 - Third Image"
             class="gallery-img"
             width="373"
             height="250">
         </div>
         <div class="gallery-item gallery-item-hidden">
           <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/AspectRatioBlock-1_daf4a07e-cc6a-4d46-84f1-708384a1a15f.png?v=1739374016"
-            alt="Car Giveaway"
+            src="https://cdn.shopify.com/s/files/1/0573/3783/9710/files/DSC_0463.jpg?v=1746623406"
+            alt="Chevrolet Corvette C8 - Fourth Image"
             class="gallery-img"
             width="373"
             height="250">
         </div>
-        <div class="gallery-item gallery-item-hidden">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/AspectRatioBlock-2_b2d54bf0-2415-48fe-b790-fa64dc7002ea.png?v=1739374016"
-            alt="Product Design"
-            class="gallery-img"
-            width="373"
-            height="250">
-        </div>
-        <div class="gallery-item gallery-item-hidden">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/carphoto-1920.png?v=1736930092"
-            alt="Community Event"
-            class="gallery-img"
-            width="373"
-            height="250">
-        </div>
-      </div>
-      <div class="gallery-expand">
-        <button class="expand-button cta-button" id="expandGallery">
-          <span class="expand-text">Show more</span>
-          <svg
-            class="expand-arrow"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M7 10L12 15L17 10"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
     </div>
   </section>
 
@@ -474,7 +439,7 @@
   </script>
 
   <!-- Winner Section -->
-  <section class="winner-announcement video-text-section">
+  {% comment %} <section class="winner-announcement video-text-section">
     <div class="container">
       <div class="two-column-grid">
         <div class="video-column">
@@ -503,7 +468,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
   <!-- Our Merchandise Section -->
   <section style="background: #000;display:flex;flex-direction: column;gap: 60px;">
@@ -560,7 +525,7 @@
 
   </section>
 
-  <section class="features">
+  {% comment %} <section class="features">
     <div class="container">
       <h2 class="section-title">Why Participate?</h2>
       <div class="features-grid">
@@ -626,9 +591,9 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
-  <section class="prize-showcase" id="prize">
+  {% comment %} <section class="prize-showcase" id="prize">
     <h2 class="section-title">Your Dream Car Awaits</h2>
     <div class="container" style="display:flex;justify-content:space-between;align-items: center;gap:25px;">
       <div>
@@ -659,9 +624,9 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
-  <section class="how-it-works" id="how-it-works">
+  {% comment %} <section class="how-it-works" id="how-it-works">
     <div class="container">
       <h2 class="section-title">Participation Process</h2>
       <div class="steps">
@@ -669,9 +634,7 @@
           <div class="step-number">1</div>
           <h3 class="step-title">Choose your product</h3>
           <p>
-            Browse our collection and make any purchase. Every order qualifies                                        
- 
-              you for entry!
+            Browse our collection and make any purchase. Every order qualifies you for entry!
           </p>
         </div>
 
@@ -679,9 +642,7 @@
           <div class="step-number">2</div>
           <h3 class="step-title">Complete your purchase</h3>
           <p>
-            Get 1 entry for any purchase, plus 1 BONUS entry for every $50                                        
- 
-              spent on eligible products.
+            Get 1 entry for any purchase, plus 1 BONUS entry for every $50 spent on eligible products.
           </p>
         </div>
 
@@ -689,14 +650,12 @@
           <div class="step-number">3</div>
           <h3 class="step-title">Receive your entry & wait for the draw</h3>
           <p>
-            When the countdown ends, we'll randomly select and announce a                                        
- 
-              winner who takes home the car!
+            When the countdown ends, we'll randomly select and announce a winner who takes home the car!
           </p>
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
   <section
     class="testimonials"
@@ -725,11 +684,35 @@
             </div>
           </div>
         </div>
+
+      <div class="testimonial-slide active">
+        <div class="testimonial-content">
+          <div class="testimonial-image">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0667/8036/4971/files/bcg_-2-winner-to-be-announced_refactored.png?v=1763153596"
+              alt="To be announced - Chevrolet Corvette C8 Winner"
+              class="winner-photo"
+              width="432"
+              height="243"
+              loading="lazy">
+          </div>
+          <div class="testimonial-text-content">
+            <p class="testimonial-text">
+              Thanks to everyone who entered!
+              <span class="highlight">The Beast Car Giveaway #02</span>
+              has ended, and the winner will be announced in accordance with our official rules.</p>
+            <p class="testimonial-author">- Rafael Gomez, Chevrolet Corvette C8 Winner</p>
+          </div>
+        </div>
       </div>
+
+
+      </div>
+
     </div>
   </section>
 
-  <section class="faq" id="faq">
+  {% comment %} <section class="faq" id="faq">
     <div class="container">
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-list">
@@ -779,7 +762,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 </main>
 
 {% schema %}
