@@ -13,8 +13,8 @@
       "type": "index-page",
       "name": "Index Page",
       "settings": {
-        "merchandise_title": "Our Merchandise Shop",
-        "merchandise_subtitle": "More chances to win if you are in",
+        "merchandise_title": "Our Merch",
+        "merchandise_subtitle": "",
         "collection": "homepage",
         "products_limit": 9,
         "button_text": "Shop Now",
